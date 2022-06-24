@@ -26,6 +26,8 @@ settings:
         n: scroll left
         o: scroll right
         t: mode-enter insert
+  content.geolocation:
+    https://www.monster.com: true
   scrolling.smooth:
     global: false
   tabs.position:
