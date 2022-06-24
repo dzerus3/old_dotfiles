@@ -1,0 +1,19 @@
+# Unmaps remapped keys
+unmap h
+unmap j
+unmap k
+unmap l
+unmap n
+unmap N
+
+# Movement keys
+map n scroll left
+map e scroll down
+map i scroll up
+map o scroll right
+map E navigate next
+map I navigate previous
+
+# Search
+map h search forward
+map H search backward
