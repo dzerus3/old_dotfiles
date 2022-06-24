@@ -1,0 +1,8 @@
+# Movement
+map e down
+map i up
+map n updir
+map o open
+
+#
+map x delete
