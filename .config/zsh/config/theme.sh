@@ -1,7 +1,12 @@
 # Sets the prompt
-if [ $UID -eq 0 ]
-then
-    PS1="%B%{$fg[red]%}[%{$fg[magenta]%}%B%c/%b%{$reset_color%}%{$fg[red]%}]%{$reset_color%} "
+# Note: reference at https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+ZSH_THEME_GIT_PROMPT_PREFIX=":"
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+
+if [ $UID -eq 0 ]; then
+	PROMPT='%B%{$fg[red]%}[%{$fg[magenta]%}%B%1~%b%{$reset_color%}$(gitprompt)%{$fg[red]%}]%{$reset_color%} '
 else
-    PS1="%B%{$fg[blue]%}[%{$fg[green]%}%B%c/%b%{$reset_color%}%{$fg[blue]%}]%{$reset_color%} "
+	PROMPT='%B%{$fg[blue]%}[%{$fg[green]%}%B%1~%b%{$reset_color%}$(gitprompt)%{$fg[blue]%}]%{$reset_color%} '
 fi
