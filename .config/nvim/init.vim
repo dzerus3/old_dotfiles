@@ -101,14 +101,14 @@ cnoreabbrev m Make
 
 " Easy window switching (alt key)
 " May break with some setups
-nmap <silent> <M-i> :wincmd k<CR>
-nmap <silent> <M-e> :wincmd j<CR>
-nmap <silent> <M-n> :wincmd h<CR>
-nmap <silent> <M-o> :wincmd l<CR>
+nmap <silent> <A-i> :wincmd k<CR>
+nmap <silent> <A-e> :wincmd j<CR>
+nmap <silent> <A-n> :wincmd h<CR>
+nmap <silent> <A-o> :wincmd l<CR>
 
 " Better tab management
-nmap <silent> <A-n> <Esc>:tabprev<CR>
-nmap <silent> <A-o> <Esc>:tabnext<CR>
+nmap <silent> <C-Left> <Esc>:tabprev<CR>
+nmap <silent> <C-Right> <Esc>:tabnext<CR>
 nmap <silent> <C-Up> <Esc>:tabnew<CR>
 " map <C-Down> <Esc>:q<CR>
 
