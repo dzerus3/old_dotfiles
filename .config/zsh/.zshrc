@@ -13,6 +13,11 @@ zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+# Makes it so Ctrl + w stops at each part of a filesystem path
+# but does not stop at the - in command line arguments
+# local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
+local WORDCHARS=$'*?_-.[]~=:;!#$%^(){}<>'
+
 # Enables mid-word autocompletion
 zstyle ':completion:*' completer _expand _complete
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
@@ -52,10 +57,3 @@ done
 source $ZDOTDIR/.zsh_functions
 
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-unix-word-rubout() {
-  local WORDCHARS=$'!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
-  zle backward-kill-word
-}
-
-zle -N unix-word-rubout
-bindkey '^W' unix-word-rubout
