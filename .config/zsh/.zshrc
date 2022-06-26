@@ -17,7 +17,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Makes it so Ctrl + w stops at each part of a filesystem path
 # but does not stop at the - in command line arguments
 # local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
-local WORDCHARS=$'*?_-.[]~=:;!#$%^(){}<>'
+local WORDCHARS=$'*?_-.[]~:;!#$%^(){}<>'
 
 # Enables mid-word autocompletion
 zstyle ':completion:*' completer _expand _complete
