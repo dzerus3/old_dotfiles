@@ -1,9 +1,10 @@
 # Enable colors
 autoload -U colors && colors
 
-# enable completion features
+# Enable completion features
 autoload -Uz compinit
 compinit -d ~/.cache/zcompdump
+
 # Enables menu selection for completion
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' group-name ''
