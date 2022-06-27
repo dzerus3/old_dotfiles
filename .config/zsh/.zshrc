@@ -257,6 +257,11 @@ if command -v ip &> /dev/null; then
 	alias ifconfig='ip'
 fi
 
+# Replaces nslookup with dig
+if command -v dig &> /dev/null; then
+	alias nslookup='dig'
+fi
+
 ######################################################
 # Prompt
 ######################################################
