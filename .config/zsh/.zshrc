@@ -19,29 +19,30 @@ export EDITOR="nvim"
 export BAT_PAGER=""
 export BAT_STYLE="plain"
 
+# Makes it so Ctrl + w stops at each part of a filesystem path
+# but does not stop at the - in command line arguments
+#local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
+local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
+
 ######################################################
 # Completion
 ######################################################
 
+# Enables menu selection for completion
 autoload -Uz compinit
+zmodload zsh/complist
+zstyle ':completion:*:*:*:*:*' menu select
 
 # Moves zcompdump to ~/.cache
 compinit -d ~/.cache/zcompdump
 
-# Enables menu selection for completion
-zstyle ':completion:*:*:*:*:*' menu select
-
+# These were pulled from Kali's default zshrc.
+# TODO: Investigate what exactly these do
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
-# Makes it so Ctrl + w stops at each part of a filesystem path
-# but does not stop at the - in command line arguments
-#local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
-local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
 
 # Enables mid-word autocompletion
 zstyle ':completion:*' completer _expand _complete
@@ -49,12 +50,13 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower
 
 # Sets colors for autocompletion
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 
-autoload -Uz compinit
-zmodload zsh/complist
+# Sets autocompletion options for kill command
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Autocompletes hidden files
+# TODO: Investigate what other options there are
 _comp_options+=(globdots)
 
 #######################################################
@@ -183,6 +185,7 @@ export LESSHISTFILE=-
 # Enable less color support
 export LESS=" --RAW-CONTROL-CHARS --squeeze-blank-lines "
 
+# Enables progress report in less
 export MANPAGER="less +Gg"
 
 # Disabled because it doesn't work on my setup
@@ -264,12 +267,15 @@ if typeset -f gitprompt > /dev/null; then
 	function gitprompt{}
 fi
 
-# Note: reference at https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+# Prompt variable reference in $ZDOTDIR/plugins/git-prompt.zsh/examples/default.zsh
 ZSH_THEME_GIT_PROMPT_PREFIX=":"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
 ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 
+# Sets a red and magenta prompt if root, and blue/green
+# otherwise.
+# Note: reference at https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
 if [ $UID -eq 0 ]; then
 	PROMPT='%B%{$fg[red]%}[%{$fg[magenta]%}%B%1~%b%{$reset_color%}$(gitprompt)%{$fg[red]%}]%{$reset_color%} '
 else
