@@ -1,13 +1,32 @@
+######################################################
+# Generic optoins
+######################################################
+
 # Enable colors
 autoload -U colors && colors
 
-# Enable completion features
-autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
+# Sets max history size
+export HISTSIZE=250
+export SAVEHIST=250
+
+# Moves history file to ~/.cache
+export HISTFILE=~/.cache/zsh.history
+
+# Sets nvim as default editor
+export EDITOR="nvim"
+
+# bat configuration options
+export BAT_PAGER=""
+export BAT_STYLE="plain"
 
 ######################################################
 # Completion
 ######################################################
+
+autoload -Uz compinit
+
+# Moves zcompdump to ~/.cache
+compinit -d ~/.cache/zcompdump
 
 # Enables menu selection for completion
 zstyle ':completion:*:*:*:*:*' menu select
@@ -36,22 +55,6 @@ zmodload zsh/complist
 
 # Autocompletes hidden files
 _comp_options+=(globdots)
-
-# Sets max history size
-HISTSIZE=250
-SAVEHIST=250
-
-# Moves history file to ~/.cache
-export HISTFILE=~/.cache/zsh.history
-
-# Sets nvim as default editor
-export EDITOR="nvim"
-
-# bat configuration options
-export BAT_PAGER=""
-export BAT_STYLE="plain"
-
-source $ZDOTDIR/.zsh_functions
 
 #######################################################
 # Plugins
@@ -160,6 +163,7 @@ bindkey '^[i' up-history
 ######################################################
 # less configuration
 ######################################################
+
 # Sets less keybindings file.
 export LESSKEYIN="/home/sal/.config/lesskey"
 
