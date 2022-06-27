@@ -1,16 +1,12 @@
-######################################################
+################################################################
 # Generic optoins
-######################################################
+#
+# DOCUMENTATION:
+#   man zshall, from line 5812 /WORDCHARS
+################################################################
 
 # Enable colors
 autoload -U colors && colors
-
-# Sets max history size
-export HISTSIZE=250
-export SAVEHIST=250
-
-# Moves history file to ~/.cache
-export HISTFILE=~/.cache/zsh.history
 
 # Sets nvim as default editor
 export EDITOR="nvim"
@@ -19,14 +15,49 @@ export EDITOR="nvim"
 export BAT_PAGER=""
 export BAT_STYLE="plain"
 
-# Makes it so Ctrl + w stops at each part of a filesystem path
-# but does not stop at the - in command line arguments
 #local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
 local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
 
-######################################################
+################################################################
+# History options
+#
+# DOCUMENTATION:
+#   man zshbuiltins, /history /fc
+#   man zshall, from line 5375 /HISTFILE
+#   man zshall, from line 6312 /APPEND_HISTORY
+################################################################
+
+# Sets history to output the last 30 entries
+alias history='history -30'
+
+# Uncomment this if you want history to have the same
+# default behavior as in bash
+#alias history='history 1'
+
+# Moves history file to ~/.cache
+export HISTFILE=~/.cache/zsh.history
+
+# Sets max history file size
+export HISTSIZE=1000
+# Sets max number of history entries to keep in memory
+export SAVEHIST=1000
+
+# Treat '!' specially for expansion.
+setopt bang_hist
+# Don't record the same command run repeatedly.
+setopt hist_ignore_dups
+# Don't write entries that start with a space
+setopt hist_ignore_space
+# Hide superfluous blanks before entry.
+setopt hist_reduce_blanks
+# Do not store the usage of the history command in history
+setopt hist_no_store
+# Share history between every shell session.
+setopt share_history
+
+################################################################
 # Completion
-######################################################
+################################################################
 
 # Enables menu selection for completion
 autoload -Uz compinit
@@ -59,26 +90,22 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # TODO: Investigate what other options there are
 _comp_options+=(globdots)
 
-#######################################################
+################################################################
 # Plugins
-######################################################
+################################################################
 
-# If plugin directory exists, load plugins. This is a
-# compromise between not having a plugin manager, and
-# not having it throw errors when plugins are not
-# installed.
-#
-# This is not the most elegant solution, sure, but I
-# prefer this over using a package manager.
+# If plugin directory exists, load plugins. This is a compromise
+# between not having a plugin manager, and not having it throw
+# errors when plugins are not installed.
 if [ -d "$ZDOTDIR/plugins" ]; then
 	source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.plugin.zsh
 	source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 	source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 fi
 
-######################################################
+################################################################
 # Aliases
-######################################################
+################################################################
 
 # A few contractions for commonly used commands
 alias cls='clear'
@@ -101,9 +128,9 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$
 alias yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
 alias yt-audiobook='yt-dlp --extract-audio --audio-format mp3 --yes-playlist -o "%(title)s.%(ext)s"'
 
-######################################################
+################################################################
 # Custom functions
-######################################################
+################################################################
 
 # Find files containing string
 find-files-with() {
@@ -111,7 +138,8 @@ find-files-with() {
 }
 
 isitup() {
-	# I'm not sure why the lookaround is included in the results, but hey, it works.
+	# I'm not sure why the lookaround is included in the results,
+	# but hey, it works.
     curl -s "https://isitup.org/$1" | grep -P "(?<=<title>).*(?=<\/title>)" | cut -c 8- | rev | cut -c 9- | rev
 }
 
@@ -136,9 +164,11 @@ rawurlencode() {
   echo "${encoded}"
 }
 
-######################################################
+################################################################
 # Keybindings
-######################################################
+# DOCUMENTATION:
+#   man zshall, from line 10536 /STANDARD WIDGETS
+################################################################
 
 # Enables emacs keybindings
 bindkey -e
@@ -165,8 +195,8 @@ bindkey '^[n' backward-word
 # Ctrl + e/i moves to beginning/end of line
 # Mapping Ctrl + i seems also to rebind tab...
 #
-# Disabling because breaks autocompletion, and I
-# didn't find a way to fix it with alacritty
+# Disabling because breaks autocompletion, and I didn't find a
+# way to fix it with alacritty
 #bindkey '^e' beginning-of-line
 #bindkey '^i' end-of-line
 
@@ -174,9 +204,9 @@ bindkey '^[n' backward-word
 bindkey '^[e' down-history
 bindkey '^[i' up-history
 
-######################################################
+################################################################
 # less configuration
-######################################################
+################################################################
 
 # Sets less keybindings file.
 export LESSKEYIN="/home/sal/.config/lesskey"
@@ -210,9 +240,9 @@ if [ -f "/usr/bin/src-hilite-lesspipe.sh" ]; then
 	export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 fi
 
-#######################################################
+#################################################################
 # Command replacements
-#######################################################
+#################################################################
 
 # Replaces sudo with doas when possible
 if command -v doas &> /dev/null; then
@@ -252,8 +282,7 @@ if command -v ss &> /dev/null; then
 	alias netstat='ss'
 fi
 
-# Replaces ifconfig with ip
-# Also enables colors for ip
+# Replaces ifconfig with ip and enables colors for ip
 if command -v ip &> /dev/null; then
 	alias ip='ip --color=auto'
 	alias ifconfig='ip'
@@ -264,17 +293,19 @@ if command -v dig &> /dev/null; then
 	alias nslookup='dig'
 fi
 
-######################################################
+################################################################
 # Prompt
-######################################################
+# DOCUMENTATION:
+#   $ZDOTDIR/plugins/git-prompt.zsh/examples/default.zsh
+#   man zshall, from line 2061 /EXPANSION OF PROMPT
+################################################################
 
-# Don't throw an error if git-prompt plugin is not
-# installed
+# Don't throw an error if git-prompt plugin is not installed
 if typeset -f gitprompt > /dev/null; then
 	function gitprompt{}
 fi
 
-# Prompt variable reference in $ZDOTDIR/plugins/git-prompt.zsh/examples/default.zsh
+# Prompt variable reference in
 ZSH_THEME_GIT_PROMPT_PREFIX=":"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
@@ -282,19 +313,18 @@ ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 
 # Sets a red and magenta prompt if root, and blue/green
 # otherwise.
-# Note: reference at https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
 if [ $UID -eq 0 ]; then
 	PROMPT='%B%{$fg[red]%}[%{$fg[magenta]%}%B%1~%b%{$reset_color%}$(gitprompt)%{$fg[red]%}]%{$reset_color%} '
 else
 	PROMPT='%B%{$fg[blue]%}[%{$fg[green]%}%B%1~%b%{$reset_color%}$(gitprompt)%{$fg[blue]%}]%{$reset_color%} '
 fi
 
-######################################################
+################################################################
 # Fortune
-######################################################
+################################################################
 
-# My signature fortune | lolcat setup. Tries to run
-# without breaking anything if neither is installed.
+# My signature fortune | lolcat setup. Tries to run without
+# breaking anything if neither is installed.
 if command -v fortune &> /dev/null; then
 	if command -v lolcat &> /dev/null; then
 		fortune | lolcat
@@ -303,13 +333,12 @@ if command -v fortune &> /dev/null; then
 	fi
 fi
 
-######################################################
+################################################################
 # tmux config
-######################################################
+################################################################
 
-# Opens in tmux, provided tmux is installed and is not
-# already launched.
-# https://unix.stackexchange.com/questions/43601/how-can-i-set-my-default-shell-to-start-up-tmux
+# Opens in tmux, provided tmux is installed and is not already
+# launched.
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
 	exec tmux
 fi
