@@ -135,6 +135,12 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$
 alias yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
 alias yt-audiobook='yt-dlp --extract-audio --audio-format mp3 --yes-playlist -o "%(title)s.%(ext)s"'
 
+if command -v wl-copy &> /dev/null; then
+	alias copy='wl-copy'
+elif command -v xcopy &> /dev/null; then
+	alias copy='xcopy'
+fi
+
 ################################################################
 # Custom functions
 ################################################################
