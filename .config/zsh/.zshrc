@@ -61,9 +61,18 @@ _comp_options+=(globdots)
 # Plugins
 ######################################################
 
-source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.plugin.zsh
-source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# If plugin directory exists, load plugins. This is a
+# compromise between not having a plugin manager, and
+# not having it throw errors when plugins are not
+# installed.
+#
+# This is not the most elegant solution, sure, but I
+# prefer this over using a package manager.
+if [ -d "$ZDOTDIR/plugins" ]; then
+	source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.plugin.zsh
+	source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+	source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+fi
 
 ######################################################
 # Aliases
@@ -248,6 +257,12 @@ fi
 ######################################################
 # Prompt
 ######################################################
+
+# Don't throw an error if git-prompt plugin is not
+# installed
+if typeset -f gitprompt > /dev/null; then
+	function gitprompt{}
+fi
 
 # Note: reference at https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
 ZSH_THEME_GIT_PROMPT_PREFIX=":"
