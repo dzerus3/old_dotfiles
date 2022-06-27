@@ -30,6 +30,7 @@ compinit -d ~/.cache/zcompdump
 
 # Enables menu selection for completion
 zstyle ':completion:*:*:*:*:*' menu select
+
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' rehash true
@@ -39,7 +40,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Makes it so Ctrl + w stops at each part of a filesystem path
 # but does not stop at the - in command line arguments
-# local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
+#local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
 local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
 
 # Enables mid-word autocompletion
@@ -60,8 +61,8 @@ _comp_options+=(globdots)
 # Plugins
 ######################################################
 
-source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.plugin.zsh
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 ######################################################
@@ -119,8 +120,7 @@ rawurlencode() {
      esac
      encoded+="${o}"
   done
-  echo "${encoded}"    # You can either set a return variable (FASTER) 
-  REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
+  echo "${encoded}"
 }
 
 ######################################################
@@ -137,9 +137,9 @@ bindkey -M menuselect 'i' vi-up-line-or-history
 bindkey -M menuselect 'o' vi-forward-char
 
 # Edit command in vim with Ctrl + x
-# autoload edit-command-line
-# zle -N edit-command-line
-# bindkey '^x' edit-command-line
+#autoload edit-command-line
+#zle -N edit-command-line
+#bindkey '^x' edit-command-line
 
 # Ctrl + o/n moves one character forward/back
 bindkey '^o' forward-char
@@ -151,9 +151,11 @@ bindkey '^[n' backward-word
 
 # Ctrl + e/i moves to beginning/end of line
 # Mapping Ctrl + i seems also to rebind tab...
-# Disabling because breaks autocompletion, and I didn't find a way to fix it with alacritty
-# bindkey '^e' beginning-of-line
-# bindkey '^i' end-of-line
+#
+# Disabling because breaks autocompletion, and I
+# didn't find a way to fix it with alacritty
+#bindkey '^e' beginning-of-line
+#bindkey '^i' end-of-line
 
 # Use Alt + e/i to move through history
 bindkey '^[e' down-history
@@ -196,7 +198,7 @@ fi
 
 #######################################################
 # Command replacements
-######################################################
+#######################################################
 
 # Replaces sudo with doas when possible
 if command -v doas &> /dev/null; then
