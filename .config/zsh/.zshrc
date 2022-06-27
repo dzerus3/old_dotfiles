@@ -73,11 +73,10 @@ alias cls='clear'
 alias md='mkdir'
 alias q='exit'
 
-# Enables colors for diff
-# Disabled because it breaks on systems without GNU coreutils
-# alias ls='ls --color=auto'
-# alias grep='grep --color=auto'
-# alias diff='diff --color=auto'
+# Enables colors for diff if GNU coreutils are installed
+ls   --version | grep GNU > /dev/null && alias ls='ls --color=auto'
+grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
+diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
 
 # Easy editing of common files
 alias editrc='$EDITOR ~/.config/zsh/.zshrc'
