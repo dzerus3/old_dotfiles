@@ -98,10 +98,8 @@ alias editvimrc='$EDITOR ~/.config/nvim/init.vim'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
 
 # Aliases for yt-dlp
-if command -v yt-dlp &> /dev/null; then
-	alias yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
-	alias yt-audiobook='yt-dlp --extract-audio --audio-format mp3 --yes-playlist -o "%(title)s.%(ext)s"'
-fi
+alias yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
+alias yt-audiobook='yt-dlp --extract-audio --audio-format mp3 --yes-playlist -o "%(title)s.%(ext)s"'
 
 ######################################################
 # Custom functions
@@ -115,6 +113,10 @@ find-files-with() {
 isitup() {
 	# I'm not sure why the lookaround is included in the results, but hey, it works.
     curl -s "https://isitup.org/$1" | grep -P "(?<=<title>).*(?=<\/title>)" | cut -c 8- | rev | cut -c 9- | rev
+}
+
+getpublicip() {
+	curl https://ifconfig.me/; echo
 }
 
 rawurlencode() {
