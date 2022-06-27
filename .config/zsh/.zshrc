@@ -3,6 +3,7 @@
 #
 # DOCUMENTATION:
 #   man zshall, from line 5812 /WORDCHARS
+#   $ZDOTDIR/plugins/zsh-autosuggestions/README.md
 ################################################################
 
 # Enable colors
@@ -15,8 +16,14 @@ export EDITOR="nvim"
 export BAT_PAGER=""
 export BAT_STYLE="plain"
 
+# Excludes some characters from being counted as parts of words
+# so that Ctrl + w works better
 #local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
 local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
+
+# Sets zsh autocomplete plugins to suggest items based on all
+# completion strategies
+ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
 ################################################################
 # History options
