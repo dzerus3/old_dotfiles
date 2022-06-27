@@ -40,7 +40,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Makes it so Ctrl + w stops at each part of a filesystem path
 # but does not stop at the - in command line arguments
 # local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
-local WORDCHARS=$'*?_-.[]~:;!#$%^(){}<>'
+local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
 
 # Enables mid-word autocompletion
 zstyle ':completion:*' completer _expand _complete
@@ -277,7 +277,8 @@ fi
 # tmux config
 ######################################################
 
-# Opens in tmux, provided tmux is installed and is not already launched.
+# Opens in tmux, provided tmux is installed and is not
+# already launched.
 # https://unix.stackexchange.com/questions/43601/how-can-i-set-my-default-shell-to-start-up-tmux
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
 	exec tmux
