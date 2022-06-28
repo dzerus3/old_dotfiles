@@ -101,14 +101,35 @@ _comp_options+=(globdots)
 # Plugins
 ################################################################
 
-# If plugin directory exists, load plugins. This is a compromise
-# between not having a plugin manager, and not having it throw
-# errors when plugins are not installed.
-if [ -d "$ZDOTDIR/plugins" ]; then
-	source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.plugin.zsh
-	source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-	source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-fi
+# Respectfully stolen from
+# https://github.com/mattmc3/zsh_unplugged
+function plugin-load {
+  local repo plugin_name plugin_dir initfile initfiles
+  ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins}
+  for repo in $@; do
+    plugin_name=${repo:t}
+    plugin_dir=$ZPLUGINDIR/$plugin_name
+    initfile=$plugin_dir/$plugin_name.plugin.zsh
+    if [[ ! -d $plugin_dir ]]; then
+      echo "Cloning $repo"
+      git clone -q --depth 1 --recursive --shallow-submodules https://github.com/$repo $plugin_dir
+    fi
+    if [[ ! -e $initfile ]]; then
+      initfiles=($plugin_dir/*.plugin.{z,}sh(N) $plugin_dir/*.{z,}sh{-theme,}(N))
+      [[ ${#initfiles[@]} -gt 0 ]] || { echo >&2 "Plugin has no init file '$repo'." && continue }
+      ln -sf "${initfiles[1]}" "$initfile"
+    fi
+    fpath+=$plugin_dir
+    (( $+functions[zsh-defer] )) && zsh-defer . $initfile || . $initfile
+  done
+}
+
+# Lightweight plugins
+plugin-load woefe/git-prompt.zsh
+
+# Heavy plugins
+plugin-load zsh-users/zsh-autosuggestions
+plugin-load zdharma-continuum/fast-syntax-highlighting
 
 ################################################################
 # Aliases
