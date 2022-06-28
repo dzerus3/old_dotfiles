@@ -129,6 +129,7 @@ function plugin-load {
 
 # Lightweight plugins
 plugin-load woefe/git-prompt.zsh
+plugin-load MichaelAquilina/zsh-you-should-use
 
 # Heavy plugins
 plugin-load zsh-users/zsh-autosuggestions
