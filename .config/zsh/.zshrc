@@ -25,6 +25,9 @@ local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
 # completion strategies
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
+# Moves ZSHZ data to ~/.cache
+ZSHZ_DATA="$HOME/.cache/z.db"
+
 ################################################################
 # History options
 #
@@ -129,6 +132,7 @@ plugin-load woefe/git-prompt.zsh
 
 # Heavy plugins
 plugin-load zsh-users/zsh-autosuggestions
+plugin-load agkozak/zsh-z
 plugin-load zdharma-continuum/fast-syntax-highlighting
 
 ################################################################
@@ -164,6 +168,10 @@ if command -v wl-copy &> /dev/null; then
 	alias copy='wl-copy'
 elif command -v xcopy &> /dev/null; then
 	alias copy='xcopy'
+fi
+
+if typeset -f zshz > /dev/null; then
+	alias cd="zshz 2>&1"
 fi
 
 ################################################################
