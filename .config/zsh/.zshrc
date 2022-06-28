@@ -354,7 +354,7 @@ fi
 # Prompt variable reference in
 ZSH_THEME_GIT_PROMPT_PREFIX=':'
 ZSH_THEME_GIT_PROMPT_SUFFIX=
-ZSH_THEME_GIT_PROMPT_BRANCH='%{$fg_bold[white]%}'
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
 ZSH_THEME_GIT_PROMPT_SEPARATOR=' '
 
 # Sets a red and magenta prompt if root, and blue/green
