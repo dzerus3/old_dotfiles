@@ -10,11 +10,11 @@
 autoload -U colors && colors
 
 # Sets nvim as default editor
-export EDITOR="nvim"
+export EDITOR='nvim'
 
 # bat configuration options
-export BAT_PAGER=""
-export BAT_STYLE="plain"
+export BAT_PAGER=
+export BAT_STYLE='plain'
 
 # Excludes some characters from being counted as parts of words
 # so that Ctrl + w works better
@@ -153,7 +153,7 @@ find-files-with() {
 isitup() {
 	# I'm not sure why the lookaround is included in the results,
 	# but hey, it works.
-    curl -s "https://isitup.org/$1" | grep -P "(?<=<title>).*(?=<\/title>)" | cut -c 8- | rev | cut -c 9- | rev
+    curl -s "https://isitup.org/$1" | grep -P '(?<=<title>).*(?=<\/title>)' | cut -c 8- | rev | cut -c 9- | rev
 }
 
 getpublicip() {
@@ -222,16 +222,16 @@ bindkey '^[i' up-history
 ################################################################
 
 # Sets less keybindings file.
-export LESSKEYIN="/home/sal/.config/lesskey"
+export LESSKEYIN='/home/sal/.config/lesskey'
 
 # Disables less history
 export LESSHISTFILE=-
 
 # Enable less color support
-export LESS=" --RAW-CONTROL-CHARS --squeeze-blank-lines "
+export LESS=' --RAW-CONTROL-CHARS --squeeze-blank-lines '
 
 # Enables progress report in less
-export MANPAGER="less +Gg"
+export MANPAGER='less +Gg'
 
 # Disabled because it doesn't work on my setup
 #export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
@@ -249,8 +249,8 @@ export MANPAGER="less +Gg"
 #export LESS_TERMCAP_ZW=$(tput rsupm)
 
 # Enable syntax highlighting for less
-if [ -f "/usr/bin/src-hilite-lesspipe.sh" ]; then
-	export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+if [ -f '/usr/bin/src-hilite-lesspipe.sh' ]; then
+	export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
 fi
 
 #################################################################
@@ -282,7 +282,7 @@ fi
 
 # Replaces cat with bat
 if command -v bat &> /dev/null; then
-	alias cat='bat --style=plain --pager=""'
+	alias cat='bat --style=plain --pager='
 fi
 
 # Replaces traceroute with mtr
@@ -319,10 +319,10 @@ if typeset -f gitprompt > /dev/null; then
 fi
 
 # Prompt variable reference in
-ZSH_THEME_GIT_PROMPT_PREFIX=":"
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
-ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+ZSH_THEME_GIT_PROMPT_PREFIX=':'
+ZSH_THEME_GIT_PROMPT_SUFFIX=
+ZSH_THEME_GIT_PROMPT_BRANCH='%{$fg_bold[white]%}'
+ZSH_THEME_GIT_PROMPT_SEPARATOR=' '
 
 # Sets a red and magenta prompt if root, and blue/green
 # otherwise.
