@@ -300,7 +300,23 @@ fi
 
 # Replaces ls with exa when possible
 if command -v exa &> /dev/null; then
-	alias ls='exa'
+	alias ls="exa --classify --group --git --group-directories-first"
+
+	# List files by creation date
+	alias lC='exa --long --sort=created'
+
+	# List files by modified date
+	alias lM='exa --long --sort=modified'
+
+	# List files by size
+	alias lS='exa --all --long --classify --reverse --color-scale --group-directories-first --color=always --no-permissions --no-time --sort=size | grep -v /'
+
+	# List only files, and sort them by extension
+	alias lX='exa --long --icons --classify --color=always --no-user --no-permissions --sort=extension | grep -v /'
+
+	# exa can also replace the tree command, but the performance
+	# is noticeably worse and tree seems to support colors anyway.
+	#alias tree="exa --tree"
 fi
 
 # Replaces grep with ripgrep when possible
