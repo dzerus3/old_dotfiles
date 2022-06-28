@@ -262,6 +262,7 @@ alias q='exit'
 ls   --version | grep GNU > /dev/null && alias ls='ls --color=auto'
 grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
 diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
+alias ip='ip --color=auto'
 
 # Easy editing of common files
 alias editrc='$EDITOR ~/.config/zsh/.zshrc'
@@ -285,7 +286,7 @@ elif command -v xcopy &> /dev/null; then
 fi
 
 if typeset -f zshz > /dev/null; then
-	alias cd="zshz 2>&1"
+	alias cd='zshz 2>&1'
 fi
 
 #################################################################
@@ -300,7 +301,7 @@ fi
 
 # Replaces ls with exa when possible
 if command -v exa &> /dev/null; then
-	alias ls="exa --classify --group --git --group-directories-first"
+	alias ls='exa --classify --group --git --group-directories-first'
 
 	# List files by creation date
 	alias lC='exa --long --sort=created'
@@ -336,25 +337,9 @@ if command -v bat &> /dev/null; then
 	alias cat='bat --style=plain --pager='
 fi
 
-# Replaces traceroute with mtr
-if command -v mtr &> /dev/null; then
-	alias traceroute='mtr'
-fi
-
 # Replaces netstat with ss
 if command -v ss &> /dev/null; then
 	alias netstat='ss'
-fi
-
-# Replaces ifconfig with ip and enables colors for ip
-if command -v ip &> /dev/null; then
-	alias ip='ip --color=auto'
-	alias ifconfig='ip'
-fi
-
-# Replaces nslookup with dig
-if command -v dig &> /dev/null; then
-	alias nslookup='dig'
 fi
 
 ################################################################
