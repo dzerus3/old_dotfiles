@@ -138,45 +138,6 @@ plugin-load agkozak/zsh-z
 plugin-load zdharma-continuum/fast-syntax-highlighting
 
 ################################################################
-# Aliases
-################################################################
-
-# A few contractions for commonly used commands
-alias cls='clear'
-alias md='mkdir'
-alias q='exit'
-
-# Enables colors for diff if GNU coreutils are installed
-ls   --version | grep GNU > /dev/null && alias ls='ls --color=auto'
-grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
-diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
-
-# Easy editing of common files
-alias editrc='$EDITOR ~/.config/zsh/.zshrc'
-alias editvimrc='$EDITOR ~/.config/nvim/init.vim'
-
-# Dotfile configuration
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
-
-# Aliases for yt-dlp
-alias yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
-alias yt-audiobook='yt-dlp --extract-audio --audio-format mp3 --yes-playlist -o "%(title)s.%(ext)s"'
-
-# TODO See also
-# https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
-# https://unix.stackexchange.com/questions/211817/copy-the-contents-of-a-file-into-the-clipboard-without-displaying-its-contents/211826#211826
-# https://github.com/zshzoo/copier/blob/main/copier.zsh
-if command -v wl-copy &> /dev/null; then
-	alias copy='wl-copy'
-elif command -v xcopy &> /dev/null; then
-	alias copy='xcopy'
-fi
-
-if typeset -f zshz > /dev/null; then
-	alias cd="zshz 2>&1"
-fi
-
-################################################################
 # Custom functions
 ################################################################
 
@@ -286,6 +247,45 @@ export MANPAGER='less +Gg'
 # Enable syntax highlighting for less
 if [ -f '/usr/bin/src-hilite-lesspipe.sh' ]; then
 	export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
+fi
+
+################################################################
+# Aliases
+################################################################
+
+# A few contractions for commonly used commands
+alias cls='clear'
+alias md='mkdir'
+alias q='exit'
+
+# Enables colors for diff if GNU coreutils are installed
+ls   --version | grep GNU > /dev/null && alias ls='ls --color=auto'
+grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
+diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
+
+# Easy editing of common files
+alias editrc='$EDITOR ~/.config/zsh/.zshrc'
+alias editvimrc='$EDITOR ~/.config/nvim/init.vim'
+
+# Dotfile configuration
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
+
+# Aliases for yt-dlp
+alias yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
+alias yt-audiobook='yt-dlp --extract-audio --audio-format mp3 --yes-playlist -o "%(title)s.%(ext)s"'
+
+# TODO See also
+# https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
+# https://unix.stackexchange.com/questions/211817/copy-the-contents-of-a-file-into-the-clipboard-without-displaying-its-contents/211826#211826
+# https://github.com/zshzoo/copier/blob/main/copier.zsh
+if command -v wl-copy &> /dev/null; then
+	alias copy='wl-copy'
+elif command -v xcopy &> /dev/null; then
+	alias copy='xcopy'
+fi
+
+if typeset -f zshz > /dev/null; then
+	alias cd="zshz 2>&1"
 fi
 
 #################################################################
