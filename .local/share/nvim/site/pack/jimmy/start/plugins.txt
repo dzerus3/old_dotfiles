@@ -1,0 +1,15 @@
+General:
+https://github.com/tpope/vim-repeat
+https://github.com/wesQ3/vim-windowswap
+
+For general text editing:
+https://github.com/tpope/vim-commentary
+https://github.com/tpope/vim-surround
+https://github.com/tpope/vim-abolish
+https://github.com/tpope/vim-speeddating
+
+For heavy-duty software development:
+https://github.com/dense-analysis/ale
+https://github.com/preservim/tagbar
+https://github.com/tpope/vim-dispatch
+https://github.com/tpope/vim-fugitive
