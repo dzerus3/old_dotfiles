@@ -264,6 +264,28 @@ grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
 diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
 alias ip='ip --color=auto'
 
+# Enables grc support if it is installed. Taken from grc's zsh
+# plugin at https://github.com/garabik/grc/blob/master/grc.zsh
+if command -v grc &> /dev/null; then
+    grc_commands=(
+        blkid df dig du env fdisk findmnt free getfacl id
+        iptables iwconfig last lsblk lsmod lsof mount ping
+        ps sensors ss stat traceroute vmstat whois
+    )
+	# Set alias for available commands.
+	for cmd in $grc_commands ; do
+		if (( $+commands[$cmd] )) ; then
+			$cmd() {
+			grc --colour=auto ${commands[$0]} "$@"
+		}
+		fi
+	done
+
+# Clean up variables
+unset cmds cmd
+
+fi
+
 # Easy editing of common files
 alias editrc='$EDITOR ~/.config/zsh/.zshrc'
 alias editvimrc='$EDITOR ~/.config/nvim/init.vim'
