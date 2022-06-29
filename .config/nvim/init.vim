@@ -137,7 +137,7 @@ noremap gi gk
 
 " Insert mode now bound to l
 noremap l i
-noremap l I
+noremap L I
 noremap gl gi
 
 " Search result navigation with h
