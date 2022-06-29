@@ -32,8 +32,8 @@ syntax enable
 set so=7
 
 " Set a color scheme
-set background=dark
-colorscheme torte
+"set background=dark
+"colorscheme torte
 
 " Visible trailing whitespace
 set list
@@ -208,6 +208,7 @@ inoremap {<CR> {<CR>}<C-o>O
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Set font according to system
 " Ripped from amix's vimrc
 if has("mac") || has("macunix")
@@ -238,27 +239,43 @@ catch
 endtry
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Status line
+" Status line
+" Inspired by elements of:
+" https://stackoverflow.com/a/5380230
+" https://stackoverflow.com/a/10416234
+" https://github.com/amix/vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Always show the status line
 set laststatus=2
+set termguicolors
 
-function! WindowNumber()
-	let str=tabpagewinnr(tabpagenr())
-	return str
-endfunction
+" Colors for status line
+highlight User1 guifg=#CE933B guibg=#333333
+highlight User2 guifg=#76CE3B guibg=#333333
+highlight User3 guifg=#933BCE guibg=#333333
+highlight User4 guifg=#EA5031 guibg=#333333
+highlight User5 guifg=#F2E863 guibg=#333333
+highlight User7 guifg=#FFFFFF guibg=#333333
+highlight User6 guifg=#CCCCCC guibg=#333333
 
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ Win:%{WindowNumber()}\ \ \ Line:\ %l\ \ Column:\ %c
-
-" Returns true if paste mode is enabled
-function! HasPaste()
-	if &paste
-		return 'PASTE MODE  '
-	endif
-	return ''
-endfunction
+set statusline=
+" Buffer number
+set statusline +=%1*\ %02n\ %*
+" File name
+set statusline +=%2*%<%t%*
+" File type
+set statusline +=%3*\ %Y\ %*
+" Flags (modified, readonly, help, etc.)
+set statusline +=%4*%m%r%w%h%*
+" Separator
+set statusline +=%1*%=
+" Column number
+set statusline +=%5*%c%6*:
+" Row number/Number of rows
+set statusline +=%5*%l%6*/%1*%L
+" Percentage of location
+set statusline +=%7*\ \ \ %02p%%\ \       
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
