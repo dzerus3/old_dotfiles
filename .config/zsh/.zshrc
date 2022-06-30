@@ -9,6 +9,13 @@
 # Enable colors
 autoload -U colors && colors
 
+# Sets XDG folder environments if they are not already set
+# They should probably be set in /etc/zsh/zshenv or in
+# ~/.zshenv so that they apply to zsh as well.
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
 # Sets nvim as default editor
 export EDITOR='nvim'
 
@@ -25,8 +32,8 @@ local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
 # completion strategies
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
-# Moves ZSHZ data to ~/.cache
-ZSHZ_DATA="$HOME/.cache/z.db"
+# Moves ZSHZ data to .cache
+ZSHZ_DATA="$XDG_CACHE_HOME/z.db"
 
 ################################################################
 # History options
@@ -44,8 +51,8 @@ alias history='history -30'
 # default behavior as in bash
 #alias history='history 1'
 
-# Moves history file to ~/.cache
-export HISTFILE=~/.cache/zsh.history
+# Moves history file to .cache
+export HISTFILE="$XDG_CACHE_HOME/zsh.history"
 
 # Sets max history file size
 export HISTSIZE=1000
@@ -74,8 +81,8 @@ autoload -Uz compinit
 zmodload zsh/complist
 zstyle ':completion:*:*:*:*:*' menu select
 
-# Moves zcompdump to ~/.cache
-compinit -d ~/.cache/zcompdump
+# Moves zcompdump to .cache
+compinit -d "$XDG_CACHE_HOME/zcompdump"
 
 # These were pulled from Kali's default zshrc.
 # TODO: Investigate what exactly these do
@@ -307,11 +314,11 @@ unset cmds cmd
 fi
 
 # Easy editing of common files
-alias editrc='$EDITOR ~/.config/zsh/.zshrc'
-alias editvimrc='$EDITOR ~/.config/nvim/init.vim'
+alias editrc="$EDITOR ~/.config/zsh/.zshrc"
+alias editvimrc="$EDITOR ~/.config/nvim/init.vim"
 
 # Dotfile configuration
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 
 # Aliases for yt-dlp
 alias yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
