@@ -18,7 +18,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " With a map leader it's possible to do extra key combinations
-let mapleader = ","
+let mapleader = " "
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim settings
