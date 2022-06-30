@@ -55,12 +55,14 @@ alias history='history -30'
 export HISTFILE="$XDG_CACHE_HOME/zsh.history"
 
 # Sets max history file size
-export HISTSIZE=1000
+export HISTSIZE=1000000
 # Sets max number of history entries to keep in memory
-export SAVEHIST=1000
+export SAVEHIST=$HISTSIZE
 
 # Treat '!' specially for expansion.
 setopt bang_hist
+# Store command execution time in history
+setopt extended_history
 # Don't record the same command run repeatedly.
 setopt hist_ignore_dups
 # Don't write entries that start with a space
@@ -69,8 +71,8 @@ setopt hist_ignore_space
 setopt hist_reduce_blanks
 # Do not store the usage of the history command in history
 setopt hist_no_store
-# Share history between every shell session.
-setopt share_history
+# Append to history file rather than rewriting it
+setopt inc_append_history_time
 
 ################################################################
 # Completion
