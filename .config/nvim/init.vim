@@ -32,8 +32,10 @@ syntax enable
 set so=7
 
 " Set a color scheme
-"set background=dark
-"colorscheme torte
+" I use https://github.com/w0ng/vim-hybrid with a few tweaks
+" ported from https://github.com/AlessandroYorba/Alduin
+set background=dark
+colorscheme hybrid
 
 " Visible trailing whitespace
 set list
