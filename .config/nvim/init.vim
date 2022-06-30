@@ -5,13 +5,13 @@
 " nvim edits
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if has('nvim')
+"if has('nvim')
     " Resets default vim cursor shape
     "set guicursor=
 
-    set runtimepath^=~/.vim runtimepath+=~/.vim/after
-    let &packpath = &runtimepath
-endif
+    "set runtimepath^=~/.vim runtimepath+=~/.vim/after
+    "let &packpath = &runtimepath
+"endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Leader key
@@ -37,8 +37,7 @@ set so=7
 
 " Visible trailing whitespace
 set list
-set listchars=trail:░,tab:▸\ 
-"set listchars=tab:>\ ,trail:░,extends:>,precedes:<,nbsp:+
+set listchars=trail:░,tab:▸\ ,extends:>,precedes:<,nbsp:+
 
 " Height of the command bar
 set cmdheight=1
@@ -256,8 +255,8 @@ highlight User2 guifg=#76CE3B guibg=#333333
 highlight User3 guifg=#933BCE guibg=#333333
 highlight User4 guifg=#EA5031 guibg=#333333
 highlight User5 guifg=#F2E863 guibg=#333333
-highlight User7 guifg=#FFFFFF guibg=#333333
 highlight User6 guifg=#CCCCCC guibg=#333333
+highlight User7 guifg=#FFFFFF guibg=#333333
 
 set statusline=
 " Buffer number
@@ -275,7 +274,7 @@ set statusline +=%5*%c%6*:
 " Row number/Number of rows
 set statusline +=%5*%l%6*/%1*%L
 " Percentage of location
-set statusline +=%7*\ \ \ %02p%%\ \       
+set statusline +=%7*\ \ \ %02p%%\ \ 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
