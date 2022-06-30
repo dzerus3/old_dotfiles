@@ -372,6 +372,8 @@ if command -v nvim &> /dev/null; then
 	alias nv='nvim'
 	alias vi='nvim'
 	alias vim='nvim'
+else
+	alias vim='vim -u .config/vim/init.vim'
 fi
 
 # Replaces cat with bat
