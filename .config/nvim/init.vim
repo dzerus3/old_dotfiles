@@ -46,6 +46,7 @@ set cmdheight=1
 
 " Case sensitive search only when at least one capital is
 " present
+set ignorecase
 set smartcase
 
 " Highlight search results
