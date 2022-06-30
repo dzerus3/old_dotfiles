@@ -9,9 +9,8 @@
 # Enable colors
 autoload -U colors && colors
 
-# Sets XDG folder environments if they are not already set
-# They should probably be set in /etc/zsh/zshenv or in
-# ~/.zshenv so that they apply to zsh as well.
+# Sets XDG folder environments if they are not set already. They
+# should probably be set in /etc/zsh/zshenv or in ~/.zshenv.
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
