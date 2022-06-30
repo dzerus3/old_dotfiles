@@ -104,7 +104,7 @@ _comp_options+=(globdots)
 # Plugins
 ################################################################
 
-if command -v git &> /dev/null; then
+if [ -d $ZDOTDIR/plugins ]; then
 	# Respectfully stolen from
 	# https://github.com/mattmc3/zsh_unplugged
 	function plugin-load {
@@ -373,6 +373,7 @@ if command -v nvim &> /dev/null; then
 	alias vi='nvim'
 	alias vim='nvim'
 else
+	# TODO: Investigate VIMINIT variable
 	alias vim='vim -u .config/vim/init.vim'
 fi
 
