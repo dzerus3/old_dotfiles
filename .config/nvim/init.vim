@@ -45,6 +45,7 @@ else
 	set backupdir=$XDG_DATA_HOME/vim/backup
 	set viminfo+=n$XDG_DATA_HOME/vim/viminfo
 	set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+    let &packpath = &runtimepath
 endif
 
 " The number of lines that will remain visible above/below
