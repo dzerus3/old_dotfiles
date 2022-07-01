@@ -157,10 +157,8 @@ noremap i k
 noremap o l
 noremap ge gj
 noremap gi gk
-
-" Disables unused capital keybindings
-noremap N <Nop>
-noremap O <Nop>
+noremap N H
+noremap O L
 
 " Insert mode now bound to l
 noremap l i
