@@ -157,6 +157,10 @@ noremap o l
 noremap ge gj
 noremap gi gk
 
+" Disables unused capital keybindings
+noremap N <Nop>
+noremap O <Nop>
+
 " Insert mode now bound to l
 noremap l i
 noremap L I
@@ -177,6 +181,9 @@ noremap K O
 " E and I function like PageUp/Down
 nnoremap E <C-f>
 nnoremap I <C-b>
+
+" Lower case j joins lines.
+nnoremap j J
 
 " Ctrl-D to delete without copying
 map <silent> <C-D> "_dd
@@ -208,8 +215,12 @@ nmap <silent> <leader>o :wincmd l<CR>
 "nmap <silent> <Up> <Esc>:tabnew<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tweaks
+" Custom additions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Makes writing a bracket and then pressing enter autoclose
+" and create new line in between.
+inoremap {<CR> {<CR>}<C-o>O
 
 " Creating newline without insert mode
 noremap <A-k> o<Esc>
@@ -220,27 +231,14 @@ noremap <silent> x "_x
 noremap <silent> X "_X
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Custom additions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Makes writing a bracket and then pressing enter autoclose
-" and create new line in between.
-inoremap {<CR> {<CR>}<C-o>O
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Set font according to system
-" Ripped from amix's vimrc
-if has("mac") || has("macunix")
-    set gfn=Hack:h14,IBM\ Plex\ Mono:h14,Source\ Code\ Pro:h15,Menlo:h15
-elseif has("win16") || has("win32")
-    set gfn=IBM\ Plex\ Mono:h14,Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
-elseif has("gui_gtk2")
-    set gfn=Hack\ 14,IBM\ Plex\ Mono\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+" Set font according to system. Ripped from amix's vimrc.
+if has("gui_gtk2")
+    set gfn=Hack\ 14,IBM\ Plex\ Mono\ 14
 elseif has("linux")
-    set gfn=Hack\ 14,IBM\ Plex\ Mono\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+    set gfn=Hack\ 14,IBM\ Plex\ Mono\ 14
 elseif has("unix")
     set gfn=Monospace\ 11
 endif
