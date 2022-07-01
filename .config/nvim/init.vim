@@ -27,6 +27,26 @@ let mapleader = " "
 " Enable syntax highlighting
 syntax enable
 
+" Moves disposable files into corresponding XDG directories Also
+" enables persistent undo.
+if has('nvim')
+	set undodir=$XDG_STATE_HOME/nvim/undo
+	set undofile
+
+	" I personally think these belong in STATE_HOME, but I'll keep
+	" 'em here since the defaults are good enough.
+	"set directory=$XDG_STATE_HOME/nvim/swap
+	"set shada+=n$XDG_STATE_HOME/nvim/shada
+else
+	set undodir=$XDG_STATE_HOME/vim/undo
+	set undofile
+
+	set directory=$XDG_DATA_HOME/vim/swap
+	set backupdir=$XDG_DATA_HOME/vim/backup
+	set viminfo+=n$XDG_DATA_HOME/vim/viminfo
+	set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+endif
+
 " The number of lines that will remain visible above/below
 " cursor when scrolling
 set so=7
@@ -208,7 +228,7 @@ noremap <silent> X "_X
 inoremap {<CR> {<CR>}<C-o>O
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => GUI related
+" GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Set font according to system
@@ -224,21 +244,6 @@ elseif has("linux")
 elseif has("unix")
     set gfn=Monospace\ 11
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Persistent undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" try
-"     set undodir=~/.vim_runtime/temp_dirs/undodir
-"     set undofile
-" catch
-" endtry
-try
-    set undodir=~/.cache/nvim/undo
-    set undofile
-catch
-endtry
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status line

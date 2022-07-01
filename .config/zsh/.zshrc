@@ -11,9 +11,11 @@ autoload -U colors && colors
 
 # Sets XDG folder environments if they are not set already. They
 # should probably be set in /etc/zsh/zshenv or in ~/.zshenv.
+# https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 # Sets nvim as default editor
 export EDITOR='nvim'
@@ -31,8 +33,8 @@ local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
 # completion strategies
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
-# Moves ZSHZ data to .cache
-ZSHZ_DATA="$XDG_CACHE_HOME/z.db"
+# Moves ZSHZ data to data directory
+ZSHZ_DATA="$XDG_DATA_HOME/z.db"
 
 ################################################################
 # History options
@@ -50,8 +52,8 @@ alias history='history -30'
 # default behavior as in bash
 #alias history='history 1'
 
-# Moves history file to .cache
-export HISTFILE="$XDG_CACHE_HOME/zsh.history"
+# Moves history file to state directory
+export HISTFILE="$XDG_STATE_HOME/zsh.history"
 
 # Sets max history file size
 export HISTSIZE=1000000
@@ -82,8 +84,8 @@ autoload -Uz compinit
 zmodload zsh/complist
 zstyle ':completion:*:*:*:*:*' menu select
 
-# Moves zcompdump to .cache
-compinit -d "$XDG_CACHE_HOME/zcompdump"
+# Moves zcompdump to cache directory
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
 
 # These were pulled from Kali's default zshrc.
 # TODO: Investigate what exactly these do
@@ -381,8 +383,7 @@ if command -v nvim &> /dev/null; then
 	alias vi='nvim'
 	alias vim='nvim'
 else
-	# TODO: Investigate VIMINIT variable
-	alias vim='vim -u .config/vim/init.vim'
+	export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 fi
 
 # Replaces cat with bat
