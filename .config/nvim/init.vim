@@ -8,9 +8,6 @@
 "if has('nvim')
     " Resets default vim cursor shape
     "set guicursor=
-
-    "set runtimepath^=~/.vim runtimepath+=~/.vim/after
-    "let &packpath = &runtimepath
 "endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
