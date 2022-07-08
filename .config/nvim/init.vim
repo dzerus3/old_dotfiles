@@ -83,12 +83,10 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Enables line numbers
-set number
+" Enables relative numbers
 set relativenumber
 
 "...but not in text files
-au BufReadPost,BufNewFile *.md,*.txt,*.tex set nonumber
 au BufReadPost,BufNewFile *.md,*.txt,*.tex set norelativenumber
 
 " Remember position after exiting file
