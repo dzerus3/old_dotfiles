@@ -87,12 +87,10 @@ set tm=500
 set relativenumber
 
 "...but not in text files
-au BufReadPost,BufNewFile *.md,*.txt,*.tex set norelativenumber
+autocmd FileType markdown,text,plaintex set norelativenumber
 
 " Remember position after exiting file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Enable yanking between windows
 set clipboard=unnamed
