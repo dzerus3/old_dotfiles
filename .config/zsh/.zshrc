@@ -347,35 +347,35 @@ fi
 
 if typeset -f zshz > /dev/null; then
 	# alias cd='zshz 2>&1'
-	alias cd='echo "You should use z instead of cd."'
+	alias cd='echo "You should use z instead of cd."||'
 fi
 
 if command -v doas &> /dev/null; then
-	alias sudo='echo "You should use doas instead of sudo."'
+	alias sudo='echo "You should use doas instead of sudo."||'
 fi
 
 if command -v exa &> /dev/null; then
-	alias ls='echo "You should use exa instead of ls."'
+	alias ls='echo "You should use exa instead of ls."||'
 fi
 
 if command -v rg &> /dev/null; then
-	alias grep='echo "You should use rg instead of grep."'
+	alias grep='echo "You should use rg instead of grep."||'
 fi
 
 if command -v ss &> /dev/null; then
-	alias netstat='echo "You should use ss instead of netstat."'
+	alias netstat='echo "You should use ss instead of netstat."||'
 fi
 
 if command -v ip &> /dev/null; then
-	alias ifconfig='echo "You should use ip instead of ifconfig."'
+	alias ifconfig='echo "You should use ip instead of ifconfig."||'
 fi
 
 if command -v dig &> /dev/null; then
-	alias nslookup='echo "You should use dig instead of nslookup."'
+	alias nslookup='echo "You should use dig instead of nslookup."||'
 fi
 
 if command -v fd &> /dev/null; then
-	alias find='echo "You should use fd instead of find."'
+	alias find='echo "You should use fd instead of find."||'
 fi
 
 # Disabled because cat is still useful for scripting.
