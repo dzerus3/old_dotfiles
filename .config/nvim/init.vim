@@ -202,8 +202,8 @@ nnoremap I <C-b>
 nnoremap j J
 
 " Ctrl-D to delete without copying
-map <silent> <C-D> "_dd
-vnoremap <silent> <C-D> "_d
+noremap <silent> <C-d> "_dd
+vnoremap <silent> <C-d> "_d
 
 " Enter clears search highlighting
 nnoremap <silent><CR> :noh<CR>
