@@ -205,6 +205,10 @@ nnoremap j J
 noremap <silent> <C-d> "_dd
 vnoremap <silent> <C-d> "_d
 
+" <leader>l toggles line numbers
+noremap <silent> <leader>l :set relativenumber!<CR>
+"noremap <silent> <leader>l :set relativenumber! <bar> set nu!<CR>
+
 " Enter clears search highlighting
 nnoremap <silent><CR> :noh<CR>
 
