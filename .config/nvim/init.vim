@@ -310,8 +310,8 @@ highlight User7 guifg=#FFFFFF guibg=#333333
 set statusline=
 " Buffer number
 set statusline +=%1*\ %02n\ %*
-" File name
-set statusline +=%2*%<%t%*
+" File name (up to 40 characters)
+set statusline +=%2*%<%.40t%*
 " File type
 set statusline +=%3*\ %Y\ %*
 " Flags (modified, readonly, help, etc.)
@@ -323,7 +323,7 @@ set statusline +=%5*%c%6*:
 " Row number/Number of rows
 set statusline +=%5*%l%6*/%1*%L
 " Percentage of location
-set statusline +=%7*\ \ \ %02p%%\ \ 
+set statusline +=%7*%6p%%\ \ 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
