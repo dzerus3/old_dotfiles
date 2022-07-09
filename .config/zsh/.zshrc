@@ -20,6 +20,9 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 # Sets nvim as default editor
 export EDITOR='nvim'
 
+# Sets vimrc location to be XDG-compliant
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
 # bat configuration options
 export BAT_PAGER=
 export BAT_STYLE='plain'
@@ -155,13 +158,7 @@ if [ -d $ZDOTDIR/plugins ]; then
 		done
 	}
 
-	# Lightweight plugins
 	plugin-load woefe/git-prompt.zsh
-	#plugin-load romkatv/zsh-defer
-	plugin-load MichaelAquilina/zsh-you-should-use
-	plugin-load zsh-users/zsh-completions
-
-	# Heavy plugins
 	plugin-load zsh-users/zsh-autosuggestions
 	plugin-load agkozak/zsh-z
 	plugin-load zdharma-continuum/fast-syntax-highlighting
@@ -184,23 +181,6 @@ isitup() {
 
 getpublicip() {
 	curl https://ifconfig.me/; echo
-}
-
-rawurlencode() {
-  local string="${@}"
-  local strlen=${#string}
-  local encoded=""
-  local pos c o
-
-  for (( pos=0 ; pos<strlen ; pos++ )); do
-     c=${string:$pos:1}
-     case "$c" in
-        [-_.~a-zA-Z0-9] ) o="${c}" ;;
-        * )               printf -v o '%%%02x' "'$c"
-     esac
-     encoded+="${o}"
-  done
-  echo "${encoded}"
 }
 
 ################################################################
@@ -294,27 +274,28 @@ grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
 diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
 alias ip='ip --color=auto'
 
-# Enables grc support if it is installed. Taken from grc's zsh
-# plugin at https://github.com/garabik/grc/blob/master/grc.zsh
-if command -v grc &> /dev/null; then
-    grc_commands=(
-        blkid df dig du env fdisk findmnt free getfacl id
-        iptables iwconfig last lsblk lsmod lsof mount ping
-        ps sensors ss stat traceroute vmstat whois
-    )
-	# Set alias for available commands.
-	for cmd in $grc_commands ; do
-		if (( $+commands[$cmd] )) ; then
-			$cmd() {
-			grc --colour=auto ${commands[$0]} "$@"
-		}
-		fi
-	done
+alias nv='nvim'
 
-# Clean up variables
-unset cmds cmd
+alias exa='exa --classify --group --git --group-directories-first'
+alias e='exa'
 
-fi
+# List files by creation date
+alias eC='exa --long --sort=created'
+
+# List files by modified date
+alias eM='exa --long --sort=modified'
+
+# List files by size
+alias eS='exa --all --long --classify --reverse --color-scale --group-directories-first --color=always --no-permissions --no-time --sort=size | grep -v /'
+
+# List only files, and sort them by extension
+alias eX='exa --long --icons --classify --color=always --no-user --no-permissions --sort=extension | grep -v /'
+
+# exa can also replace the tree command, but the performance
+# is noticeably worse and tree seems to support colors anyway.
+#alias tree="exa --tree"
+
+alias bat='bat -pp'
 
 # Easy editing of common files
 alias editrc="$EDITOR ~/.config/zsh/.zshrc"
@@ -337,63 +318,67 @@ elif command -v xcopy &> /dev/null; then
 	alias copy='xcopy'
 fi
 
-if typeset -f zshz > /dev/null; then
-	alias cd='zshz 2>&1'
-fi
-
 #################################################################
 # Command replacements
 #################################################################
 
-# Replaces sudo with doas when possible
+if typeset -f zshz > /dev/null; then
+	# alias cd='zshz 2>&1'
+	alias cd='echo "You should use z instead of cd."'
+fi
+
 if command -v doas &> /dev/null; then
-	alias please='doas'
-	alias sudo='doas'
+	alias sudo='echo "You should use doas instead of sudo."'
 fi
 
-# Replaces ls with exa when possible
 if command -v exa &> /dev/null; then
-	alias ls='exa --classify --group --git --group-directories-first'
-
-	# List files by creation date
-	alias lC='exa --long --sort=created'
-
-	# List files by modified date
-	alias lM='exa --long --sort=modified'
-
-	# List files by size
-	alias lS='exa --all --long --classify --reverse --color-scale --group-directories-first --color=always --no-permissions --no-time --sort=size | grep -v /'
-
-	# List only files, and sort them by extension
-	alias lX='exa --long --icons --classify --color=always --no-user --no-permissions --sort=extension | grep -v /'
-
-	# exa can also replace the tree command, but the performance
-	# is noticeably worse and tree seems to support colors anyway.
-	#alias tree="exa --tree"
+	alias ls='echo "You should use exa instead of ls."'
 fi
 
-# Replaces grep with ripgrep when possible
 if command -v rg &> /dev/null; then
-	alias grep='rg'
+	alias grep='echo "You should use rg instead of grep."'
 fi
 
-# Replace vim with nvim when possible
-if command -v nvim &> /dev/null; then
-	alias nv='nvim'
-	alias vi='nvim'
-	alias vim='nvim'
-else
-	export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
-fi
-
-# Replaces cat with bat
-if command -v bat &> /dev/null; then
-	alias cat='bat --style=plain --pager='
-fi
-
-# Replaces netstat with ss
 if command -v ss &> /dev/null; then
-	alias netstat='ss'
+	alias netstat='echo "You should use ss instead of netstat."'
+fi
+
+if command -v ip &> /dev/null; then
+	alias ifconfig='echo "You should use ip instead of ifconfig."'
+fi
+
+if command -v dig &> /dev/null; then
+	alias nslookup='echo "You should use dig instead of nslookup."'
+fi
+
+if command -v fd &> /dev/null; then
+	alias find='echo "You should use fd instead of find."'
+fi
+
+# Disabled because cat is still used for scripting.
+#if command -v bat &> /dev/null; then
+#	alias cat='echo "You should use bat instead of cat."'
+#fi
+
+# Enables grc support if it is installed. Taken from grc's zsh
+# plugin at https://github.com/garabik/grc/blob/master/grc.zsh
+if command -v grc &> /dev/null; then
+	grc_commands=(
+		blkid df dig du env fdisk findmnt free getfacl id
+		iptables iwconfig last lsblk lsmod lsof mount ping
+		ps sensors ss stat traceroute vmstat whois fdisk
+	)
+	# Set alias for available commands.
+	for cmd in $grc_commands ; do
+		if (( $+commands[$cmd] )) ; then
+			$cmd() {
+			grc --colour=auto ${commands[$0]} "$@"
+		}
+		fi
+	done
+
+	# Clean up variables
+	unset cmds cmd
 fi
 
 ################################################################
@@ -404,6 +389,7 @@ fi
 ################################################################
 
 # Don't throw an error if git-prompt plugin is not installed
+# FIXME: I don't think it actually works correctly
 if typeset -f gitprompt > /dev/null; then
 	function gitprompt{}
 fi
