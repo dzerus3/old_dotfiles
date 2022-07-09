@@ -268,6 +268,11 @@ noremap <A-K> O<Esc>
 noremap <silent> x "_x
 noremap <silent> X "_X
 
+" Keymaps for working with vimrc
+" Mnemonics: rc edit, rc reload
+nnoremap <leader>re :vsplit $MYVIMRC<cr>
+nnoremap <leader>rr :source $MYVIMRC<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
