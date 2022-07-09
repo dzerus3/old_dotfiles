@@ -168,8 +168,6 @@ noremap i k
 noremap o l
 noremap ge gj
 noremap gi gk
-noremap N H
-noremap O L
 
 " Insert mode now bound to l
 noremap l i
@@ -185,8 +183,16 @@ noremap k o
 noremap K O
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Custom bindings
+" Custom mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" W and B move to beginning/end of word inclusive
+noremap W e
+noremap B gE
+
+" Sets N and O for easier horizontal navigation
+noremap N ,
+noremap O ;
 
 " E and I function like PageUp/Down
 nnoremap E <C-f>
