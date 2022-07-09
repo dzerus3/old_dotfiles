@@ -241,6 +241,18 @@ nmap <silent> <Down> <Nop>
 "nnoremap <silent> <Up> <Esc>:tabnew<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Abbreviations
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+iabbrev EUR €
+iabbrev GBP £
+iabbrev RUB ₽
+iabbrev ccc ©
+iabbrev tmk ®
+iabbrev --- —
+iabbrev lenny ( ͡° ͜ʖ ͡°)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom additions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
