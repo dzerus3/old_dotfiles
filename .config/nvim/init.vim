@@ -98,13 +98,6 @@ set clipboard=unnamed
 " Sets the number of lines of history that will be stored
 set history=50
 
-" Enable filetype plugins
-"filetype plugin on
-"filetype indent on
-
-" A buffer becomes hidden when it is abandoned
-"set hid
-
 " Show matching brackets when text indicator is over them
 set showmatch
 
@@ -117,12 +110,25 @@ set backspace=eol,start,indent
 " Don't redraw while executing macros
 set lazyredraw
 
-" Ignore useless files in wildcards
-set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+" Ignore useless files with :e
+" Version control
+set wildignore=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+" Compiled files
+set wildignore+=*.o,*.elf,*.pyc,*.bin,*.exe,*.msi
+" Images
+set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.webp,*.ico
+" Binary documents
+set wildignore+=*.pdf,*.doc*,*.xls*,*.ppt*,*.odt,*.djvu,*.fb2
+" Archives
+set wildignore+=*.zip,*.tar,*.rar,*.7z,*.gz,*.bz2
+" Audio
+set wildignore+=*.mp3,*.opus,*.wav,*.flac,*.m4a,*.m4b
+" Video
+set wildignore+=*.mp4,*.mkv,*.webm,*.avi
+" Miscellaneous
+set wildignore+=*.dat,*.db,*.iso,*.img,*.torrent
 
-" Auto read when file is changed outside vim
-"set autoread
-"au FocusGained,BufEnter * checktime
+
 
 " Disable scrollbars
 set guioptions-=r
@@ -132,6 +138,17 @@ set guioptions-=L
 
 " Set tab size to 4 spaces
 set tabstop=4 shiftwidth=0
+
+" Enable filetype plugins
+"filetype plugin on
+"filetype indent on
+
+" A buffer becomes hidden when it is abandoned
+"set hid
+
+" Auto read when file is changed outside vim
+"set autoread
+"au FocusGained,BufEnter * checktime
 
 " Auto convers tabs to spaces
 "set et
