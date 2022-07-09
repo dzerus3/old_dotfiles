@@ -212,23 +212,29 @@ nnoremap <silent><CR> :noh<CR>
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 
 " Easy window switching (leader key)
-nmap <silent> <leader>i :wincmd k<CR>
-nmap <silent> <leader>e :wincmd j<CR>
-nmap <silent> <leader>n :wincmd h<CR>
-nmap <silent> <leader>o :wincmd l<CR>
+nnoremap <silent> <leader>n :wincmd h<CR>
+nnoremap <silent> <leader>e :wincmd j<CR>
+nnoremap <silent> <leader>i :wincmd k<CR>
+nnoremap <silent> <leader>o :wincmd l<CR>
+
+" Disables arrow keys
+nmap <silent> <Left> <Nop>
+nmap <silent> <Right> <Nop>
+nmap <silent> <Up> <Nop>
+nmap <silent> <Down> <Nop>
 
 " Easy window switching (alt key)
 " Much more convenient, but uses up tmux keyspace
-"nmap <silent> <A-i> :wincmd k<CR>
-"nmap <silent> <A-e> :wincmd j<CR>
-"nmap <silent> <A-n> :wincmd h<CR>
-"nmap <silent> <A-o> :wincmd l<CR>
+"nnoremap <silent> <A-i> :wincmd k<CR>
+"nnoremap <silent> <A-e> :wincmd j<CR>
+"nnoremap <silent> <A-n> :wincmd h<CR>
+"nnoremap <silent> <A-o> :wincmd l<CR>
 
 " Arrow keys for tab management
 " Disabled in favor of tmux
-"nmap <silent> <Left> <Esc>:tabprev<CR>
-"nmap <silent> <Right> <Esc>:tabnext<CR>
-"nmap <silent> <Up> <Esc>:tabnew<CR>
+"nnoremap <silent> <Left> <Esc>:tabprev<CR>
+"nnoremap <silent> <Right> <Esc>:tabnext<CR>
+"nnoremap <silent> <Up> <Esc>:tabnew<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom additions
