@@ -183,6 +183,29 @@ getpublicip() {
 	curl https://ifconfig.me/; echo
 }
 
+# https://www.reddit.com/r/commandline/comments/p5ibiz/i_keep_forgetting_how_to_extract_tar_or_7z/
+extract () {
+	if [ -f $1 ] ; then
+		case $1 in
+			*.tbz2 | *.tar.bz2) tar -xvjf ;;
+			*.txz | *.tar.xz)   tar -xvJf ;;
+			*.tgz | *.tar.gz)   tar -xvzf ;;
+			*.tar | *.cbt)      tar -xvf  ;;
+			*.tar.zst)          tar -xvf  ;;
+			*.zip | *.cbz)      unzip     ;;
+			*.rar | *.cbr)      unrar x   ;;
+			*.arj)              unarj x   ;;
+			*.ace)              unace x   ;;
+			*.bz2)              bunzip2   ;;
+			*.xz)               unxz      ;;
+			*.gz)               gunzip    ;;
+			*.7z)               7za x     ;;
+			*.z)                uncompress;;
+			*) echo "Error: failed to extract '$1'" ;;
+		esac
+	fi
+}
+
 ################################################################
 # Keybindings
 # DOCUMENTATION:
@@ -355,7 +378,7 @@ if command -v fd &> /dev/null; then
 	alias find='echo "You should use fd instead of find."'
 fi
 
-# Disabled because cat is still used for scripting.
+# Disabled because cat is still useful for scripting.
 #if command -v bat &> /dev/null; then
 #	alias cat='echo "You should use bat instead of cat."'
 #fi
