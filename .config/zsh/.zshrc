@@ -1,45 +1,4 @@
 ################################################################
-# Generic optoins
-#
-# DOCUMENTATION:
-#   man zshall, from line 5812 /WORDCHARS
-#   $ZDOTDIR/plugins/zsh-autosuggestions/README.md
-################################################################
-
-# Enable colors
-autoload -U colors && colors
-
-# Sets XDG folder environments if they are not set already. They
-# should probably be set in /etc/zsh/zshenv or in ~/.zshenv.
-# https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
-
-# Sets nvim as default editor
-export EDITOR='nvim'
-
-# Sets vimrc location to be XDG-compliant
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
-
-# bat configuration options
-export BAT_PAGER=
-export BAT_STYLE='plain'
-
-# Excludes some characters from being counted as parts of words
-# so that Ctrl + w works better
-#local WORDCHARS=$'!"#$%&\'()*+,-.;<=>?[\\]^_`{|}~'
-local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
-
-# Sets zsh autocomplete plugins to suggest items based on all
-# completion strategies
-ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
-
-# Moves ZSHZ data to data directory
-ZSHZ_DATA="$XDG_DATA_HOME/z.db"
-
-################################################################
 # History options
 #
 # DOCUMENTATION:
@@ -160,7 +119,7 @@ if [ -d $ZDOTDIR/plugins ]; then
 
 	plugin-load woefe/git-prompt.zsh
 	plugin-load zsh-users/zsh-autosuggestions
-	plugin-load agkozak/zsh-z
+	# plugin-load agkozak/zsh-z
 	plugin-load zdharma-continuum/fast-syntax-highlighting
 fi
 
@@ -205,6 +164,57 @@ extract () {
 		esac
 	fi
 }
+
+################################################################
+# Generic optoins
+#
+# DOCUMENTATION:
+#   man zshall, from line 5812 /WORDCHARS
+#   $ZDOTDIR/plugins/zsh-autosuggestions/README.md
+################################################################
+
+# Enable colors
+autoload -U colors && colors
+
+# Sets XDG folder environments if they are not set already. They
+# should probably be set in /etc/zsh/zshenv or in ~/.zshenv.
+# https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+# Sets nvim as default editor
+export EDITOR='nvim'
+
+# Sets vimrc location to be XDG-compliant
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
+# bat configuration options
+export BAT_PAGER=
+export BAT_STYLE='plain'
+
+# nnn configuration
+export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$"
+
+# https://www.ditig.com/256-colors-cheat-sheet
+BLK="E4" CHR="E4" DIR="04" EXE="02" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="F5" SOCK="F5" OTHER="01"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+
+export NNN_COLORS='#07a0221b'
+
+# Excludes some characters from being counted as parts of words
+# so that Ctrl + w works better
+local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
+
+# Sets zsh autocomplete plugins to suggest items based on all
+# completion strategies
+ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
+
+# Initializes zoxide
+eval "$(zoxide init zsh)"
+
+export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*
 
 ################################################################
 # Keybindings
@@ -318,14 +328,14 @@ alias eX='exa --long --icons --classify --color=always --no-user --no-permission
 # is noticeably worse and tree seems to support colors anyway.
 #alias tree="exa --tree"
 
-alias bat='bat -pp'
+#alias bat='bat -pp'
 
 # Easy editing of common files
 alias editrc="$EDITOR ~/.config/zsh/.zshrc"
 alias editvimrc="$EDITOR ~/.config/nvim/init.vim"
 
 # Dotfile configuration
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
+alias dotfiles="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 
 # Aliases for yt-dlp
 alias yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
@@ -347,40 +357,44 @@ fi
 
 if typeset -f zshz > /dev/null; then
 	# alias cd='zshz 2>&1'
-	alias cd='echo "You should use z instead of cd."||'
+	alias cd='echo "You should use z instead of cd."||:'
 fi
 
 if command -v doas &> /dev/null; then
-	alias sudo='echo "You should use doas instead of sudo."||'
+	alias sudo='echo "You should use doas instead of sudo."||:'
 fi
 
 if command -v exa &> /dev/null; then
-	alias ls='echo "You should use exa instead of ls."||'
+	alias ls='echo "You should use exa instead of ls."||:'
 fi
 
 if command -v rg &> /dev/null; then
-	alias grep='echo "You should use rg instead of grep."||'
+	alias grep='echo "You should use rg instead of grep."||:'
 fi
 
 if command -v ss &> /dev/null; then
-	alias netstat='echo "You should use ss instead of netstat."||'
+	alias netstat='echo "You should use ss instead of netstat."||:'
 fi
 
 if command -v ip &> /dev/null; then
-	alias ifconfig='echo "You should use ip instead of ifconfig."||'
+	alias ifconfig='echo "You should use ip instead of ifconfig."||:'
 fi
 
 if command -v dig &> /dev/null; then
-	alias nslookup='echo "You should use dig instead of nslookup."||'
+	alias nslookup='echo "You should use dig instead of nslookup."||:'
 fi
 
 if command -v fd &> /dev/null; then
-	alias find='echo "You should use fd instead of find."||'
+	alias find='echo "You should use fd instead of find."||:'
+fi
+
+if command -v xh &> /dev/null; then
+	alias curl='echo "You should use xh instead of curl."||:'
 fi
 
 # Disabled because cat is still useful for scripting.
 #if command -v bat &> /dev/null; then
-#	alias cat='echo "You should use bat instead of cat."'
+#	alias cat='echo "You should use bat instead of cat."||:'
 #fi
 
 # Enables grc support if it is installed. Taken from grc's zsh
@@ -401,7 +415,7 @@ if command -v grc &> /dev/null; then
 	done
 
 	# Clean up variables
-	unset cmds cmd
+	unset grc_commands cmd
 fi
 
 ################################################################
