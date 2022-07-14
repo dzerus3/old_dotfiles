@@ -15,4 +15,8 @@ https://github.com/tpope/vim-dispatch
 https://github.com/tpope/vim-fugitive
 
 Nvim-specific:
+https://github.com/luukvbaal/nnn.nvim
+https://github.com/kylechui/nvim-surround
+https://github.com/terrortylor/nvim-comment
+https://github.com/b3nj5m1n/kommentary
 https://github.com/nvim-treesitter/nvim-treesitter

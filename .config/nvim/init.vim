@@ -215,30 +215,17 @@ nnoremap <silent><CR> :noh<CR>
 " Visual mode pressing * or # searches for the current selection
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 
-" Easy window switching (leader key)
-nnoremap <silent> <leader>n :wincmd h<CR>
-nnoremap <silent> <leader>e :wincmd j<CR>
-nnoremap <silent> <leader>i :wincmd k<CR>
-nnoremap <silent> <leader>o :wincmd l<CR>
-
 " Disables arrow keys
-nmap <silent> <Left> <Nop>
-nmap <silent> <Right> <Nop>
-nmap <silent> <Up> <Nop>
-nmap <silent> <Down> <Nop>
+"nmap <silent> <Left>  <Nop>
+"nmap <silent> <Right> <Nop>
+"nmap <silent> <Up>    <Nop>
+"nmap <silent> <Down>  <Nop>
 
-" Easy window switching (alt key)
-" Much more convenient, but uses up tmux keyspace
-"nnoremap <silent> <A-i> :wincmd k<CR>
-"nnoremap <silent> <A-e> :wincmd j<CR>
-"nnoremap <silent> <A-n> :wincmd h<CR>
-"nnoremap <silent> <A-o> :wincmd l<CR>
-
-" Arrow keys for tab management
-" Disabled in favor of tmux
-"nnoremap <silent> <Left> <Esc>:tabprev<CR>
-"nnoremap <silent> <Right> <Esc>:tabnext<CR>
-"nnoremap <silent> <Up> <Esc>:tabnew<CR>
+" Easy window switching
+nnoremap <silent> <Left>  :wincmd h<CR>
+nnoremap <silent> <Down>  :wincmd j<CR>
+nnoremap <silent> <Up>    :wincmd k<CR>
+nnoremap <silent> <Right> :wincmd l<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Abbreviations
@@ -334,3 +321,14 @@ cnoreabbrev TT TagbarToggle
 
 " Allows switching windows without tagbar changing content
 cnoreabbrev Z TagbarTogglePause
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NNN Integration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+lua << EOF
+require("nnn").setup()
+EOF
+
+tnoremap - <cmd>NnnExplorer<CR>
+nnoremap - <cmd>NnnExplorer %:p:h<CR>
