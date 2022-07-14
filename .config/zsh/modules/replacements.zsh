@@ -34,6 +34,11 @@ if command -v xh &> /dev/null; then
 	alias curl='echo "You should use xh instead of curl."||:'
 fi
 
+if command -v nvim &> /dev/null; then
+	alias vi='echo "You should use nvim instead of vi."||:'
+	alias vim='echo "You should use nvim instead of vim."||:'
+fi
+
 # TODO: Enabling breaks git-prompt plugin.
 #if command -v bat &> /dev/null; then
 #	alias cat='echo "You should use bat instead of cat."||:'

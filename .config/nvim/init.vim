@@ -25,26 +25,14 @@ let maplocalleader = ","
 " Enable syntax highlighting
 syntax enable
 
-" Moves disposable files into corresponding XDG directories Also
-" enables persistent undo.
-if has('nvim')
-	set undodir=$XDG_STATE_HOME/nvim/undo
-	set undofile
+" Enables persistent undo.
+set undodir=$XDG_STATE_HOME/nvim/undo
+set undofile
 
-	" I personally think these belong in STATE_HOME, but I'll keep
-	" 'em here since the defaults are good enough.
-	"set directory=$XDG_STATE_HOME/nvim/swap
-	"set shada+=n$XDG_STATE_HOME/nvim/shada
-else
-	set undodir=$XDG_STATE_HOME/vim/undo
-	set undofile
-
-	set directory=$XDG_DATA_HOME/vim/swap
-	set backupdir=$XDG_DATA_HOME/vim/backup
-	set viminfo+=n$XDG_DATA_HOME/vim/viminfo
-	set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-    let &packpath = &runtimepath
-endif
+" I personally think these belong in STATE_HOME, but I'll keep
+" 'em here since the defaults are good enough.
+"set directory=$XDG_STATE_HOME/nvim/swap
+"set shada+=n$XDG_STATE_HOME/nvim/shada
 
 " The number of lines that will remain visible above/below
 " cursor when scrolling
@@ -127,8 +115,6 @@ set wildignore+=*.mp3,*.opus,*.wav,*.flac,*.m4a,*.m4b
 set wildignore+=*.mp4,*.mkv,*.webm,*.avi
 " Miscellaneous
 set wildignore+=*.dat,*.db,*.iso,*.img,*.torrent
-
-
 
 " Disable scrollbars
 set guioptions-=r

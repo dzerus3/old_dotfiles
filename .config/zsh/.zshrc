@@ -18,9 +18,6 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 # Sets nvim as default editor
 export EDITOR='nvim'
 
-# Sets vimrc location to be XDG-compliant
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
-
 # bat configuration
 export BAT_PAGER=
 export BAT_STYLE='plain'
