@@ -355,7 +355,7 @@ fi
 # Command replacements
 #################################################################
 
-if typeset -f zshz > /dev/null; then
+if command -v z > /dev/null; then
 	# alias cd='zshz 2>&1'
 	alias cd='echo "You should use z instead of cd."||:'
 fi
