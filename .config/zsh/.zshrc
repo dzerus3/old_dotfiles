@@ -119,7 +119,6 @@ if [ -d $ZDOTDIR/plugins ]; then
 
 	plugin-load woefe/git-prompt.zsh
 	plugin-load zsh-users/zsh-autosuggestions
-	# plugin-load agkozak/zsh-z
 	plugin-load zdharma-continuum/fast-syntax-highlighting
 fi
 
@@ -176,9 +175,7 @@ extract () {
 # Enable colors
 autoload -U colors && colors
 
-# Sets XDG folder environments if they are not set already. They
-# should probably be set in /etc/zsh/zshenv or in ~/.zshenv.
-# https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
+# Sets XDG folder environments if they are not set already.
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
@@ -190,18 +187,16 @@ export EDITOR='nvim'
 # Sets vimrc location to be XDG-compliant
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
-# bat configuration options
+# bat configuration
 export BAT_PAGER=
 export BAT_STYLE='plain'
 
 # nnn configuration
-export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$"
-
 # https://www.ditig.com/256-colors-cheat-sheet
 BLK="E4" CHR="E4" DIR="04" EXE="02" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="F5" SOCK="F5" OTHER="01"
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-
 export NNN_COLORS='#07a0221b'
+export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$"
 
 # Excludes some characters from being counted as parts of words
 # so that Ctrl + w works better
@@ -214,6 +209,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 # Initializes zoxide
 eval "$(zoxide init zsh)"
 
+# Excludes .cache and ~ from zoxide completion
 export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*
 
 ################################################################
@@ -244,11 +240,6 @@ bindkey '^n' backward-char
 bindkey '^[o' forward-word
 bindkey '^[n' backward-word
 
-# Ctrl + e/i moves to beginning/end of line
-# Mapping Ctrl + i seems also to rebind tab...
-#
-# Disabling because breaks autocompletion, and I didn't find a
-# way to fix it with alacritty
 #bindkey '^e' beginning-of-line
 #bindkey '^i' end-of-line
 
@@ -272,31 +263,11 @@ export LESS=' --RAW-CONTROL-CHARS --squeeze-blank-lines '
 # Enables progress report in less
 export MANPAGER='less +Gg'
 
-# Disabled because it doesn't work on my setup
-#export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
-#export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
-#export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-#export LESS_TERMCAP_so=$'\E[01;33m'    # begin reverse video
-#export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-#export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-#export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-#export LESS_TERMCAP_mr=$(tput rev)
-#export LESS_TERMCAP_mh=$(tput dim)
-#export LESS_TERMCAP_ZN=$(tput ssubm)
-#export LESS_TERMCAP_ZV=$(tput rsubm)
-#export LESS_TERMCAP_ZO=$(tput ssupm)
-#export LESS_TERMCAP_ZW=$(tput rsupm)
-
-# Enable syntax highlighting for less
-if [ -f '/usr/bin/src-hilite-lesspipe.sh' ]; then
-	export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
-fi
-
 ################################################################
 # Aliases
 ################################################################
 
-# A few contractions for commonly used commands
+# A few common abbreviations
 alias cls='clear'
 alias md='mkdir'
 alias q='exit'
@@ -318,6 +289,7 @@ alias eC='exa --long --sort=created'
 # List files by modified date
 alias eM='exa --long --sort=modified'
 
+# TODO: These break when given a path. Remake info functions?
 # List files by size
 alias eS='exa --all --long --classify --reverse --color-scale --group-directories-first --color=always --no-permissions --no-time --sort=size | grep -v /'
 
@@ -328,6 +300,7 @@ alias eX='exa --long --icons --classify --color=always --no-user --no-permission
 # is noticeably worse and tree seems to support colors anyway.
 #alias tree="exa --tree"
 
+# Disabled because the same can be achieved with env variables.
 #alias bat='bat -pp'
 
 # Easy editing of common files
@@ -356,7 +329,6 @@ fi
 #################################################################
 
 if command -v z > /dev/null; then
-	# alias cd='zshz 2>&1'
 	alias cd='echo "You should use z instead of cd."||:'
 fi
 
@@ -392,7 +364,7 @@ if command -v xh &> /dev/null; then
 	alias curl='echo "You should use xh instead of curl."||:'
 fi
 
-# Disabled because cat is still useful for scripting.
+# TODO: Enabling breaks git-prompt plugin.
 #if command -v bat &> /dev/null; then
 #	alias cat='echo "You should use bat instead of cat."||:'
 #fi
@@ -426,7 +398,7 @@ fi
 ################################################################
 
 # Don't throw an error if git-prompt plugin is not installed
-# FIXME: I don't think it actually works correctly
+# TODO: I don't think it actually works correctly
 if typeset -f gitprompt > /dev/null; then
 	function gitprompt{}
 fi
