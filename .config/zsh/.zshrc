@@ -1,4 +1,59 @@
 ################################################################
+# Generic optoins
+#
+# DOCUMENTATION:
+#   man zshall, from line 5812 /WORDCHARS
+#   $ZDOTDIR/plugins/zsh-autosuggestions/README.md
+################################################################
+
+# Enable colors
+autoload -U colors && colors
+
+# Sets XDG folder environments if they are not set already.
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+# Sets nvim as default editor
+export EDITOR='nvim'
+
+# Sets vimrc location to be XDG-compliant
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
+# bat configuration
+export BAT_PAGER=
+export BAT_STYLE='plain'
+
+# nnn configuration
+# https://www.ditig.com/256-colors-cheat-sheet
+BLK="E4" CHR="E4" DIR="04" EXE="02" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="F5" SOCK="F5" OTHER="01"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+export NNN_COLORS='#07a0221b'
+export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$"
+
+# Excludes some characters from being counted as parts of words
+# so that Ctrl + w works better
+local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
+
+# Sets zsh autocomplete plugins to suggest items based on all
+# completion strategies
+ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
+
+# Initializes zoxide
+eval "$(zoxide init zsh)"
+
+# Excludes .cache and ~ from zoxide completion
+export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*
+
+# Sets nvim as pager
+if command -v nvim &> /dev/null; then
+	export MANPAGER='nvim +Man!'
+else
+	export MANPAGER='less +Gg'
+fi
+
+################################################################
 # History options
 #
 # DOCUMENTATION:
@@ -165,54 +220,6 @@ extract () {
 }
 
 ################################################################
-# Generic optoins
-#
-# DOCUMENTATION:
-#   man zshall, from line 5812 /WORDCHARS
-#   $ZDOTDIR/plugins/zsh-autosuggestions/README.md
-################################################################
-
-# Enable colors
-autoload -U colors && colors
-
-# Sets XDG folder environments if they are not set already.
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
-
-# Sets nvim as default editor
-export EDITOR='nvim'
-
-# Sets vimrc location to be XDG-compliant
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
-
-# bat configuration
-export BAT_PAGER=
-export BAT_STYLE='plain'
-
-# nnn configuration
-# https://www.ditig.com/256-colors-cheat-sheet
-BLK="E4" CHR="E4" DIR="04" EXE="02" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="F5" SOCK="F5" OTHER="01"
-export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-export NNN_COLORS='#07a0221b'
-export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$"
-
-# Excludes some characters from being counted as parts of words
-# so that Ctrl + w works better
-local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
-
-# Sets zsh autocomplete plugins to suggest items based on all
-# completion strategies
-ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
-
-# Initializes zoxide
-eval "$(zoxide init zsh)"
-
-# Excludes .cache and ~ from zoxide completion
-export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*
-
-################################################################
 # Keybindings
 # DOCUMENTATION:
 #   man zshall, from line 10536 /STANDARD WIDGETS
@@ -259,9 +266,6 @@ export LESSHISTFILE=-
 
 # Enable less color support
 export LESS=' --RAW-CONTROL-CHARS --squeeze-blank-lines '
-
-# Enables progress report in less
-export MANPAGER='less +Gg'
 
 ################################################################
 # Aliases
