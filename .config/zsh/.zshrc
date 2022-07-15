@@ -33,7 +33,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 eval "$(zoxide init zsh)"
 
 # Excludes .cache and ~ from zoxide completion
-export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*
+export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*:$ZDOTDIR/plugins/*
 
 ################################################################
 # History options
