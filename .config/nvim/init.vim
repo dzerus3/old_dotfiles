@@ -41,8 +41,13 @@ set so=7
 " Set a color scheme
 " I use https://github.com/w0ng/vim-hybrid with a few tweaks
 " ported from https://github.com/AlessandroYorba/Alduin
+" TODO: I have no idea whether the correct cterm colors are set
 set background=dark
 colorscheme hybrid
+highlight Search       guifg=#dfdfaf guibg=#878787 gui=NONE ctermfg=187 ctermbg=102  cterm=NONE
+highlight MatchParen   guifg=#dfdfaf guibg=#875f5f gui=NONE ctermfg=187 ctermbg=95   cterm=NONE
+highlight Function     guifg=#af6767 guibg=NONE    gui=NONE ctermfg=95  ctermbg=NONE cterm=NONE
+highlight CursorLineNR guifg=#808890 guibg=NONE    gui=NONE ctermfg=101 ctermbg=NONE cterm=NONE
 
 " Visible trailing whitespace
 set list
@@ -73,6 +78,8 @@ set tm=500
 
 " Enables relative numbers
 set relativenumber
+set cursorline
+set cursorlineopt=number
 
 "...but not in text files
 autocmd FileType markdown,text,plaintex set norelativenumber
