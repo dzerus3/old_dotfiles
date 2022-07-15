@@ -9,15 +9,6 @@
 # Enable colors
 autoload -U colors && colors
 
-# Sets XDG folder environments if they are not set already.
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
-
-# Sets nvim as default editor
-export EDITOR='nvim'
-
 # bat configuration
 export BAT_PAGER=
 export BAT_STYLE='plain'
@@ -28,6 +19,7 @@ BLK="E4" CHR="E4" DIR="04" EXE="02" REG="00" HARDLINK="00" SYMLINK="06" MISSING=
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
 export NNN_COLORS='#07a0221b'
 export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$"
+export NNN_FIFO=/tmp/nnn.fifo
 
 # Excludes some characters from being counted as parts of words
 # so that Ctrl + w works better
@@ -42,13 +34,6 @@ eval "$(zoxide init zsh)"
 
 # Excludes .cache and ~ from zoxide completion
 export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*
-
-# Sets nvim as pager
-if command -v nvim &> /dev/null; then
-	export MANPAGER='nvim +Man!'
-else
-	export MANPAGER='less +Gg'
-fi
 
 ################################################################
 # History options
@@ -189,7 +174,7 @@ bindkey '^[i' up-history
 ################################################################
 
 # Sets less keybindings file.
-export LESSKEYIN='/home/sal/.config/lesskey'
+export LESSKEYIN="$XDG_CONFIG_HOME/lesskey"
 
 # Disables less history
 export LESSHISTFILE=-
@@ -224,8 +209,7 @@ fi
 # tmux config
 ################################################################
 
-# Opens in tmux, provided tmux is installed and is not already
-# launched.
+# Opens tmux if it is necessary
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
 	exec tmux
 fi
