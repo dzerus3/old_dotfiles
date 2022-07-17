@@ -29,7 +29,7 @@ vim.g.maplocalleader = ","
 ----------------------------------------------------------------
 
 -- Enable syntax highlighting
-vim.cmd("syntax enable")
+vim.cmd "syntax enable"
 
 -- Set a color scheme
 -- I use https://github.com/w0ng/vim-hybrid with a few tweaks
@@ -87,7 +87,7 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
 --...but not in text files
-vim.cmd("autocmd FileType markdown,text,plaintex set norelativenumber")
+vim.cmd "autocmd FileType markdown,text,plaintex set norelativenumber"
 
 -- Remember position after exiting file
 vim.cmd([[
@@ -142,6 +142,10 @@ vim.opt.wildignore = {
 -- Set tab size to 4 spaces
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
+
+-- Disables netrw
+vim.g.loaded_netrw       = 1
+vim.g.loaded_netrwPlugin = 1
 
 ---------------------------------------------------------------
 -- Colemak remappings
@@ -287,7 +291,81 @@ vim.opt.statusline= table.concat({
 ---------------------------------------------------------------
 
 -- Start Tagbar
-vim.cmd("cnoreabbrev TT TagbarToggle")
+vim.cmd "cnoreabbrev TT TagbarToggle"
 
 -- Allows switching windows without tagbar changing content
-vim.cmd("cnoreabbrev Z TagbarTogglePause")
+vim.cmd "cnoreabbrev Z TagbarTogglePause"
+
+---------------------------------------------------------------
+-- Plugins
+---------------------------------------------------------------
+
+map("t", "-", "<cmd>NnnExplorer<CR>")
+map("n", "-", "<cmd>NnnExplorer %:p:h<CR>")
+
+-- Only required if you have packer configured as `opt`
+vim.cmd "packadd packer.nvim"
+
+return require('packer').startup(function()
+	-- Package manager
+	use "wbthomason/packer.nvim"
+
+	-- Easy date increment
+	use "tpope/vim-speeddating"
+
+	use "meliora-theme/theme"
+	use "vim-hybrid"
+
+	-- Comment plugin
+	use {
+		"b3nj5m1n/kommentary",
+		config = function()
+			require("kommentary.config").configure_language(
+				"default",
+				{prefer_single_line_comments=true}
+			)
+		end
+	}
+
+	-- Delimiter surrounding
+	use {
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup()
+		end
+	}
+
+	-- File manager
+	use {
+		"luukvbaal/nnn.nvim",
+		opt = true,
+		cmd = {'NnnExplorer'},
+		config = function()
+			require("nnn").setup()
+		end
+	}
+
+	-- Syntax highlighting
+	use {
+		"nvim-treesitter/nvim-treesitter",
+		run = function()
+			require("nvim-treesitter.install").update({ with_sync = true })
+		end
+	}
+
+	-- Better % matching
+	-- use {'andymass/vim-matchup', event = 'VimEnter'}
+
+	-- https://github.com/nvim-telescope/telescope.nvim
+	-- https://github.com/fhill2/xplr.nvim
+	-- https://github.com/phaazon/hop.nvim
+	-- https://github.com/neovim/nvim-lspconfig
+	-- https://github.com/oberblastmeister/neuron.nvim
+	-- https://github.com/nvim-neorg/neorg
+	-- https://github.com/tjdevries/colorbuddy.nvim
+	-- https://github.com/folke/which-key.nvim
+	-- https://github.com/tpope/vim-abolish
+	-- https://github.com/mbbill/undotree
+	-- https://github.com/TimUntersberger/neogit
+	-- https://github.com/lewis6991/gitsigns.nvim
+end)
