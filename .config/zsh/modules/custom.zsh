@@ -36,7 +36,7 @@ alias eX='exa --long --icons --classify --color=always --no-user --no-permission
 
 # Easy editing of common files
 alias editrc="$EDITOR ~/.config/zsh/.zshrc"
-alias editvimrc="$EDITOR ~/.config/nvim/init.vim"
+alias editvimrc="$EDITOR ~/.config/nvim/init.lua"
 
 # Dotfile configuration
 alias dotfiles="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"

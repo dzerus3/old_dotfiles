@@ -1,0 +1,298 @@
+---------------------------------------------------------------
+-- Helper functions
+---------------------------------------------------------------
+
+function map(mode, shortcut, command)
+	vim.api.nvim_set_keymap(
+		mode,
+		shortcut,
+		command,
+		{
+			noremap = true,
+			silent = true
+		}
+	)
+end
+
+---------------------------------------------------------------
+-- Leader key
+---------------------------------------------------------------
+
+-- With a map leader it's possible to do extra key combinations
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
+----------------------------------------------------------------
+-- Vim settings
+----------------------------------------------------------------
+
+-- Enable syntax highlighting
+vim.cmd("syntax enable")
+
+-- Set a color scheme
+-- I use https://github.com/w0ng/vim-hybrid with a few tweaks
+-- from https://github.com/AlessandroYorba/Alduin
+vim.opt.background = "dark"
+vim.cmd([[
+	colorscheme hybrid
+	highlight Search       guifg=#dfdfaf guibg=#878787 gui=NONE ctermfg=187 ctermbg=102  cterm=NONE
+	highlight MatchParen   guifg=#dfdfaf guibg=#875f5f gui=NONE ctermfg=187 ctermbg=95   cterm=NONE
+	highlight Function     guifg=#af6767 guibg=NONE    gui=NONE ctermfg=95  ctermbg=NONE cterm=NONE
+	highlight CursorLineNR guifg=#808890 guibg=NONE    gui=NONE ctermfg=101 ctermbg=NONE cterm=NONE
+]])
+
+-- Sets the font
+vim.opt.gfn="Hack 14"
+
+-- Enables persistent undo.
+vim.opt.undodir  = "$XDG_STATE_HOME/nvim/undo"
+vim.opt.undofile = true
+
+-- Number of lines that remain visible cursor when scrolling
+vim.opt.so = 7
+
+-- Visible trailing whitespace
+-- See :help lua line 1139
+vim.opt.list = true
+vim.opt.listchars = {
+	trail    = "░",
+	tab      = "▸ ",
+	extends  = ">",
+	precedes = "<",
+	nbsp     = "+"
+}
+
+-- Height of the command bar
+vim.opt.cmdheight = 1
+
+-- Case sensitive search only when at least one capital is
+-- present
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- Highlight search results
+vim.opt.hlsearch = true
+
+-- Start searching before pressing enter
+vim.opt.incsearch = true
+
+-- Make it so vim handles numbers with leading zeroes correctly TODO
+vim.opt.nrformats:remove {"octal"}
+
+-- Enables relative numbers
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+
+--...but not in text files
+vim.cmd("autocmd FileType markdown,text,plaintex set norelativenumber")
+
+-- Remember position after exiting file
+vim.cmd([[
+	autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+]])
+
+-- Enable yanking between windows
+vim.opt.clipboard="unnamed"
+
+-- Sets the number of lines of history that will be stored
+vim.opt.history = 50
+
+-- Show matching brackets when text indicator is over them
+vim.opt.showmatch = true
+
+-- How many tenths of a second to blink when matching brackets
+vim.opt.mat = 2
+
+-- Allows backspace to delete everything
+vim.opt.backspace = {
+	"eol",
+	"start",
+	"indent"
+}
+
+-- Don't redraw while executing macros
+vim.opt.lazyredraw = true
+
+-- Ignore useless files with :e
+-- Check :help lua.txt line 1114
+vim.opt.wildignore = {
+	-- Version control
+	"*/.git/*", "*/.hg/*", "*/.svn/*", "*/.DS_Store",
+	-- Compiled files
+	"*.o", "*.elf", "*.pyc", "*.bin", "*.exe", "*.msi",
+	-- Images
+	"*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.ico",
+	-- Binary documents
+	"*.pdf", "*.doc*", "*.xls*", "*.ppt*", "*.odt", "*.djvu", "*.fb2",
+	-- Archives
+	"*.zip", "*.tar", "*.rar", "*.7z", "*.gz", "*.bz2",
+	-- Audio
+	"*.mp3", "*.opus", "*.wav", "*.flac", "*.m4a", "*.m4b",
+	-- Video
+	"*.mp4", "*.mkv", "*.webm", "*.avi",
+	-- Miscellaneous
+	"*.dat", "*.db", "*.iso", "*.img", "*.torrent"
+}
+
+-- Set tab size to 4 spaces
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 0
+
+---------------------------------------------------------------
+-- Colemak remappings
+---------------------------------------------------------------
+
+-- Movement keys at neio
+map("", "n", "h")
+map("", "e", "j")
+map("", "i", "k")
+map("", "o", "l")
+map("", "ge", "gj")
+map("", "gi", "gk")
+
+-- Insert mode now bound to l
+map("", "l", "i")
+map("", "L", "I")
+map("", "gl", "gi")
+
+-- Search result navigation with h
+map("", "h", "n")
+map("", "H", "N")
+
+-- Insert mode with newline is now on k
+map("", "k", "o")
+map("", "K", "O")
+
+---------------------------------------------------------------
+-- Custom mappings
+---------------------------------------------------------------
+
+-- W and B move to beginning/end of word inclusive
+map("", "W", "e")
+map("", "B", "gE")
+
+-- Sets N and O for easier horizontal navigation
+map("", "N", ",")
+map("", "O", ";")
+
+-- E and I function like PageUp/Down
+map("", "E", "<C-f>")
+map("", "I", "<C-b>")
+
+-- Lower case j joins lines.
+map("", "j", "J")
+
+-- Ctrl-D to delete without copying
+map("",  "<C-d>", "\"_dd")
+map("v", "<C-d>", "\"_d")
+
+-- <leader>l toggles line numbers
+map("n", "<leader>l", ":set relativenumber!<CR>")
+
+-- Enter clears search highlighting
+map("", "<silent><CR>", ":noh<CR>")
+
+-- Visual mode pressing * or # searches for the current selection
+map("v", "*", ":<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>")
+
+-- Easy window switching
+map("", "<Left>",  ":wincmd h<CR>")
+map("", "<Down>",  ":wincmd j<CR>")
+map("", "<Up>",    ":wincmd k<CR>")
+map("", "<Right>", ":wincmd l<CR>")
+
+---------------------------------------------------------------
+-- Abbreviations
+---------------------------------------------------------------
+
+vim.cmd([[
+	iabbrev EUR €
+	iabbrev GBP £
+	iabbrev RUB ₽
+	iabbrev ccc ©
+	iabbrev tmk ®
+	iabbrev --- —
+	iabbrev lenny ( ͡° ͜ʖ ͡°)
+]])
+
+---------------------------------------------------------------
+-- Custom additions
+---------------------------------------------------------------
+
+-- Makes writing a bracket and then pressing enter autoclose.
+map("i", "{<CR>", "{<CR>}<C-o>O)")
+
+-- Creating newline without insert mode
+map("", "<A-k>", "o<Esc>")
+map("", "<A-K>", "O<Esc>")
+
+-- x and X don't copy when deleting
+map("", "x", "\"_x")
+map("", "X", "\"_X")
+
+-- Keymaps for working with vimrc
+-- Mnemonics: rc edit, rc reload
+map("", "<leader>re", ":vsplit $MYVIMRC<cr>")
+map("", "<leader>rr", ":source $MYVIMRC<cr>")
+
+---------------------------------------------------------------
+-- Status line
+-- Inspired by elements of:
+-- https://stackoverflow.com/a/5380230
+-- https://stackoverflow.com/a/10416234
+-- https://github.com/amix/vimrc
+---------------------------------------------------------------
+
+-- Always show the status line
+vim.opt.laststatus=2
+vim.opt.termguicolors=true
+
+-- Colors for status line
+vim.cmd([[
+	highlight User1 guifg=#CE933B guibg=#333333
+	highlight User2 guifg=#76CE3B guibg=#333333
+	highlight User3 guifg=#933BCE guibg=#333333
+	highlight User4 guifg=#EA5031 guibg=#333333
+	highlight User5 guifg=#F2E863 guibg=#333333
+	highlight User6 guifg=#CCCCCC guibg=#333333
+	highlight User7 guifg=#FFFFFF guibg=#333333
+]])
+
+vim.opt.statusline= table.concat({
+	-- Buffer number
+	"%1* %02n %*",
+	-- File name (up to 40 characters)
+	"%2*%<%.40t%*",
+	-- File type
+	"%3* %Y %*",
+	-- Flags (modified, readonly, help, etc.)
+	"%4*%m%r%w%h%*",
+	-- Separator
+	"%1*%=",
+	-- Column number
+	"%5*%c%6*:",
+	-- Row number/Number of rows
+	"%5*%l%6*/%1*%L",
+	-- Percentage of location
+	"%7*%6p%%  "
+})
+
+---------------------------------------------------------------
+-- Tagbar
+---------------------------------------------------------------
+
+-- Start Tagbar
+vim.cmd("cnoreabbrev TT TagbarToggle")
+
+-- Allows switching windows without tagbar changing content
+vim.cmd("cnoreabbrev Z TagbarTogglePause")
+
+---------------------------------------------------------------
+-- NNN Integration
+---------------------------------------------------------------
+
+require("nnn").setup()
+
+map("t", "-", "<cmd>NnnExplorer<CR>")
+map("n", "-", "<cmd>NnnExplorer %:p:h<CR>")
