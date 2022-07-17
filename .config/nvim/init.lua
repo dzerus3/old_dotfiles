@@ -53,7 +53,7 @@ vim.cmd([[
 ]])
 
 -- Enables persistent undo.
-vim.opt.undodir  = "$XDG_STATE_HOME/nvim/undo"
+vim.opt.undodir = vim.env.XDG_STATE_HOME .. "/nvim/undo"
 vim.opt.undofile = true
 
 -- Disables swapfiles
