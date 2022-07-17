@@ -1,17 +1,34 @@
 if command -v z > /dev/null; then
-	alias cd='echo "You should use z instead of cd."||:'
-fi
-
-if command -v doas &> /dev/null; then
-	alias sudo='echo "You should use doas instead of sudo."||:'
+	abbrev cd='z'
 fi
 
 if command -v exa &> /dev/null; then
-	alias ls='echo "You should use exa instead of ls."||:'
+	abbrev ls='exa'
 fi
 
 if command -v rg &> /dev/null; then
-	alias grep='echo "You should use rg instead of grep."||:'
+	abbrev rg='grep'
+fi
+
+if command -v bat &> /dev/null; then
+	abbrev cat='bat'
+fi
+
+if command -v xh &> /dev/null; then
+	abbrev curl='xh'
+fi
+
+if command -v fd &> /dev/null; then
+	abbrev find='fd'
+fi
+
+if command -v nvim &> /dev/null; then
+	abbrev vi='nvim'
+	abbrev vim='nvim'
+fi
+
+if command -v doas &> /dev/null; then
+	alias sudo='doas'
 fi
 
 if command -v ss &> /dev/null; then
@@ -25,24 +42,6 @@ fi
 if command -v dig &> /dev/null; then
 	alias nslookup='echo "You should use dig instead of nslookup."||:'
 fi
-
-if command -v fd &> /dev/null; then
-	alias find='echo "You should use fd instead of find."||:'
-fi
-
-if command -v xh &> /dev/null; then
-	alias curl='echo "You should use xh instead of curl."||:'
-fi
-
-if command -v nvim &> /dev/null; then
-	alias vi='echo "You should use nvim instead of vi."||:'
-	alias vim='echo "You should use nvim instead of vim."||:'
-fi
-
-# TODO: Enabling breaks git-prompt plugin.
-#if command -v bat &> /dev/null; then
-#	alias cat='echo "You should use bat instead of cat."||:'
-#fi
 
 # Enables grc support if it is installed. Taken from grc's zsh
 # plugin at https://github.com/garabik/grc/blob/master/grc.zsh

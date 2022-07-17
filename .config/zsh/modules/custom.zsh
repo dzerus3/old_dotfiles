@@ -1,7 +1,7 @@
 # A few common abbreviations
-alias cls='clear'
-alias md='mkdir'
-alias q='exit'
+abbrev cls='clear'
+abbrev md='mkdir'
+abbrev q='exit'
 
 # Enables colors for diff if GNU coreutils are installed
 ls   --version | grep GNU > /dev/null && alias ls='ls --color=auto'
@@ -9,10 +9,12 @@ grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
 diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
 alias ip='ip --color=auto'
 
-alias nv='nvim'
+abbrev nv='nvim'
 
+abbrev e='exa'
+abbrev el='exa -l'
+abbrev ea='exa -a'
 alias exa='exa --classify --group --git --group-directories-first'
-alias e='exa'
 
 # List files by creation date
 alias eC='exa --long --sort=created'
@@ -35,8 +37,8 @@ alias eX='exa --long --icons --classify --color=always --no-user --no-permission
 #alias bat='bat -pp'
 
 # Easy editing of common files
-alias editrc="$EDITOR ~/.config/zsh/.zshrc"
-alias editvimrc="$EDITOR ~/.config/nvim/init.lua"
+abbrev editrc="$EDITOR ~/.config/zsh/.zshrc"
+abbrev editvimrc="$EDITOR ~/.config/nvim/init.lua"
 
 # Dotfile configuration
 alias dotfiles="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
@@ -50,10 +52,12 @@ alias yt-audiobook='yt-dlp --extract-audio --audio-format mp3 --yes-playlist -o 
 # https://unix.stackexchange.com/questions/211817/copy-the-contents-of-a-file-into-the-clipboard-without-displaying-its-contents/211826#211826
 # https://github.com/zshzoo/copier/blob/main/copier.zsh
 if command -v wl-copy &> /dev/null; then
-	alias copy='wl-copy'
+	abbrev copy='wl-copy'
 elif command -v xcopy &> /dev/null; then
-	alias copy='xcopy'
+	abbrev copy='xcopy'
 fi
+
+abbrev x='extract'
 
 # Find files containing string
 find-files-with() {

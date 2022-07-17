@@ -110,31 +110,6 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 _comp_options+=(globdots)
 
 ################################################################
-# Plugins
-################################################################
-
-# If you want plugins to be installed mkdir $ZDOTDIR/plugins
-if [ -d $ZDOTDIR/plugins ]; then
-	source $ZDOTDIR/modules/plugins.zsh
-
-	plugin-load woefe/git-prompt.zsh
-	plugin-load zsh-users/zsh-autosuggestions
-	plugin-load zdharma-continuum/fast-syntax-highlighting
-fi
-
-################################################################
-# Custom functions
-################################################################
-
-source $ZDOTDIR/modules/custom.zsh
-
-#################################################################
-# Command replacements
-#################################################################
-
-source $ZDOTDIR/modules/replacements.zsh
-
-################################################################
 # Keybindings
 # DOCUMENTATION:
 #   man zshall, from line 10536 /STANDARD WIDGETS
@@ -168,6 +143,37 @@ bindkey '^[n' backward-word
 # Use Alt + e/i to move through history
 bindkey '^[e' down-history
 bindkey '^[i' up-history
+
+################################################################
+# Plugins
+################################################################
+
+# If you want plugins to be installed mkdir $ZDOTDIR/plugins
+if [ -d $ZDOTDIR/plugins ]; then
+	source $ZDOTDIR/modules/plugins.zsh
+
+	plugin-load woefe/git-prompt.zsh
+	plugin-load zsh-users/zsh-autosuggestions
+	plugin-load zdharma-continuum/fast-syntax-highlighting
+fi
+
+################################################################
+# Abbreviations
+################################################################
+
+source $ZDOTDIR/modules/abbreviations.zsh
+
+################################################################
+# Custom functions
+################################################################
+
+source $ZDOTDIR/modules/custom.zsh
+
+#################################################################
+# Command replacements
+#################################################################
+
+source $ZDOTDIR/modules/replacements.zsh
 
 ################################################################
 # less configuration
