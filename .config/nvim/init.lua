@@ -2,6 +2,8 @@
 -- Helper functions
 ---------------------------------------------------------------
 
+-- https://github.com/nanotee/nvim-lua-guide
+
 function map(mode, shortcut, command)
 	vim.api.nvim_set_keymap(
 		mode,
@@ -76,7 +78,7 @@ vim.opt.hlsearch = true
 -- Start searching before pressing enter
 vim.opt.incsearch = true
 
--- Make it so vim handles numbers with leading zeroes correctly TODO
+-- Make it so vim handles numbers with leading zeroes correctly
 vim.opt.nrformats:remove {"octal"}
 
 -- Enables relative numbers
@@ -89,7 +91,9 @@ vim.cmd("autocmd FileType markdown,text,plaintex set norelativenumber")
 
 -- Remember position after exiting file
 vim.cmd([[
-	autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+	autocmd BufReadPost *
+	\ if line("'\"") > 1 && line("'\"") <= line("$")
+	\ | exe "normal! g'\"" | endif
 ]])
 
 -- Enable yanking between windows
@@ -187,20 +191,40 @@ map("", "j", "J")
 map("",  "<C-d>", "\"_dd")
 map("v", "<C-d>", "\"_d")
 
--- <leader>l toggles line numbers
-map("n", "<leader>l", ":set relativenumber!<CR>")
+-- x and X don't copy when deleting
+map("", "x", "\"_x")
+map("", "X", "\"_X")
 
 -- Enter clears search highlighting
 map("", "<silent><CR>", ":noh<CR>")
-
--- Visual mode pressing * or # searches for the current selection
-map("v", "*", ":<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>")
 
 -- Easy window switching
 map("", "<Left>",  ":wincmd h<CR>")
 map("", "<Down>",  ":wincmd j<CR>")
 map("", "<Up>",    ":wincmd k<CR>")
 map("", "<Right>", ":wincmd l<CR>")
+
+-- Some autoclosing for multi-line stuff
+map("i", "{<CR>", "{<CR>}<C-o>O")
+map("i", "[<CR>", "[<CR>]<C-o>O")
+map("i", "[[<CR>", "[[<CR>]]<C-o>O")
+map("i", "\"\"\"<CR>", "\"\"\"<CR>\"\"\"<C-o>O")
+map("i", "/**<CR>", "/**<CR> */<C-o>O * ")
+
+-- Creating newline without insert mode
+map("", "<A-k>", "o<Esc>")
+map("", "<A-K>", "O<Esc>")
+
+-- Keymaps for working with vimrc
+-- Mnemonics: rc edit, rc reload
+map("", "<leader>re", ":vsplit $MYVIMRC<cr>")
+map("", "<leader>rr", ":source $MYVIMRC<cr>")
+
+-- <leader>l toggles line numbers
+map("n", "<leader>l", ":set relativenumber!<CR>")
+
+-- Visual mode pressing * or # searches for the current selection
+map("v", "*", ":<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>")
 
 ---------------------------------------------------------------
 -- Abbreviations
@@ -215,26 +239,6 @@ vim.cmd([[
 	iabbrev --- —
 	iabbrev lenny ( ͡° ͜ʖ ͡°)
 ]])
-
----------------------------------------------------------------
--- Custom additions
----------------------------------------------------------------
-
--- Makes writing a bracket and then pressing enter autoclose.
-map("i", "{<CR>", "{<CR>}<C-o>O)")
-
--- Creating newline without insert mode
-map("", "<A-k>", "o<Esc>")
-map("", "<A-K>", "O<Esc>")
-
--- x and X don't copy when deleting
-map("", "x", "\"_x")
-map("", "X", "\"_X")
-
--- Keymaps for working with vimrc
--- Mnemonics: rc edit, rc reload
-map("", "<leader>re", ":vsplit $MYVIMRC<cr>")
-map("", "<leader>rr", ":source $MYVIMRC<cr>")
 
 ---------------------------------------------------------------
 -- Status line
@@ -287,12 +291,3 @@ vim.cmd("cnoreabbrev TT TagbarToggle")
 
 -- Allows switching windows without tagbar changing content
 vim.cmd("cnoreabbrev Z TagbarTogglePause")
-
----------------------------------------------------------------
--- NNN Integration
----------------------------------------------------------------
-
-require("nnn").setup()
-
-map("t", "-", "<cmd>NnnExplorer<CR>")
-map("n", "-", "<cmd>NnnExplorer %:p:h<CR>")
