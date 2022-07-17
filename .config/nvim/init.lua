@@ -29,7 +29,16 @@ vim.g.maplocalleader = ","
 ----------------------------------------------------------------
 
 -- Enable syntax highlighting
-vim.cmd "syntax enable"
+vim.g.syntax = true
+
+-- Enables 24-bit colors
+vim.opt.termguicolors = true
+
+-- Sets encoding to UTF-8
+vim.opt.encoding = "UTF-8"
+
+-- Sets the font
+vim.opt.gfn="Hack 14"
 
 -- Set a color scheme
 -- I use https://github.com/w0ng/vim-hybrid with a few tweaks
@@ -43,25 +52,37 @@ vim.cmd([[
 	highlight CursorLineNR guifg=#808890 guibg=NONE    gui=NONE ctermfg=101 ctermbg=NONE cterm=NONE
 ]])
 
--- Sets the font
-vim.opt.gfn="Hack 14"
-
 -- Enables persistent undo.
 vim.opt.undodir  = "$XDG_STATE_HOME/nvim/undo"
 vim.opt.undofile = true
 
+-- Disables swapfiles
+vim.opt.swapfile = false
+
 -- Number of lines that remain visible cursor when scrolling
-vim.opt.so = 7
+vim.opt.scrolloff = 7
+vim.opt.sidescrolloff = 7
+
+-- Disables showing mode on the bottom. Should be obvious from cursor.
+vim.opt.showmode = false
 
 -- Visible trailing whitespace
 -- See :help lua line 1139
 vim.opt.list = true
 vim.opt.listchars = {
-	trail    = "░",
-	tab      = "▸ ",
-	extends  = ">",
-	precedes = "<",
-	nbsp     = "+"
+	trail      = "░",
+	tab        = "▸ ",
+	extends    = "❱",
+	precedes   = "❰",
+	nbsp       = "+",
+	multispace = "·"
+}
+
+-- Don't insert completion option until it is selected
+vim.opt.completeopt = {
+	"noinsert",
+	"menuone",
+	"noselect"
 }
 
 -- Height of the command bar
@@ -87,7 +108,7 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
 --...but not in text files
-vim.cmd "autocmd FileType markdown,text,plaintex set norelativenumber"
+-- vim.cmd "autocmd FileType markdown,text,plaintex set norelativenumber"
 
 -- Remember position after exiting file
 vim.cmd([[
@@ -106,7 +127,7 @@ vim.opt.history = 50
 vim.opt.showmatch = true
 
 -- How many tenths of a second to blink when matching brackets
-vim.opt.mat = 2
+vim.opt.matchtime = 2
 
 -- Allows backspace to delete everything
 vim.opt.backspace = {
@@ -114,6 +135,8 @@ vim.opt.backspace = {
 	"start",
 	"indent"
 }
+
+vim.opt.wrap = false
 
 -- Don't redraw while executing macros
 vim.opt.lazyredraw = true
@@ -142,6 +165,9 @@ vim.opt.wildignore = {
 -- Set tab size to 4 spaces
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
+
+-- Auto convert tabs to spaces
+--vim.opt.expandtab = true
 
 -- Disables netrw
 vim.g.loaded_netrw       = 1
@@ -212,7 +238,6 @@ map("", "<Right>", ":wincmd l<CR>")
 map("i", "{<CR>", "{<CR>}<C-o>O")
 map("i", "[<CR>", "[<CR>]<C-o>O")
 map("i", "[[<CR>", "[[<CR>]]<C-o>O")
-map("i", "\"\"\"<CR>", "\"\"\"<CR>\"\"\"<C-o>O")
 map("i", "/**<CR>", "/**<CR> */<C-o>O * ")
 
 -- Creating newline without insert mode
@@ -229,6 +254,12 @@ map("n", "<leader>l", ":set relativenumber!<CR>")
 
 -- Visual mode pressing * or # searches for the current selection
 map("v", "*", ":<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>")
+
+-- Keep visual selection after indent
+map('v', '>', '>gv')
+map('v', '<', '<gv')
+--map('n', '<leader>hl', ':set cursorline!<CR>') -- Leader + h(ighlighting) + l(ine) to toggle highlighting the current line
+--map('n', '<leader>hc', ':set cursorcolumn!<CR>') -- Leader + h(ighlighting) + c(olumn) to toggle highlighting the current column
 
 ---------------------------------------------------------------
 -- Abbreviations
@@ -313,8 +344,7 @@ return require('packer').startup(function()
 	-- Easy date increment
 	use "tpope/vim-speeddating"
 
-	use "meliora-theme/theme"
-	use "vim-hybrid"
+	use "w0ng/vim-hybrid"
 
 	-- Comment plugin
 	use {
@@ -368,4 +398,8 @@ return require('packer').startup(function()
 	-- https://github.com/mbbill/undotree
 	-- https://github.com/TimUntersberger/neogit
 	-- https://github.com/lewis6991/gitsigns.nvim
+	-- https://github.com/folke/trouble.nvim
+	-- https://github.com/shoukoo/commentary.nvim
+	-- https://github.com/lewis6991/impatient.nvim
+	-- https://github.com/lukas-reineke/indent-blankline.nvim
 end)
