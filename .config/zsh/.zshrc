@@ -115,8 +115,7 @@ _comp_options+=(globdots)
 #   man zshall, from line 10536 /STANDARD WIDGETS
 ################################################################
 
-# Enables emacs keybindings
-bindkey -e
+source $ZDOTDIR/modules/vi-mode.zsh
 
 # Gives tab selection vim navigation
 bindkey -M menuselect 'n' vi-backward-char
@@ -125,24 +124,9 @@ bindkey -M menuselect 'i' vi-up-line-or-history
 bindkey -M menuselect 'o' vi-forward-char
 
 # Edit command in vim with Ctrl + x
-#autoload edit-command-line
-#zle -N edit-command-line
-#bindkey '^x' edit-command-line
-
-# Ctrl + o/n moves one character forward/back
-bindkey '^o' forward-char
-bindkey '^n' backward-char
-
-# Alt + o/n moves forward/backward by one word
-bindkey '^[o' forward-word
-bindkey '^[n' backward-word
-
-#bindkey '^e' beginning-of-line
-#bindkey '^i' end-of-line
-
-# Use Alt + e/i to move through history
-bindkey '^[e' down-history
-bindkey '^[i' up-history
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^x' edit-command-line
 
 ################################################################
 # Plugins
@@ -153,7 +137,7 @@ if [ -d $ZDOTDIR/plugins ]; then
 	source $ZDOTDIR/modules/plugins.zsh
 
 	plugin-load woefe/git-prompt.zsh
-	plugin-load zsh-users/zsh-autosuggestions
+	plugin-load zsh-users/zsh-history-substring-search
 	plugin-load zdharma-continuum/fast-syntax-highlighting
 fi
 
