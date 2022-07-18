@@ -51,3 +51,14 @@ echo -ne '\e[5 q'
 
 # Use beam shape cursor for each new prompt.
 preexec() { echo -ne '\e[5 q' ;}
+
+# Space in normal mode to edit current line in editor buffer
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd ' ' edit-command-line
+
+# Gives tab selection vim navigation
+bindkey -M menuselect 'n' vi-backward-char
+bindkey -M menuselect 'e' vi-down-line-or-history
+bindkey -M menuselect 'i' vi-up-line-or-history
+bindkey -M menuselect 'o' vi-forward-char
