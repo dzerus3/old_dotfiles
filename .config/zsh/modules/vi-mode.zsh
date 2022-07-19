@@ -3,6 +3,17 @@
 bindkey -v
 export KEYTIMEOUT=1
 
+# Disables annoying special characters
+bindkey -r "^A"
+bindkey -r "^B"
+bindkey -r "^F"
+bindkey -r "^H"
+bindkey -r "^J"
+bindkey -r "^K"
+bindkey -r "^P"
+bindkey -r "^U"
+bindkey -r "^W"
+
 # Rebinds vi mode bindings to fit Colemak
 # Key reference at man zshzle line 948
 bindkey -a 'n' backward-char
