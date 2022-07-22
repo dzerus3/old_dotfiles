@@ -200,10 +200,11 @@ export LESS=' --RAW-CONTROL-CHARS --squeeze-blank-lines '
 ################################################################
 
 # Sets cursor shape to be a beam, matching nvim
-_fix_cursor() {
-   echo -ne '\e[5 q'
-}
-precmd_functions+=(_fix_cursor)
+# Already set in kitty config
+#_fix_cursor() {
+#   echo -ne '\e[5 q'
+#}
+#precmd_functions+=(_fix_cursor)
 
 source $ZDOTDIR/modules/prompt.zsh
 
@@ -219,21 +220,4 @@ if command -v fortune &> /dev/null; then
 	else
 		fortune
 	fi
-fi
-
-################################################################
-# zellij config
-################################################################
-
-# Opens tmux if it is necessary
-if [[ -z "$ZELLIJ" ]]; then
-    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-        zellij attach -c && exit
-    else
-        zellij && exit
-    fi
-
-    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-        exit
-    fi
 fi

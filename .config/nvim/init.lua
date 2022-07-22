@@ -44,6 +44,7 @@ vim.opt.gfn="Hack 14"
 -- I use https://github.com/w0ng/vim-hybrid with a few tweaks
 -- from https://github.com/AlessandroYorba/Alduin
 vim.opt.background = "dark"
+vim.g.hybrid_custom_term_colors = 1
 vim.cmd([[
 	colorscheme hybrid
 	highlight Search       guifg=#dfdfaf guibg=#878787 gui=NONE ctermfg=187 ctermbg=102  cterm=NONE
