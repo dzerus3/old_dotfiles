@@ -1,5 +1,5 @@
 ################################################################
-# Generic optoins
+# Generic options
 #
 # DOCUMENTATION:
 #   man zshall, from line 5812 /WORDCHARS
@@ -24,10 +24,6 @@ export NNN_FIFO=/tmp/nnn.fifo
 # Excludes some characters from being counted as parts of words
 # so that Ctrl + w works better
 local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
-
-# Sets zsh autocomplete plugins to suggest items based on all
-# completion strategies
-ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
 # Initializes zoxide
 eval "$(zoxide init zsh)"
@@ -89,7 +85,7 @@ compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 
 # Enables menu selection for completion if at least 4 matches
-zstyle ':completion:*' menu select=4
+zstyle ':completion:*' menu select
 
 # Disables using deprecated compctl
 zstyle ':completion:*' use-compctl false
@@ -122,7 +118,35 @@ zstyle ':completion:*' list-suffixes true
 #   man zshall, from line 10536 /STANDARD WIDGETS
 ################################################################
 
-source $ZDOTDIR/modules/vi-mode.zsh
+# Enables emacs keybindings
+bindkey -e
+
+# Gives tab selection vim navigation
+bindkey -M menuselect 'n' vi-backward-char
+bindkey -M menuselect 'e' vi-down-line-or-history
+bindkey -M menuselect 'i' vi-up-line-or-history
+bindkey -M menuselect 'o' vi-forward-char
+
+# Edit command in vim with Ctrl + x
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^x' edit-command-line
+
+# Alt + o/n moves one character forward/back
+bindkey '^[o' forward-char
+bindkey '^[n' backward-char
+
+# Alt + O/N moves forward/backward by one word
+bindkey '^[O' forward-word
+bindkey '^[N' backward-word
+
+# Ctrl + n/o moves to beginning/end of line
+bindkey '^n' beginning-of-line
+bindkey '^o' end-of-line
+
+# Use Alt + e/i to move through history
+bindkey '^[e' history-substring-search-down
+bindkey '^[i' history-substring-search-up
 
 ################################################################
 # Plugins
@@ -174,6 +198,12 @@ export LESS=' --RAW-CONTROL-CHARS --squeeze-blank-lines '
 #   $ZDOTDIR/plugins/git-prompt.zsh/examples/default.zsh
 #   man zshall, from line 2061 /EXPANSION OF PROMPT
 ################################################################
+
+# Sets cursor shape to be a beam, matching nvim
+_fix_cursor() {
+   echo -ne '\e[5 q'
+}
+precmd_functions+=(_fix_cursor)
 
 source $ZDOTDIR/modules/prompt.zsh
 
