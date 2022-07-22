@@ -222,10 +222,18 @@ if command -v fortune &> /dev/null; then
 fi
 
 ################################################################
-# tmux config
+# zellij config
 ################################################################
 
 # Opens tmux if it is necessary
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-	exec tmux
+if [[ -z "$ZELLIJ" ]]; then
+    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+        zellij attach -c && exit
+    else
+        zellij && exit
+    fi
+
+    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+        exit
+    fi
 fi
