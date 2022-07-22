@@ -256,8 +256,8 @@ map("n", "<leader>l", ":set relativenumber!<CR>")
 map("v", "*", ":<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>")
 
 -- Keep visual selection after indent
-map('v', '>', '>gv')
-map('v', '<', '<gv')
+--map('v', '>', '>gv')
+--map('v', '<', '<gv')
 --map('n', '<leader>hl', ':set cursorline!<CR>') -- Leader + h(ighlighting) + l(ine) to toggle highlighting the current line
 --map('n', '<leader>hc', ':set cursorcolumn!<CR>') -- Leader + h(ighlighting) + c(olumn) to toggle highlighting the current column
 
