@@ -37,9 +37,6 @@ vim.opt.termguicolors = true
 -- Sets encoding to UTF-8
 vim.opt.encoding = "UTF-8"
 
--- Sets the font
-vim.opt.gfn="Hack 14"
-
 -- Set a color scheme
 -- I use https://github.com/w0ng/vim-hybrid with a few tweaks
 -- from https://github.com/AlessandroYorba/Alduin
@@ -71,11 +68,10 @@ vim.opt.showmode = false
 -- See :help lua line 1139
 vim.opt.list = true
 vim.opt.listchars = {
-	trail      = "░",
+	trail      = "␣",
 	tab        = "▸ ",
 	extends    = "❱",
 	precedes   = "❰",
-	nbsp       = "+",
 	multispace = "·"
 }
 
@@ -219,15 +215,15 @@ map("", "I", "<C-b>")
 map("", "j", "J")
 
 -- Ctrl-D to delete without copying
-map("",  "<C-d>", "\"_dd")
-map("v", "<C-d>", "\"_d")
+map("",  "<leader>d", "\"_dd")
+map("v", "<leader>d", "\"_d")
 
 -- x and X don't copy when deleting
 map("", "x", "\"_x")
 map("", "X", "\"_X")
 
 -- Enter clears search highlighting
-map("", "<silent><CR>", ":noh<CR>")
+map("", "<CR>", ":noh<CR>")
 
 -- Easy window switching
 map("", "<Left>",  ":wincmd h<CR>")

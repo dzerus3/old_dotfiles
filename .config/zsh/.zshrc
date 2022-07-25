@@ -132,21 +132,9 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x' edit-command-line
 
-# Alt + o/n moves one character forward/back
-bindkey '^[o' forward-char
-bindkey '^[n' backward-char
-
-# Alt + O/N moves forward/backward by one word
-bindkey '^[O' forward-word
-bindkey '^[N' backward-word
-
-# Ctrl + n/o moves to beginning/end of line
-bindkey '^n' beginning-of-line
-bindkey '^o' end-of-line
-
-# Use Alt + e/i to move through history
-bindkey '^[e' history-substring-search-down
-bindkey '^[i' history-substring-search-up
+# Rebinds up/down to use substring search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 ################################################################
 # Plugins
@@ -198,13 +186,6 @@ export LESS=' --RAW-CONTROL-CHARS --squeeze-blank-lines '
 #   $ZDOTDIR/plugins/git-prompt.zsh/examples/default.zsh
 #   man zshall, from line 2061 /EXPANSION OF PROMPT
 ################################################################
-
-# Sets cursor shape to be a beam, matching nvim
-# Already set in kitty config
-#_fix_cursor() {
-#   echo -ne '\e[5 q'
-#}
-#precmd_functions+=(_fix_cursor)
 
 source $ZDOTDIR/modules/prompt.zsh
 
