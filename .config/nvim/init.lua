@@ -115,6 +115,8 @@ vim.cmd([[
 		\ | setlocal wrap
 		\ | setlocal linebreak
 		\ | setlocal display+=lastline
+		autocmd FileType man
+		\   setlocal scrolloff=99999
 	augroup end
 ]])
 
