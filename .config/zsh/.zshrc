@@ -93,9 +93,12 @@ zstyle ':completion:*' use-compctl false
 # Sets colors for autocompletion options
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# Sets autocompletion options for kill command
+# Autocompletion options for specific commands
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*:*:cp:*' file-sort modification
+zstyle ':completion:*:*:chown:*' file-list all
+zstyle ':completion:*:*:chmod:*' file-list all
 
 # Adds more descriptiveness to completion output
 zstyle ':completion:*' verbose true
