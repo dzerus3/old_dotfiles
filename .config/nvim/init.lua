@@ -117,6 +117,10 @@ vim.cmd([[
 		\ | setlocal display+=lastline
 		autocmd FileType man
 		\   setlocal scrolloff=99999
+		\ | nnoremap <buffer> q :q!<CR>
+		\ | hi Cursor blend=100
+		\ | setlocal guicursor+=a:Cursor/lCursor
+
 	augroup end
 ]])
 
