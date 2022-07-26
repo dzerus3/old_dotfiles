@@ -3,38 +3,33 @@ abbrev cls='clear'
 abbrev md='mkdir'
 abbrev q='exit'
 
+abbrev nv='nvim'
+
+abbrev e='exa'
+abbrev el='exa -l'
+abbrev ea='exa -a'
+
 # Enables colors for diff if GNU coreutils are installed
 ls   --version | grep GNU > /dev/null && alias ls='ls --color=auto'
 grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
 diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
 alias ip='ip --color=auto'
 
-abbrev nv='nvim'
+alias exa='exa --group --git --group-directories-first'
 
-abbrev e='exa'
-abbrev el='exa -l'
-abbrev ea='exa -a'
-alias exa='exa --classify --group --git --group-directories-first'
+# exa, but exclude directories
+ef(){
+	exa $@ --classify --color=always | grep -v /
+}
 
-# List files by creation date
-alias eC='exa --long --sort=created'
+# List with permissions only
+alias eP='exa --no-time --long --no-filesize'
 
-# List files by modified date
-alias eM='exa --long --sort=modified'
+# List by modified date
+alias eM='exa --no-permissions --no-user --no-filesize --long --sort=modified'
 
-# TODO: These break when given a path. Remake info functions?
-# List files by size
-alias eS='exa --all --long --classify --reverse --color-scale --group-directories-first --color=always --no-permissions --no-time --sort=size | grep -v /'
-
-# List only files, and sort them by extension
-alias eX='exa --long --icons --classify --color=always --no-user --no-permissions --sort=extension | grep -v /'
-
-# exa can also replace the tree command, but the performance
-# is noticeably worse and tree seems to support colors anyway.
-#alias tree="exa --tree"
-
-# Disabled because the same can be achieved with env variables.
-#alias bat='bat -pp'
+# List files by extension
+alias eX='ef --icons --sort=extension'
 
 # Easy editing of common files
 abbrev editrc="$EDITOR ~/.config/zsh/.zshrc"
@@ -57,8 +52,6 @@ elif command -v xcopy &> /dev/null; then
 	abbrev copy='xcopy'
 fi
 
-abbrev x='extract'
-
 # Find files containing string
 find-files-with() {
     find . -type f -print | xargs grep $1
@@ -72,27 +65,4 @@ isitup() {
 
 getpublicip() {
 	curl https://ifconfig.me/; echo
-}
-
-# https://www.reddit.com/r/commandline/comments/p5ibiz/i_keep_forgetting_how_to_extract_tar_or_7z/
-extract () {
-	if [ -f $1 ] ; then
-		case $1 in
-			*.tbz2 | *.tar.bz2) tar -xvjf ;;
-			*.txz | *.tar.xz)   tar -xvJf ;;
-			*.tgz | *.tar.gz)   tar -xvzf ;;
-			*.tar | *.cbt)      tar -xvf  ;;
-			*.tar.zst)          tar -xvf  ;;
-			*.zip | *.cbz)      unzip     ;;
-			*.rar | *.cbr)      unrar x   ;;
-			*.arj)              unarj x   ;;
-			*.ace)              unace x   ;;
-			*.bz2)              bunzip2   ;;
-			*.xz)               unxz      ;;
-			*.gz)               gunzip    ;;
-			*.7z)               7za x     ;;
-			*.Z)                uncompress;;
-			*) echo "Error: failed to extract '$1'" ;;
-		esac
-	fi
 }

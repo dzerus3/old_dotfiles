@@ -80,6 +80,8 @@ zmodload zsh/complist
 
 # Moves zcompdump to cache directory
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 
 # Sets types of completion to use
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
