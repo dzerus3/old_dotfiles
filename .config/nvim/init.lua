@@ -99,10 +99,24 @@ vim.opt.incsearch = true
 -- Make it so vim handles numbers with leading zeroes correctly
 vim.opt.nrformats:remove {"octal"}
 
+-- Disables wrapping
+vim.opt.wrap = false
+
 -- Enables relative numbers
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
+
+vim.cmd([[
+	augroup plaintext
+		autocmd!
+		autocmd FileType markdown,text,plaintex
+		\   setlocal norelativenumber
+		\ | setlocal wrap
+		\ | setlocal linebreak
+		\ | setlocal display+=lastline
+	augroup end
+]])
 
 --...but not in text files
 -- vim.cmd "autocmd FileType markdown,text,plaintex set norelativenumber"
