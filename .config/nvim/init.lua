@@ -363,6 +363,12 @@ map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 
 ---------------------------------------------------------------
+-- Markdown
+---------------------------------------------------------------
+
+vim.g.vim_markdown_no_default_key_mappings = 1
+
+---------------------------------------------------------------
 -- Packer
 ---------------------------------------------------------------
 
@@ -483,6 +489,7 @@ return require("packer").startup(function()
 	-- https://github.com/TimUntersberger/neogit
 	-- https://github.com/lewis6991/gitsigns.nvim
 	-- https://github.com/folke/trouble.nvim
+	-- https://github.com/preservim/vimux
 end)
 
 ---------------------------------------------------------------
@@ -494,3 +501,4 @@ end)
 -- vim.g.neovide_cursor_vfx_mode = "wireframe"
 -- vim.opt.mouse = "a"
 -- vim.g.hybrid_custom_term_colors = 1
+
