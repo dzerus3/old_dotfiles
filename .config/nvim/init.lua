@@ -34,6 +34,8 @@ vim.g.syntax = true
 -- Enables 24-bit colors
 vim.opt.termguicolors = true
 
+vim.opt.guifont = "Anonymice Nerd Font:h11"
+
 -- Sets encoding to UTF-8
 vim.opt.encoding = "UTF-8"
 
@@ -345,23 +347,69 @@ vim.cmd "cnoreabbrev TT TagbarToggle"
 vim.cmd "cnoreabbrev Z TagbarTogglePause"
 
 ---------------------------------------------------------------
--- Plugins
+-- NNN
 ---------------------------------------------------------------
 
-map("t", "-", "<cmd>NnnExplorer<CR>")
-map("n", "-", "<cmd>NnnExplorer %:p:h<CR>")
+-- map("t", "-", "<cmd>NnnExplorer<CR>")
+-- map("n", "-", "<cmd>NnnExplorer %:p:h<CR>")
+
+---------------------------------------------------------------
+-- Telescope
+---------------------------------------------------------------
+
+-- Find files using Telescope command-line sugar.
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+
+---------------------------------------------------------------
+-- Packer
+---------------------------------------------------------------
 
 -- Only required if you have packer configured as `opt`
 vim.cmd "packadd packer.nvim"
 
-return require('packer').startup(function()
+return require("packer").startup(function()
 	-- Package manager
 	use "wbthomason/packer.nvim"
 
-	-- Easy date increment
-	use "tpope/vim-speeddating"
-
+	-- Color theme
 	use "w0ng/vim-hybrid"
+
+	-- Easy date increment
+	use {
+		"tpope/vim-speeddating",
+		requires = { "tpope/vim-repeat" }
+	}
+
+	use {
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.0",
+		requires = {"nvim-lua/plenary.nvim"},
+		opt = true,
+		cmd = { "Telescope" }
+	}
+
+	use {
+		"preservim/vim-markdown",
+		requires = {"godlygeek/tabular"}
+	}
+
+	-- Delimiter surrounding
+	use {
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup()
+		end
+	}
+
+	-- Syntax highlighting
+	use {
+		"nvim-treesitter/nvim-treesitter",
+		run = function()
+			require("nvim-treesitter.install").update({ with_sync = true })
+		end
+	}
 
 	-- Comment plugin
 	use {
@@ -374,49 +422,75 @@ return require('packer').startup(function()
 		end
 	}
 
-	-- Delimiter surrounding
+	-- Graphic tabs. Works well with Neovide.
 	use {
-		"kylechui/nvim-surround",
+		"romgrk/barbar.nvim",
+		disable = true,
+		requires = {"kyazdani42/nvim-web-devicons"}
+	}
+
+	-- Better replacements and matching.
+	use {
+		"tpope/vim-abolish",
+		disable = true
+	}
+
+	-- Smooth scrolling
+	use {
+		"karb94/neoscroll.nvim",
+		disable = true,
 		config = function()
-			require("nvim-surround").setup()
+			require("neoscroll").setup()
 		end
 	}
 
-	-- File manager
+	-- Improves startup time.
+	use {
+		"lewis6991/impatient.nvim",
+		disable = true
+	}
+
+	-- Allows moving through tags in code files.
+	use {
+		"preservim/tagbar",
+		disable = true
+	}
+
+	-- Graphically displays blocks of indentation.
+	use{
+		"lukas-reineke/indent-blankline.nvim",
+		disable = true
+	}
+
+	-- Integration with nnn file manager.
 	use {
 		"luukvbaal/nnn.nvim",
+		disable = true,
 		opt = true,
-		cmd = {'NnnExplorer'},
+		cmd = {"NnnExplorer"},
 		config = function()
 			require("nnn").setup()
 		end
 	}
 
-	-- Syntax highlighting
-	use {
-		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			require("nvim-treesitter.install").update({ with_sync = true })
-		end
-	}
-
-	-- Better % matching
-	-- use {'andymass/vim-matchup', event = 'VimEnter'}
-
-	-- https://github.com/nvim-telescope/telescope.nvim
-	-- https://github.com/fhill2/xplr.nvim
 	-- https://github.com/phaazon/hop.nvim
 	-- https://github.com/neovim/nvim-lspconfig
 	-- https://github.com/oberblastmeister/neuron.nvim
 	-- https://github.com/nvim-neorg/neorg
 	-- https://github.com/tjdevries/colorbuddy.nvim
 	-- https://github.com/folke/which-key.nvim
-	-- https://github.com/tpope/vim-abolish
 	-- https://github.com/mbbill/undotree
 	-- https://github.com/TimUntersberger/neogit
 	-- https://github.com/lewis6991/gitsigns.nvim
 	-- https://github.com/folke/trouble.nvim
-	-- https://github.com/shoukoo/commentary.nvim
-	-- https://github.com/lewis6991/impatient.nvim
-	-- https://github.com/lukas-reineke/indent-blankline.nvim
 end)
+
+---------------------------------------------------------------
+-- Neovide
+--    Uncomment all this if using Neovide
+---------------------------------------------------------------
+
+-- vim.g.neovide_cursor_animation_length=0.02
+-- vim.g.neovide_cursor_vfx_mode = "wireframe"
+-- vim.opt.mouse = "a"
+-- vim.g.hybrid_custom_term_colors = 1
