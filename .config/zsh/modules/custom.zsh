@@ -42,6 +42,9 @@ alias dotfiles="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 alias yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
 alias yt-audiobook='yt-dlp --extract-audio --audio-format mp3 --yes-playlist -o "%(title)s.%(ext)s"'
 
+alias wget="wget --hsts-file $XDG_CACHE_HOME/wget-hsts"
+
+
 # TODO See also
 # https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
 # https://unix.stackexchange.com/questions/211817/copy-the-contents-of-a-file-into-the-clipboard-without-displaying-its-contents/211826#211826
