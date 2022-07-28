@@ -367,6 +367,9 @@ map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 ---------------------------------------------------------------
 
 vim.g.vim_markdown_no_default_key_mappings = 1
+vim.g.vim_markdown_folding_level = 1
+vim.opt.conceallevel=2
+
 
 ---------------------------------------------------------------
 -- Packer
@@ -425,6 +428,14 @@ return require("packer").startup(function()
 				"default",
 				{prefer_single_line_comments=true}
 			)
+		end
+	}
+
+	use {
+		"folke/which-key.nvim",
+		disable = true,
+		config = function()
+			require("which-key").setup {}
 		end
 	}
 
