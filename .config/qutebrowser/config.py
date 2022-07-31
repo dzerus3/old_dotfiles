@@ -24,6 +24,10 @@ c.url.searchengines = {
 
 c.tabs.position = 'top'
 c.scrolling.smooth = False
+c.completion.height = "20%"
+
+c.completion.quick = False
+c.confirm_quit = ["downloads"]
 
 # Restore opened sites when opening
 c.auto_save.session = True
@@ -91,12 +95,18 @@ config.bind('h', 'search-next')
 config.bind('H', 'search-previous')
 
 # App integrations
-# TODO: Some other ideas: 
-# neovide, zathura, imv, GIMP, nvim, nnn (for archives)
 config.bind(',m', 'hint links spawn --detach mpv {hint-url}')
 config.bind(',M', 'spawn --detach mpv {url}')
 config.bind(',f', 'hint links spawn --detach freetube {hint-url}')
 config.bind(',F', 'spawn --detach freetube {url}')
+
+# Download management
+config.bind('aa', 'download')
+config.bind('au', 'download-open;;download-remove')
+config.bind('ac', 'download-clear')
+config.bind('ad', 'download-delete')
+config.bind('as', 'download-cancel')
+config.bind('ar', 'download-retry')
 
 # M toggles bookmark status
 config.bind('M', 'bookmark-add --toggle')
