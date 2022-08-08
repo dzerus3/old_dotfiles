@@ -137,16 +137,17 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x' edit-command-line
 
-# Rebinds up/down to use substring search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
 ################################################################
 # Plugins
 ################################################################
 
 # If you want plugins to be installed mkdir $ZDOTDIR/plugins
 if [ -d $ZDOTDIR/plugins ]; then
+	# TODO: Find better way to organize this
+	# Rebinds up/down to use substring search
+	bindkey '^[[A' history-substring-search-up
+	bindkey '^[[B' history-substring-search-down
+
 	source $ZDOTDIR/modules/plugins.zsh
 
 	plugin-load woefe/git-prompt.zsh

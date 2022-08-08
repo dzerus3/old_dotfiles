@@ -36,6 +36,7 @@ abbrev editrc="$EDITOR ~/.config/zsh/.zshrc"
 abbrev editvimrc="$EDITOR ~/.config/nvim/init.lua"
 
 # Dotfile configuration
+abbrev dot='dotfiles'
 alias dotfiles="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 
 # Aliases for yt-dlp
