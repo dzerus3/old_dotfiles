@@ -253,10 +253,10 @@ map("", "X", "\"_X")
 map("", "<CR>", ":noh<CR>")
 
 -- Easy window switching
-map("", "<Left>",  ":wincmd h<CR>")
-map("", "<Down>",  ":wincmd j<CR>")
-map("", "<Up>",    ":wincmd k<CR>")
-map("", "<Right>", ":wincmd l<CR>")
+map("", "<leader>n", ":wincmd h<CR>")
+map("", "<leader>e", ":wincmd j<CR>")
+map("", "<leader>i", ":wincmd k<CR>")
+map("", "<leader>o", ":wincmd l<CR>")
 
 -- Some autoclosing for multi-line stuff
 map("i", "{<CR>", "{<CR>}<C-o>O")
@@ -265,8 +265,12 @@ map("i", "[[<CR>", "[[<CR>]]<C-o>O")
 map("i", "/**<CR>", "/**<CR> */<C-o>O * ")
 
 -- Creating newline without insert mode
-map("", "<A-k>", "o<Esc>")
-map("", "<A-K>", "O<Esc>")
+map("", "<C-k>",   "o<Esc>")
+map("", "<C-S-K>", "O<Esc>")
+
+-- Movement between previous motions
+map("", "<C-H>", "<C-O>")
+map("", "<C-S-H>", "<C-I>")
 
 -- Keymaps for working with vimrc
 -- Mnemonics: rc edit, rc reload
