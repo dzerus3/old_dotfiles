@@ -243,9 +243,13 @@ map("", "j", "J")
 map("",  "<leader>d", "\"_dd")
 map("v", "<leader>d", "\"_d")
 
--- x and X don't copy when deleting
-map("", "x", "\"_x")
-map("", "X", "\"_X")
+-- Ctrl + x/X don't copy when deleting
+map("", "<C-x>", "\"_x")
+map("", "<C-S-x>", "\"_X")
+
+-- + and - add/subtract to number
+map("", "+", "<C-a>")
+map("", "-", "<C-x>")
 
 -- Enter clears search highlighting
 map("", "<CR>", ":noh<CR>")
@@ -483,8 +487,16 @@ return require("packer").startup(function()
 	-- Graphically displays blocks of indentation.
 	use{
 		"lukas-reineke/indent-blankline.nvim",
-		disable = true
+		-- disable = true,
+		config = function()
+			require("indent_blankline").setup {
+				-- for example, context is off by default, use this to turn it on
+				show_current_context = true,
+				show_current_context_start = true,
+			}
+		end
 	}
+
 
 	-- Integration with nnn file manager.
 	use {
