@@ -92,7 +92,7 @@ config.bind('<Ctrl-w>', 'nop')
 
 # Search
 config.bind('h', 'search-next')
-config.bind('H', 'search-previous')
+config.bind('H', 'search-prev')
 
 # App integrations
 config.bind(',m', 'hint links spawn --detach mpv {hint-url}')
