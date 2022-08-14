@@ -34,10 +34,11 @@ vim.g.syntax = true
 -- Enables 24-bit colors
 vim.opt.termguicolors = true
 
-vim.opt.guifont = "Anonymice Nerd Font:h11"
-
 -- Sets encoding to UTF-8
 vim.opt.encoding = "UTF-8"
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr="nvim_treesitter#foldexpr()"
 
 -- Set a color scheme
 -- I use https://github.com/w0ng/vim-hybrid with a few tweaks
@@ -56,7 +57,7 @@ vim.cmd([[
 vim.opt.undofile = true
 if(vim.env.XDG_STATE_HOME == nil)
 	then
-	vim.opt.undodir = "~/.local/state"
+	vim.opt.undodir = "~/.local/state/nvim/undo"
 else
 	vim.opt.undodir = vim.env.XDG_STATE_HOME .. "/nvim/undo"
 end
@@ -79,7 +80,8 @@ vim.opt.listchars = {
 	tab        = "▸ ",
 	extends    = "❱",
 	precedes   = "❰",
-	multispace = "·"
+	multispace = "·",
+	lead       = "."
 }
 
 -- Don't insert completion option until it is selected
@@ -189,7 +191,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
 
 -- Auto convert tabs to spaces
---vim.opt.expandtab = true
+vim.opt.expandtab = true
 
 -- Disables netrw
 vim.g.loaded_netrw       = 1
@@ -239,17 +241,17 @@ map("", "I", "<C-b>")
 -- Lower case j joins lines.
 map("", "j", "J")
 
--- Ctrl-D to delete without copying
-map("",  "<leader>d", "\"_dd")
+-- Leader-D to delete without copying
+map("",  "<leader>d", "\"_d")
 map("v", "<leader>d", "\"_d")
 
 -- Ctrl + x/X don't copy when deleting
-map("", "<C-x>", "\"_x")
-map("", "<C-S-x>", "\"_X")
+-- map("", "<C-x>", "\"_x")
+-- map("", "<C-S-x>", "\"_X")
 
 -- + and - add/subtract to number
-map("", "+", "<C-a>")
-map("", "-", "<C-x>")
+-- map("", "+", "<C-a>")
+-- map("", "-", "<C-x>")
 
 -- Enter clears search highlighting
 map("", "<CR>", ":noh<CR>")
@@ -267,8 +269,8 @@ map("i", "[[<CR>", "[[<CR>]]<C-o>O")
 map("i", "/**<CR>", "/**<CR> */<C-o>O * ")
 
 -- Creating newline without insert mode
-map("", "<C-k>",   "o<Esc>")
-map("", "<C-S-K>", "O<Esc>")
+map("", "<C-k>",   "o<Esc>k")
+map("", "<C-S-K>", "O<Esc>j")
 
 -- Movement between previous motions
 map("", "<C-H>", "<C-O>")
@@ -301,7 +303,6 @@ vim.cmd([[
 	iabbrev RUB ₽
 	iabbrev ccc ©
 	iabbrev tmk ®
-	iabbrev --- —
 	iabbrev lenny ( ͡° ͜ʖ ͡°)
 ]])
 
@@ -379,12 +380,127 @@ map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 
 vim.g.vim_markdown_no_default_key_mappings = 1
 vim.g.vim_markdown_folding_level = 1
-vim.opt.conceallevel=2
+vim.opt.conceallevel = 2
 
+---------------------------------------------------------------
+-- Indentation Guide
+---------------------------------------------------------------
+
+require("indent_blankline").setup {
+    -- The character used to draw spaces on a blank line
+    space_char_blankline = " ",
+
+    -- Highlights current indentation level
+    show_current_context = true,
+
+    -- Highlights first line of current indentation level
+    show_current_context_start = true,
+}
+
+-- Line color of current indentation block
+vim.cmd "highlight IndentBlanklineContextChar      guifg=#848f94 gui=nocombine"
+-- Space color of current indentation block
+-- vim.cmd "highlight IndentBlanklineContextSpaceChar guifg=#848f94 gui=nocombine"
+-- Underscore color of beginning of indentation block
+vim.cmd "highlight IndentBlanklineContextStart     guisp=#848f94 gui=underline"
+
+---------------------------------------------------------------
+-- Treesitter
+---------------------------------------------------------------
+
+require "nvim-treesitter.configs".setup {
+	-- A list of parser names, or "all"
+	ensure_installed = {
+		"c",
+		"lua",
+		"rust",
+		"bash",
+		"zig"
+	},
+
+	-- Install parsers synchronously (only applied to `ensure_installed`)
+	sync_install = false,
+
+	-- Automatically install missing parsers when entering buffer
+	auto_install = true,
+
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = false,
+	},
+}
+
+---------------------------------------------------------------
+-- Comment
+---------------------------------------------------------------
+
+map("", "gco", "")
+require("Comment").setup({
+    ignore = '^$',
+    padding = false,
+    extra = {
+        ---Add comment on the line above
+        above = 'gcK',
+        ---Add comment on the line below
+        below = 'gck',
+        ---Add comment at the end of line
+        eol = 'gcA',
+    },
+})
+
+---------------------------------------------------------------
+-- Which key
+---------------------------------------------------------------
+
+local wk = require("which-key")
+
+wk.register({
+    ["n"] = "Left",
+    ["N"] = "Next occurence of char",
+    ["e"] = "Down",
+    ["E"] = "Page down",
+    ["i"] = "Up",
+    ["I"] = "Page up",
+    ["o"] = "Right",
+    ["O"] = "Previous occurence of char",
+    ["B"] = "Previous end of word",
+    ["W"] = "Next end of word",
+    -- ["C-H"] = "Move to location of previous motion",
+    -- ["C-S-H"] = "Move to location of next motion",
+    ["<cr>"] = "which_key_ignore",
+})
+
+wk.register({
+    ["<leader>"] = {
+        d = "Delete without yanking",
+
+        f = {
+            name = "+Telescope",
+            f = "Find File",
+            b = "Buffers",
+            g = "Live Grep"
+        },
+
+        n = "Go to the left window",
+        e = "Go to the down window",
+        i = "Go to the up window",
+        o = "Go to the right window",
+
+        r = {
+            name = "+init settings",
+            e = "Edit init.lua",
+            r = "Reload init.lua"
+        },
+
+        l = "Toggle relative numbers"
+    },
+})
 
 ---------------------------------------------------------------
 -- Packer
 ---------------------------------------------------------------
+
+map("", "<leader>u", ":UndotreeToggle<cr>")
 
 -- Only required if you have packer configured as `opt`
 vim.cmd "packadd packer.nvim"
@@ -395,6 +511,18 @@ return require("packer").startup(function()
 
 	-- Color theme
 	use "w0ng/vim-hybrid"
+
+	-- Graphically displays blocks of indentation.
+	use "lukas-reineke/indent-blankline.nvim"
+
+	-- Comment plugin
+	use "numToStr/Comment.nvim"
+
+    -- Graphically displays undo history
+    use {
+        "mbbill/undotree",
+        cmd = { "UndotreeToggle", "UndotreeShow" }
+    }
 
 	-- Easy date increment
 	use {
@@ -410,6 +538,7 @@ return require("packer").startup(function()
 		cmd = { "Telescope" }
 	}
 
+	-- Better markdown support
 	use {
 		"preservim/vim-markdown",
 		requires = {"godlygeek/tabular"}
@@ -426,36 +555,22 @@ return require("packer").startup(function()
 	-- Syntax highlighting
 	use {
 		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			require("nvim-treesitter.install").update({ with_sync = true })
-		end
+		run = ":TSUpdate"
 	}
 
-	-- Comment plugin
-	use {
-		"b3nj5m1n/kommentary",
-		config = function()
-			require("kommentary.config").configure_language(
-				"default",
-				{prefer_single_line_comments=true}
-			)
-		end
-	}
-
+	-- Displays possible actions for pressed key
 	use {
 		"folke/which-key.nvim",
-		disable = true,
 		config = function()
-			require("which-key").setup {}
+			require("which-key").setup{}
 		end
 	}
 
-	-- Graphic tabs. Works well with Neovide.
-	use {
-		"romgrk/barbar.nvim",
-		disable = true,
-		requires = {"kyazdani42/nvim-web-devicons"}
-	}
+	-- Allows moving through tags in code files.
+    use {
+        disable = true,
+        "preservim/tagbar"
+    }
 
 	-- Better replacements and matching.
 	use {
@@ -463,47 +578,12 @@ return require("packer").startup(function()
 		disable = true
 	}
 
-	-- Smooth scrolling
-	use {
-		"karb94/neoscroll.nvim",
-		disable = true,
-		config = function()
-			require("neoscroll").setup()
-		end
-	}
-
-	-- Improves startup time.
-	use {
-		"lewis6991/impatient.nvim",
-		disable = true
-	}
-
-	-- Allows moving through tags in code files.
-	use {
-		"preservim/tagbar",
-		disable = true
-	}
-
-	-- Graphically displays blocks of indentation.
-	use{
-		"lukas-reineke/indent-blankline.nvim",
-		-- disable = true,
-		config = function()
-			require("indent_blankline").setup {
-				-- for example, context is off by default, use this to turn it on
-				show_current_context = true,
-				show_current_context_start = true,
-			}
-		end
-	}
-
-
 	-- Integration with nnn file manager.
 	use {
 		"luukvbaal/nnn.nvim",
 		disable = true,
 		opt = true,
-		cmd = {"NnnExplorer"},
+		cmd = "NnnExplorer",
 		config = function()
 			require("nnn").setup()
 		end
@@ -511,20 +591,14 @@ return require("packer").startup(function()
 
 	-- https://github.com/phaazon/hop.nvim
 	-- https://github.com/neovim/nvim-lspconfig
-	-- https://github.com/oberblastmeister/neuron.nvim
-	-- https://github.com/nvim-neorg/neorg
 	-- https://github.com/tjdevries/colorbuddy.nvim
-	-- https://github.com/folke/which-key.nvim
-	-- https://github.com/mbbill/undotree
 	-- https://github.com/TimUntersberger/neogit
 	-- https://github.com/lewis6991/gitsigns.nvim
 	-- https://github.com/folke/trouble.nvim
-	-- https://github.com/preservim/vimux
 end)
 
 ---------------------------------------------------------------
 -- Neovide
---    Uncomment all this if using Neovide
 ---------------------------------------------------------------
 
 -- vim.g.neovide_cursor_animation_length=0.02
