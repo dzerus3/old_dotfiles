@@ -519,11 +519,15 @@ require("packer").startup({
         {"numToStr/Comment.nvim"},
 
         -- Enables tab completion
-        {"ervandew/supertab"},
+        -- Superseded by COQ
+        {
+            "ervandew/supertab",
+            disable = true
+        },
         {
             "preservim/tagbar",
             disable = true,
-            cmd = { "TagbarToggle" }
+            cmd = "TagbarToggle"
         },
         {
             "windwp/nvim-autopairs",
@@ -544,7 +548,7 @@ require("packer").startup({
             tag = "0.1.0",
             requires = {"nvim-lua/plenary.nvim"},
             opt = true,
-            cmd = { "Telescope" },
+            cmd = "Telescope",
             config = function()
                 require("telescope").setup()
             end
@@ -582,6 +586,15 @@ require("packer").startup({
                 require("nnn").setup()
             end
         },
+        {
+            "ms-jpq/coq_nvim",
+            run = ":COQdeps",
+            cmd = { "COQnow", "COQhelp" },
+            requires = {
+                "ms-jpq/coq.artifacts",
+                "ms-jpq/coq.thirdparty"
+            }
+        }
     },
     --[[config = {
         display = {
