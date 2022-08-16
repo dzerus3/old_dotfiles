@@ -504,115 +504,91 @@ wk.register({
 
 map("", "<leader>u", ":UndotreeToggle<cr>")
 
--- Only required if you have packer configured as `opt`
-vim.cmd "packadd packer.nvim"
+require("packer").startup({
+    {
+        -- Plugin manager
+        {"wbthomason/packer.nvim"},
 
-return require("packer").startup(function()
-	-- Package manager
-	use "wbthomason/packer.nvim"
+        -- Color theme
+        {"w0ng/vim-hybrid"},
 
-	-- Color theme
-	use "w0ng/vim-hybrid"
+        -- Graphically displays blocks of indentation.
+        {"lukas-reineke/indent-blankline.nvim"},
 
-	-- Graphically displays blocks of indentation.
-	use "lukas-reineke/indent-blankline.nvim"
+        -- Comment plugin
+        {"numToStr/Comment.nvim"},
 
-	-- Comment plugin
-	use "numToStr/Comment.nvim"
-
-    -- Enables tab completion
-    use "ervandew/supertab"
-
-    -- Allows moving through code tags
-    use {
-        "preservim/tagbar",
-        cmd = { "TagbarToggle" }
-    }
-
-    -- Automatic closing of matching symbols
-    use {
-        "windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup{}
-        end
-    }
-
-    -- Graphically displays undo history
-    use {
-        "mbbill/undotree",
-        cmd = { "UndotreeToggle", "UndotreeShow" }
-    }
-
-	-- Easy date increment
-	use {
-		"tpope/vim-speeddating",
-		requires = { "tpope/vim-repeat" }
-	}
-
-    -- Fuzzy finder
-	use {
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
-		requires = {"nvim-lua/plenary.nvim"},
-		opt = true,
-		cmd = { "Telescope" },
-		config = function()
-            require("telescope").setup()
-        end
-	}
-
-	-- Better markdown support
-	use {
-		"preservim/vim-markdown",
-		requires = {"godlygeek/tabular"}
-	}
-
-	-- Delimiter surrounding
-	use {
-		"kylechui/nvim-surround",
-		config = function()
-			require("nvim-surround").setup()
-		end
-	}
-
-	-- Syntax highlighting
-	use {
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate"
-	}
-
-	-- Displays possible actions for pressed key
-	use {
-		"folke/which-key.nvim",
-		config = function()
-			require("which-key").setup{}
-		end
-	}
-
-	-- Better replacements and matching.
-	use {
-		"tpope/vim-abolish",
-		disable = true
-	}
-
-	-- Integration with nnn file manager.
-	use {
-		"luukvbaal/nnn.nvim",
-		disable = true,
-		opt = true,
-		cmd = "NnnExplorer",
-		config = function()
-			require("nnn").setup()
-		end
-	}
-
-	-- https://github.com/phaazon/hop.nvim
-	-- https://github.com/neovim/nvim-lspconfig
-	-- https://github.com/tjdevries/colorbuddy.nvim
-	-- https://github.com/TimUntersberger/neogit
-	-- https://github.com/lewis6991/gitsigns.nvim
-	-- https://github.com/folke/trouble.nvim
-end)
+        -- Enables tab completion
+        {"ervandew/supertab"},
+        {
+            "preservim/tagbar",
+            disable = true,
+            cmd = { "TagbarToggle" }
+        },
+        {
+            "windwp/nvim-autopairs",
+            config = function()
+                require("nvim-autopairs").setup{}
+            end
+        },
+        {
+            "mbbill/undotree",
+            cmd = { "UndotreeToggle", "UndotreeShow" }
+        },
+        {
+            "tpope/vim-speeddating",
+            requires = { "tpope/vim-repeat" }
+        },
+        {
+            "nvim-telescope/telescope.nvim",
+            tag = "0.1.0",
+            requires = {"nvim-lua/plenary.nvim"},
+            opt = true,
+            cmd = { "Telescope" },
+            config = function()
+                require("telescope").setup()
+            end
+        },
+        {
+            "preservim/vim-markdown",
+            requires = {"godlygeek/tabular"}
+        },
+        {
+            "kylechui/nvim-surround",
+            config = function()
+                require("nvim-surround").setup()
+            end
+        },
+        {
+            "nvim-treesitter/nvim-treesitter",
+            run = ":TSUpdate"
+        },
+        {
+            "folke/which-key.nvim",
+            config = function()
+                require("which-key").setup{}
+            end
+        },
+        {
+            "tpope/vim-abolish",
+            disable = true
+        },
+        {
+            "luukvbaal/nnn.nvim",
+            disable = true,
+            opt = true,
+            cmd = "NnnExplorer",
+            config = function()
+                require("nnn").setup()
+            end
+        },
+    },
+    --[[config = {
+        display = {
+            non_interactive = true
+        }
+    }]]
+})
 
 ---------------------------------------------------------------
 -- Neovide
