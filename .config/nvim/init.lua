@@ -349,6 +349,12 @@ vim.cmd "cnoreabbrev TT TagbarToggle"
 -- Allows switching windows without tagbar changing content
 vim.cmd "cnoreabbrev Z TagbarTogglePause"
 
+-- Corrects keybinding conflicts within tagbar window
+-- Discovered with :verbose map
+vim.g.tagbar_map_togglefold = "['za']"
+vim.g.tagbar_map_showproto =  "['k']"
+vim.g.tagbar_map_togglecaseinsensitive = "['l']"
+
 ---------------------------------------------------------------
 -- NNN
 ---------------------------------------------------------------
@@ -360,8 +366,7 @@ vim.cmd "cnoreabbrev Z TagbarTogglePause"
 -- Telescope
 ---------------------------------------------------------------
 
--- Find files using Telescope command-line sugar.
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+map("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>")
 map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 
@@ -389,11 +394,13 @@ require("indent_blankline").setup {
 }
 
 -- Line color of current indentation block
-vim.cmd "highlight IndentBlanklineContextChar      guifg=#848f94 gui=nocombine"
+vim.cmd "highlight IndentBlanklineContextChar guifg=#848f94 gui=nocombine"
+
 -- Space color of current indentation block
 -- vim.cmd "highlight IndentBlanklineContextSpaceChar guifg=#848f94 gui=nocombine"
+
 -- Underscore color of beginning of indentation block
-vim.cmd "highlight IndentBlanklineContextStart     guisp=#848f94 gui=underline"
+vim.cmd "highlight IndentBlanklineContextStart guisp=#848f94 gui=underline"
 
 ---------------------------------------------------------------
 -- Treesitter
@@ -425,7 +432,6 @@ require "nvim-treesitter.configs".setup {
 -- Comment
 ---------------------------------------------------------------
 
-map("", "gco", "")
 require("Comment").setup({
     ignore = '^$',
     padding = false,
@@ -478,12 +484,17 @@ wk.register({
         o = "Go to the right window",
 
         r = {
-            name = "+init settings",
+            name = "+init.lua editing",
             e = "Edit init.lua",
             r = "Reload init.lua"
         },
 
-        l = "Toggle relative numbers"
+        l = "Toggle relative numbers",
+        h = {
+            name = "+Cursor highlighting",
+            l = "Highlight line",
+            c = "Highlight column"
+        },
     },
 })
 
@@ -509,6 +520,23 @@ return require("packer").startup(function()
 	-- Comment plugin
 	use "numToStr/Comment.nvim"
 
+    -- Enables tab completion
+    use "ervandew/supertab"
+
+    -- Allows moving through code tags
+    use {
+        "preservim/tagbar",
+        cmd = { "TagbarToggle" }
+    }
+
+    -- Automatic closing of matching symbols
+    use {
+        "windwp/nvim-autopairs",
+        config = function()
+            require("nvim-autopairs").setup{}
+        end
+    }
+
     -- Graphically displays undo history
     use {
         "mbbill/undotree",
@@ -521,12 +549,16 @@ return require("packer").startup(function()
 		requires = { "tpope/vim-repeat" }
 	}
 
+    -- Fuzzy finder
 	use {
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
 		requires = {"nvim-lua/plenary.nvim"},
 		opt = true,
-		cmd = { "Telescope" }
+		cmd = { "Telescope" },
+		config = function()
+            require("telescope").setup()
+        end
 	}
 
 	-- Better markdown support
@@ -556,12 +588,6 @@ return require("packer").startup(function()
 			require("which-key").setup{}
 		end
 	}
-
-	-- Allows moving through tags in code files.
-    use {
-        disable = true,
-        "preservim/tagbar"
-    }
 
 	-- Better replacements and matching.
 	use {
