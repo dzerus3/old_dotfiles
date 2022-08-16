@@ -141,8 +141,11 @@ vim.cmd([[
 	\ | exe "normal! g'\"" | endif
 ]])
 
--- Enable yanking between windows
-vim.opt.clipboard="unnamed"
+-- Auto yank to clipboard
+vim.opt.clipboard="unnamedplus"
+
+-- Uncomment to keep clipboard separate from yank buffer
+--vim.opt.clipboard="unnamed"
 
 -- Sets the number of lines of history that will be stored
 vim.opt.history = 50
