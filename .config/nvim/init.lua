@@ -144,9 +144,6 @@ vim.cmd([[
 -- Auto yank to clipboard
 vim.opt.clipboard="unnamedplus"
 
--- Uncomment to keep clipboard separate from yank buffer
---vim.opt.clipboard="unnamed"
-
 -- Sets the number of lines of history that will be stored
 vim.opt.history = 50
 
@@ -257,36 +254,35 @@ map("", "<leader>e", ":wincmd j<CR>")
 map("", "<leader>i", ":wincmd k<CR>")
 map("", "<leader>o", ":wincmd l<CR>")
 
--- Some autoclosing for multi-line stuff
-map("i", "{<CR>", "{<CR>}<C-o>O")
-map("i", "[<CR>", "[<CR>]<C-o>O")
-map("i", "[[<CR>", "[[<CR>]]<C-o>O")
-map("i", "/**<CR>", "/**<CR> */<C-o>O * ")
-
 -- Creating newline without insert mode
-map("", "<C-k>",   "o<Esc>k")
-map("", "<C-S-K>", "O<Esc>j")
+map("", "<C-k>",   "o<Esc>")
+map("", "<C-S-K>", "O<Esc>")
 
 -- Movement between previous motions
 map("", "<C-H>", "<C-O>")
 map("", "<C-S-H>", "<C-I>")
 
 -- Keymaps for working with vimrc
--- Mnemonics: rc edit, rc reload
 map("", "<leader>re", ":vsplit $MYVIMRC<cr>")
 map("", "<leader>rr", ":source $MYVIMRC<cr>")
 
 -- <leader>l toggles line numbers
 map("n", "<leader>l", ":set relativenumber!<CR>")
 
--- Visual mode pressing * or # searches for the current selection
-map("v", "*", ":<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>")
+-- Leader + h allows highlighting `l`ine or `c`olumn
+map("n", "<leader>hl", ":set cursorline!<CR>")
+map("n", "<leader>hc", ":set cursorcolumn!<CR>")
 
--- Keep visual selection after indent
---map('v', '>', '>gv')
---map('v', '<', '<gv')
---map('n', '<leader>hl', ':set cursorline!<CR>') -- Leader + h(ighlighting) + l(ine) to toggle highlighting the current line
---map('n', '<leader>hc', ':set cursorcolumn!<CR>') -- Leader + h(ighlighting) + c(olumn) to toggle highlighting the current column
+-- Disables the use of the arrow keys
+map("", "<Left>", "")
+map("", "<Down>", "")
+map("", "<Up>",   "")
+map("", "<Right>", "")
+
+map("i", "<Left>", "")
+map("i", "<Down>", "")
+map("i", "<Up>",   "")
+map("i", "<Right>", "")
 
 ---------------------------------------------------------------
 -- Abbreviations
