@@ -46,3 +46,5 @@ application/x-shellscript=nvim.desktop;
 application/x-ms-dos-executable=wine.desktop
 application/x-partial-download=mpv.desktop;
 audio/x-aac=mpv.desktop;
+
+inode/directory=nnn.desktop
