@@ -134,9 +134,6 @@ vim.cmd([[
 	augroup end
 ]])
 
---...but not in text files
--- vim.cmd "autocmd FileType markdown,text,plaintex set norelativenumber"
-
 -- Remember position after exiting file
 vim.cmd([[
 	autocmd BufReadPost *
@@ -247,14 +244,6 @@ map("", "j", "J")
 -- Leader-D to delete without copying
 map("",  "<leader>d", "\"_d")
 map("v", "<leader>d", "\"_d")
-
--- Ctrl + x/X don't copy when deleting
--- map("", "<C-x>", "\"_x")
--- map("", "<C-S-x>", "\"_X")
-
--- + and - add/subtract to number
--- map("", "+", "<C-a>")
--- map("", "-", "<C-x>")
 
 -- Enter clears search highlighting
 map("", "<CR>", ":noh<CR>")
