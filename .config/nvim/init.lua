@@ -37,8 +37,11 @@ vim.opt.termguicolors = true
 -- Sets encoding to UTF-8
 vim.opt.encoding = "UTF-8"
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr="nvim_treesitter#foldexpr()"
+-- Folding
+vim.opt.foldmethod = "indent"
+
+-- Disables folding by default
+--vim.opt.foldenable = false
 
 -- Set a color scheme
 -- I use https://github.com/w0ng/vim-hybrid with a few tweaks
