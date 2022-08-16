@@ -56,6 +56,10 @@ elif command -v xcopy &> /dev/null; then
 	abbrev copy='xcopy'
 fi
 
+open(){
+    nohup xdg-open $1 > /dev/null &
+}
+
 # Find files containing string
 find-files-with() {
     find . -type f -print | xargs grep $1
