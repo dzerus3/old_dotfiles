@@ -212,11 +212,15 @@ map("", "gi", "gk")
 -- Insert mode now bound to l
 map("", "l", "i")
 map("", "L", "I")
-map("", "gl", "gi")
+map("", "gt", "gi")
 
 -- Search result navigation with h
 map("", "h", "n")
 map("", "H", "N")
+map("", "gh", "gn")
+map("", "gH", "gN")
+map("", "gn", "")
+map("", "gN", "")
 
 -- Insert mode with newline is now on k
 map("", "k", "o")
