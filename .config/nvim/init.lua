@@ -136,9 +136,12 @@ vim.cmd([[
 
 -- Remember position after exiting file
 vim.cmd([[
-	autocmd BufReadPost *
-	\ if line("'\"") > 1 && line("'\"") <= line("$")
-	\ | exe "normal! g'\"" | endif
+    augroup fileposition
+        autocmd!
+        autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft =~ 'gitcommit'
+        \ | exe "normal! g'\"" | endif
+    augroup end
 ]])
 
 -- Auto yank to clipboard
@@ -212,7 +215,7 @@ map("", "gi", "gk")
 -- Insert mode now bound to l
 map("", "l", "i")
 map("", "L", "I")
-map("", "gt", "gi")
+map("", "gl", "gi")
 
 -- Search result navigation with h
 map("", "h", "n")
@@ -480,7 +483,7 @@ wk.register({
         u = "Toggle UndoTree"
     },
     g = {
-        t = "Move to last insertion and INSERT",
+        l = "Move to last insertion and INSERT",
         e = "Move to next visible line",
         i = "Move to previous visible line",
         h = "Search forwards and select",
