@@ -41,7 +41,7 @@ vim.opt.encoding = "UTF-8"
 vim.opt.foldmethod = "indent"
 
 -- Disables folding by default
---vim.opt.foldenable = false
+vim.opt.foldenable = false
 
 -- Set a color scheme
 -- I use https://github.com/w0ng/vim-hybrid with a few tweaks
