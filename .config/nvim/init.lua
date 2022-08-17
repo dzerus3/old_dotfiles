@@ -75,16 +75,16 @@ vim.opt.sidescrolloff = 7
 -- Disables showing mode on the bottom. Should be obvious from cursor.
 vim.opt.showmode = false
 
--- Visible trailing whitespace
+-- Visible whitespace
 -- See :help lua line 1139
 vim.opt.list = true
 vim.opt.listchars = {
-	trail      = "␣",
+	trail      = "-",
 	tab        = "▸ ",
 	extends    = "❱",
 	precedes   = "❰",
 	multispace = "·",
-	lead       = "."
+	lead       = " "
 }
 
 -- Don't insert completion option until it is selected
