@@ -386,30 +386,6 @@ vim.g.vim_markdown_folding_level = 1
 vim.opt.conceallevel = 2
 
 ---------------------------------------------------------------
--- Indentation Guide
----------------------------------------------------------------
-
-require("indent_blankline").setup {
-    -- The character used to draw spaces on a blank line
-    space_char_blankline = " ",
-
-    -- Highlights current indentation level
-    show_current_context = true,
-
-    -- Highlights first line of current indentation level
-    show_current_context_start = true,
-}
-
--- Line color of current indentation block
-vim.cmd "highlight IndentBlanklineContextChar guifg=#848f94 gui=nocombine"
-
--- Space color of current indentation block
--- vim.cmd "highlight IndentBlanklineContextSpaceChar guifg=#848f94 gui=nocombine"
-
--- Underscore color of beginning of indentation block
-vim.cmd "highlight IndentBlanklineContextStart guisp=#848f94 gui=underline"
-
----------------------------------------------------------------
 -- Treesitter
 ---------------------------------------------------------------
 
@@ -441,7 +417,6 @@ require "nvim-treesitter.configs".setup {
 
 require("Comment").setup({
     ignore = '^$',
-    padding = false,
     extra = {
         ---Add comment on the line above
         above = 'gcK',
@@ -486,8 +461,8 @@ wk.register({
         },
 
         n = "Go to the left window",
-        e = "Go to the down window",
-        i = "Go to the up window",
+        e = "Go to the window below",
+        i = "Go to the window above",
         o = "Go to the right window",
 
         r = {
@@ -502,7 +477,17 @@ wk.register({
             l = "Highlight line",
             c = "Highlight column"
         },
+        u = "Toggle UndoTree"
     },
+    g = {
+        t = "Move to last insertion and INSERT",
+        e = "Move to next visible line",
+        i = "Move to previous visible line",
+        h = "Search forwards and select",
+        H = "Search backwards and select",
+        --n = "which_key_ignore",
+        --N = "which_key_ignore"
+    }
 })
 
 ---------------------------------------------------------------
@@ -514,76 +499,98 @@ map("", "<leader>u", ":UndotreeToggle<cr>")
 require("packer").startup({
     {
         -- Plugin manager
-        {"wbthomason/packer.nvim"},
+        {
+            "wbthomason/packer.nvim"
+        },
 
         -- Color theme
-        {"w0ng/vim-hybrid"},
-
-        -- Graphically displays blocks of indentation.
-        {"lukas-reineke/indent-blankline.nvim"},
+        {
+            "w0ng/vim-hybrid"
+        },
 
         -- Comment plugin
-        {"numToStr/Comment.nvim"},
-
-        -- Enables tab completion
-        -- Superseded by COQ
         {
-            "ervandew/supertab",
-            disable = true
+            "numToStr/Comment.nvim"
         },
+
+        -- Allows moving through code tags
         {
             "preservim/tagbar",
-            disable = true,
             cmd = "TagbarToggle"
         },
+
+        -- Enables tab completion
+        {
+            "ervandew/supertab",
+        },
+
+        -- Automatically creates character pairs
         {
             "windwp/nvim-autopairs",
             config = function()
                 require("nvim-autopairs").setup{}
             end
         },
+
+        -- Graphically shows undo history
         {
             "mbbill/undotree",
             cmd = { "UndotreeToggle", "UndotreeShow" }
         },
+
+        -- Allows incrementing dates
         {
             "tpope/vim-speeddating",
             requires = { "tpope/vim-repeat" }
         },
+
+        -- Fuzzy file finder
         {
             "nvim-telescope/telescope.nvim",
             tag = "0.1.0",
             requires = {"nvim-lua/plenary.nvim"},
             opt = true,
             cmd = "Telescope",
-            config = function()
-                require("telescope").setup()
-            end
+            --config = function()
+            --    require("telescope").setup()
+            --end
         },
+
+        -- Better behavior in .md files
         {
             "preservim/vim-markdown",
             requires = {"godlygeek/tabular"}
         },
+
+        -- Options for surrounding text with special characters
         {
             "kylechui/nvim-surround",
             config = function()
                 require("nvim-surround").setup()
             end
         },
+
+        -- Better syntax highlighting
         {
             "nvim-treesitter/nvim-treesitter",
             run = ":TSUpdate"
         },
+
+        -- Shows possible commands for selected key
         {
             "folke/which-key.nvim",
             config = function()
                 require("which-key").setup{}
             end
         },
+
+        -- Better searching and replacement
         {
             "tpope/vim-abolish",
             disable = true
         },
+
+        -- Integration with nnn file manager
         {
             "luukvbaal/nnn.nvim",
             disable = true,
@@ -593,15 +600,6 @@ require("packer").startup({
                 require("nnn").setup()
             end
         },
-        {
-            "ms-jpq/coq_nvim",
-            run = ":COQdeps",
-            cmd = { "COQnow", "COQhelp" },
-            requires = {
-                "ms-jpq/coq.artifacts",
-                "ms-jpq/coq.thirdparty"
-            }
-        }
     },
     --[[config = {
         display = {
