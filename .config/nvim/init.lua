@@ -259,8 +259,8 @@ map("", "<leader>i", ":wincmd k<CR>")
 map("", "<leader>o", ":wincmd l<CR>")
 
 -- Creating newline without insert mode
-map("", "<C-k>",   "o<Esc>")
-map("", "<C-S-K>", "O<Esc>")
+map("", "<C-k>",   "o<Esc>o")
+map("", "<C-S-K>", "O<Esc>O")
 
 -- Movement between previous motions
 map("", "<C-H>", "<C-O>")
