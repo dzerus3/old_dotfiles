@@ -13,6 +13,8 @@ autoload -U colors && colors
 export BAT_PAGER=
 export BAT_STYLE='plain'
 
+export PATH=$HOME/.local/bin:$PATH
+
 # nnn configuration
 # https://www.ditig.com/256-colors-cheat-sheet
 BLK="E4" CHR="E4" DIR="04" EXE="02" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="F5" SOCK="F5" OTHER="01"
