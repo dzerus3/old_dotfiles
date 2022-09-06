@@ -9,6 +9,19 @@ abbrev e='exa'
 abbrev el='exa -l'
 abbrev ea='exa -a'
 
+abbrev hw='task +hw'
+abbrev tadd='task add'
+abbrev tann='task annotate'
+abbrev tmod='task modify'
+abbrev tall='task all'
+abbrev tsta='task start'
+abbrev tlist='task list'
+abbrev tdone='task done'
+abbrev tmodlast='task modify $(task +LATEST uuids)'
+abbrev tdep='task add dep:$(task +LATEST uuids)'
+
+abbrev ti='timew'
+
 # Enables colors for diff if GNU coreutils are installed
 ls   --version | grep GNU > /dev/null && alias ls='ls --color=auto'
 grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'

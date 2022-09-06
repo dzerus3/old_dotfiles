@@ -25,7 +25,7 @@ export NNN_FIFO=/tmp/nnn.fifo
 
 # Excludes some characters from being counted as parts of words
 # so that Ctrl + w works better
-local WORDCHARS=$'*?-.[]~:;!#$%^(){}<>'
+local WORDCHARS=$'*?-.[]~;!#$%^(){}<>'
 
 # Initializes zoxide
 eval "$(zoxide init zsh)"
@@ -103,6 +103,11 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 zstyle ':completion:*:*:cp:*' file-sort modification
 zstyle ':completion:*:*:chown:*' file-list all
 zstyle ':completion:*:*:chmod:*' file-list all
+
+# Taken from oh-my-zsh taskwarrior plugin
+zstyle ':completion:*:*:task:*' verbose yes
+zstyle ':completion:*:*:task:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*:*:task:*' group-name ''
 
 # Adds more descriptiveness to completion output
 zstyle ':completion:*' verbose true
