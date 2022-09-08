@@ -13,7 +13,11 @@ autoload -U colors && colors
 export BAT_PAGER=
 export BAT_STYLE='plain'
 
+# Allows executing commands from ~/.local/bin
 export PATH=$HOME/.local/bin:$PATH
+
+# Cargo automatically installs to ~/.local/bin
+export CARGO_INSTALL_ROOT=$HOME/.local
 
 # nnn configuration
 # https://www.ditig.com/256-colors-cheat-sheet

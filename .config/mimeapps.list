@@ -10,7 +10,7 @@ application/fb2=org.pwmt.zathura.desktop
 application/djvu=org.pwmt.zathura.desktop
 
 image/gif=imv.desktop
-image/jpg=imv.desktop;
+image/jpeg=imv.desktop;
 image/png=imv.desktop;
 image/webp=imv.desktop;
 image/bmp=imv.desktop;
