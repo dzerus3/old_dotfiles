@@ -249,12 +249,18 @@ map("", "I", "<C-b>")
 -- Lower case j joins lines.
 map("", "j", "J")
 
+-- c and s no longer copy
+map("",  "s", "\"_s")
+map("v", "s", "\"_s")
+map("",  "c", "\"_c")
+map("v", "c", "\"_c")
+
 -- Leader-D to delete without copying
 map("",  "<leader>d", "\"_d")
 map("v", "<leader>d", "\"_d")
 
--- Enter clears search highlighting
-map("", "<CR>", ":noh<CR>")
+-- Enter clears toggles highlighting
+map("", "<CR>", ":set hlsearch!<CR>")
 
 -- Easy window switching
 map("", "<leader>n", ":wincmd h<CR>")
