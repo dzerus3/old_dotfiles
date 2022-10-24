@@ -13,6 +13,9 @@ autoload -U colors && colors
 export BAT_PAGER=
 export BAT_STYLE='plain'
 
+# pass configuration
+export PASSWORD_STORE_DIR=$XDG_DATA_HOME/pass
+
 # Allows executing commands from ~/.local/bin
 export PATH=$HOME/.local/bin:$PATH
 
