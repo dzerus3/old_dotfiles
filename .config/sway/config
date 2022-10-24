@@ -21,7 +21,9 @@ gaps outer 10
 # Your preferred terminal emulator
 set $term kitty
 
+# Polkit, so GUIs can ask for elevated privileges
 exec /usr/bin/lxpolkit
+# Notification center, so notifications are displayed graphically
 exec /usr/bin/mako
 
 # Your preferred application launcher
@@ -87,6 +89,10 @@ output * bg /usr/share/backgrounds/wallpaper.jpg fill
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
     floating_modifier $mod normal
+
+    # TODO: Add screenshots to printscreen
+    #bindsym Print exec grim
+    #bindsym $mod+Print exec grim -g "$(slurp)"
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
