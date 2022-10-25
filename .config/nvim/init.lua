@@ -57,7 +57,7 @@ vim.cmd([[
 	highlight CursorLineNR guifg=#808890 guibg=NONE    gui=NONE ctermfg=101 ctermbg=NONE cterm=NONE
 ]])
 
--- Enables persistent undo.
+-- Enables persistent undo
 vim.opt.undofile = true
 if(vim.env.XDG_STATE_HOME == nil)
 	then
@@ -73,7 +73,7 @@ vim.opt.swapfile = false
 vim.opt.scrolloff = 7
 vim.opt.sidescrolloff = 7
 
--- Disables showing mode on the bottom. Should be obvious from cursor.
+-- Disables showing mode on the bottom. Should be obvious from cursor
 vim.opt.showmode = false
 
 -- Visible whitespace
@@ -246,7 +246,7 @@ map("", "O", ";")
 map("", "E", "<C-f>")
 map("", "I", "<C-b>")
 
--- Lower case j joins lines.
+-- Lower case j joins lines
 map("", "j", "J")
 
 -- c and s no longer copy
@@ -610,6 +610,18 @@ require("packer").startup({
                 require("nnn").setup()
             end
         },
+        {
+            "smjonas/live-command.nvim",
+            -- live-command supports semantic versioning via tags
+            -- tag = "1.*",
+            config = function()
+                require("live-command").setup {
+                    commands = {
+                        Norm = { cmd = "norm" },
+                    },
+                }
+            end,
+        }
     },
     --[[config = {
         display = {
