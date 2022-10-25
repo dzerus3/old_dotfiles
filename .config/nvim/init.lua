@@ -542,34 +542,10 @@ require("packer").startup({
             end
         },
 
-        -- Graphically shows undo history
-        {
-            "mbbill/undotree",
-            cmd = { "UndotreeToggle", "UndotreeShow" }
-        },
-
         -- Allows incrementing dates
         {
             "tpope/vim-speeddating",
             requires = { "tpope/vim-repeat" }
-        },
-
-        -- Fuzzy file finder
-        {
-            "nvim-telescope/telescope.nvim",
-            tag = "0.1.0",
-            requires = {"nvim-lua/plenary.nvim"},
-            opt = true,
-            cmd = "Telescope",
-            --config = function()
-            --    require("telescope").setup()
-            --end
-        },
-
-        -- Better behavior in .md files
-        {
-            "preservim/vim-markdown",
-            requires = {"godlygeek/tabular"}
         },
 
         -- Options for surrounding text with special characters
@@ -594,6 +570,26 @@ require("packer").startup({
             end
         },
 
+        -- Fuzzy file finder
+        {
+            "nvim-telescope/telescope.nvim",
+            tag = "0.1.0",
+            requires = {"nvim-lua/plenary.nvim"},
+            opt = true,
+            cmd = "Telescope",
+            disable = true
+            --config = function()
+            --    require("telescope").setup()
+            --end
+        },
+
+        -- Better behavior in .md files
+        {
+            "preservim/vim-markdown",
+            requires = {"godlygeek/tabular"},
+            disable = true
+        },
+
         -- Better searching and replacement
         {
             "tpope/vim-abolish",
@@ -603,25 +599,40 @@ require("packer").startup({
         -- Integration with nnn file manager
         {
             "luukvbaal/nnn.nvim",
-            disable = true,
             opt = true,
             cmd = "NnnExplorer",
+            disable = true,
             config = function()
                 require("nnn").setup()
             end
         },
+
+        -- Fuzzy file finder
         {
-            "smjonas/live-command.nvim",
-            -- live-command supports semantic versioning via tags
-            -- tag = "1.*",
-            config = function()
-                require("live-command").setup {
-                    commands = {
-                        Norm = { cmd = "norm" },
-                    },
-                }
-            end,
-        }
+            "nvim-telescope/telescope.nvim",
+            tag = "0.1.0",
+            requires = {"nvim-lua/plenary.nvim"},
+            opt = true,
+            cmd = "Telescope",
+            disable = true
+            --config = function()
+            --    require("telescope").setup()
+            --end
+        },
+
+        -- Better behavior in .md files
+        {
+            "preservim/vim-markdown",
+            requires = {"godlygeek/tabular"},
+            disable = true
+        },
+
+        -- Graphically shows undo history
+        {
+            "mbbill/undotree",
+            cmd = { "UndotreeToggle", "UndotreeShow" },
+            disable = true
+        },
     },
     --[[config = {
         display = {
