@@ -2,7 +2,6 @@
 
 # xdg-mime seems to be the correct app for managing this file
 # See tldr xdg-mime
-# TODO: Add more workable desktop files to ~/.local/share/applications/
 
 application/pdf=org.pwmt.zathura.desktop
 application/epub=org.pwmt.zathura.desktop

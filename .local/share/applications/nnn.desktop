@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=nnn
+GenericName=File manager
+Comment=File manager
+Exec=/usr/local/bin/nnn
+Terminal=true

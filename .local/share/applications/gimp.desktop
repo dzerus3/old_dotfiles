@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=GNU Image Manipulation Program
+GenericName=Image Editor
+Comment=Create images and edit photographs
+Exec=gimp-2.10 %U
+Terminal=false
