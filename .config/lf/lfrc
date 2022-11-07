@@ -1,8 +1,128 @@
+# Integrates elements of
+#   https://github.com/thezeroalpha/dotfiles/blob/master/lf/lfrc
+#   https://github.com/BrodieRobertson/dotfiles/blob/master/config/lf/lfrc
+
+# Remove some defaults
+map m
+map "'"
+map '"'
+map d
+map c
+map f
+
+map h
+map j
+map k
+map l
+
 # Movement
+map n updir
 map e down
 map i up
-map n updir
 map o open
 
-#
+# File manipulation
 map x delete
+# Opens file in EDITOR
+map k $$EDITOR "$f"
+map L lowercasename
+
+# Archive Mappings
+map az zip
+map at tar
+map ag targz
+map ab targz
+map au unarchive
+
+# File manipulation
+map jf push %touch<space>
+map jd push %mkdir<space>
+map jp chmod
+
+# Changes file permissions
+cmd chmod ${{
+  printf "Mode Bits: "
+  read ans
+
+  for file in "$fx"
+  do
+    chmod $ans $file
+  done
+
+  lf -remote 'send reload'
+}}
+
+# Archive bindings
+cmd unarchive ${{
+  case "$f" in
+      *.zip)     unzip "$f" ;;
+      *.tar.gz)  tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar)     tar -xvf "$f" ;;
+      *.7z)      7z x "$f"
+      *.rar)     unrar x "$f"
+      *)         echo "Unsupported format" ;;
+  esac
+}}
+
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+
+# Outputs the lowercase name of a file.
+# For working with wine
+cmd lowercasename ${{
+    if [ -z "$fs" ]; then
+        mv "$f" $(echo "$f" | tr '[:upper:]' '[:lower:]')
+    fi
+}}
+
+cmd batch_rename !{{
+  contentsfile=$(mktemp)
+  trap 'rm $contentsfile' INT TERM EXIT
+  dircontents="$(command ls -1p)"
+  printf "%s" "$dircontents" | nl -n ln > "$contentsfile";
+  $EDITOR "$contentsfile"
+  printf "%s" "$dircontents" | paste -d '\t' "$contentsfile" - \
+  | while read -r line; do
+    orig="$(printf "%s" "$line" | cut -f3 | sed 's!/$!!')"
+    new="$(printf "%s" "$line" | cut -f2 | sed 's!/$!!')"
+    if [ "$new" != "$orig" ]; then
+      if [ -e "$new" ]; then
+        printf "%s already exists, not overwriting.\n" "$new"
+      else
+        printf "./%s -> ./%s\n" "$orig" "$new"
+        command mv -i ./"$orig" ./"$new"
+      fi
+    fi
+  done
+  rm "$contentsfile"
+  trap - INT TERM EXIT
+}}
+
+# paste as a symbolic link to original
+cmd paste_link %{{
+  if [ "$(wc -l < ~/.local/share/lf/files)" -gt 1 ]; then
+    while read -r file; do
+      case "$file" in
+        copy|move) ;;
+        *)
+          ln -s "$file" .
+          ;;
+      esac
+    done < ~/.local/share/lf/files
+  else
+    lf -remote "send $id echo no files to link."
+  fi
+}}
+
+cmd z %{{
+    result="$(zoxide query --exclude "${PWD}" -- "$@")"
+    lf -remote "send ${id} cd '${result}'"
+}}
+
+cmd zi ${{
+    result="$(zoxide query -i -- "$@")"
+    lf -remote "send ${id} cd '${result}'"
+}}

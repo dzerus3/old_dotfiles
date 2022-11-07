@@ -47,3 +47,4 @@ application/x-partial-download=mpv.desktop;
 audio/x-aac=mpv.desktop;
 
 inode/directory=nnn.desktop
+x-scheme-handler/nxm=modorganizer2-nxm-handler.desktop
