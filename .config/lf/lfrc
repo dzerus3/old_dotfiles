@@ -20,6 +20,7 @@ map n updir
 map e down
 map i up
 map o open
+map zi zi
 
 # File manipulation
 map x delete
@@ -117,10 +118,10 @@ cmd paste_link %{{
   fi
 }}
 
-cmd z %{{
-    result="$(zoxide query --exclude "${PWD}" -- "$@")"
-    lf -remote "send ${id} cd '${result}'"
-}}
+# cmd z %{{
+#     result="$(zoxide query --exclude "${PWD}" -- "$@")"
+#     lf -remote "send ${id} cd '${result}'"
+# }}
 
 cmd zi ${{
     result="$(zoxide query -i -- "$@")"
