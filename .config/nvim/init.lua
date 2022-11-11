@@ -22,7 +22,7 @@ end
 
 -- With a map leader it's possible to do extra key combinations
 vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+--vim.g.maplocalleader = ","
 
 ----------------------------------------------------------------
 -- Vim settings
@@ -239,8 +239,8 @@ map("", "W", "e")
 map("", "B", "gE")
 
 -- Sets N and O for easier horizontal navigation
-map("", "N", ",")
-map("", "O", ";")
+--map("", "N", ",")
+--map("", "O", ";")
 
 -- E and I function like PageUp/Down
 map("", "E", "<C-f>")
