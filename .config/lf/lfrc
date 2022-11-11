@@ -3,44 +3,107 @@
 #   https://github.com/BrodieRobertson/dotfiles/blob/master/config/lf/lfrc
 
 # Remove some defaults
-map m
-map "'"
-map '"'
-map d
 map c
-map f
-
 map h
 map j
 map k
 map l
+map H
+map J
+map K
+map L
 
 # Movement
+## Basic movement
 map n updir
 map e down
 map i up
 map o open
+
+## Marks
+#m: Create new mark
+#': Move to mark
+#": Remove mark
+
+## Find
+#f: Finds file forward
+#F: Finds file backward
+#,: Find next
+#;: Find previous
+
+# TODO: Broken
+#map <c-e> scroll-down
+#map <c-i> scroll-up
+
+## Moves up and down a whole page
+map E page-down
+map I page-up
+
+#gg moves to top of directory
+#G  moves to bottom of directory
+
+## Uses zoxide to change directories
 map zi zi
 
 # File manipulation
-map x delete
-# Opens file in EDITOR
-map k $$EDITOR "$f"
-map L lowercasename
+map lf push %touch<space>
+map lF newfile
+map ld push %mkdir<space>
+map lp chmod
 
-# Archive Mappings
+# File manipulation
+## Opens file in EDITOR
+map k $$EDITOR "$f"
+
+map r rename
+map R batch_rename
+map x delete
+
+## Renames a file or dir to all-lowercase
+map ~ lowercasename
+
+#y copies file
+#d cuts file
+#p pastes file
+
+## Clears copy and cut buffer
+map <enter> clear
+
+## Archive Mappings
 map az zip
 map at tar
 map ag targz
-map ab targz
+map ab tarbz
 map au unarchive
 
-# File manipulation
-map jf push %touch<space>
-map jd push %mkdir<space>
-map jp chmod
+# File view
+#t: Toggle file tag
 
-# Changes file permissions
+#zn: Disable file info
+#za: View file size and time
+#zr: Reverse file order
+#zs: Display file size
+#zt: Display file time
+
+## Selection
+#Space: Select a file
+#v: Invert selection
+#u: Unselect
+map b glob-select
+map B glob-unselect
+
+## Search
+map h search-next
+map H search-next
+
+## Creates a new file and opens it in editor
+cmd newfile ${{
+  printf "File Name: "
+  read ans
+  $EDITOR $ans
+}}
+
+# Changes file permissions for every selected file
 cmd chmod ${{
   printf "Mode Bits: "
   read ans
@@ -54,6 +117,7 @@ cmd chmod ${{
 }}
 
 # Archive bindings
+## Unzips currently selected file
 cmd unarchive ${{
   case "$f" in
       *.zip)     unzip "$f" ;;
@@ -66,6 +130,7 @@ cmd unarchive ${{
   esac
 }}
 
+## Compresses file in different ways
 cmd zip %zip -r "$f" "$f"
 cmd tar %tar cvf "$f.tar" "$f"
 cmd targz %tar cvzf "$f.tar.gz" "$f"
@@ -79,6 +144,7 @@ cmd lowercasename ${{
     fi
 }}
 
+# Opens all filenames in vim and to edit the names
 cmd batch_rename !{{
   contentsfile=$(mktemp)
   trap 'rm $contentsfile' INT TERM EXIT
@@ -118,6 +184,7 @@ cmd paste_link %{{
   fi
 }}
 
+# TODO: Broken
 # cmd z %{{
 #     result="$(zoxide query --exclude "${PWD}" -- "$@")"
 #     lf -remote "send ${id} cd '${result}'"
