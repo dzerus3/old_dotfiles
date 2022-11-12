@@ -60,8 +60,12 @@ map r rename
 map R batch_rename
 map x delete
 
+## Replaces problematic characters in file name
+map ls sanitizeName
+map lS sanitizeNameRecursive
 ## Renames a file or dir to all-lowercase
-map ~ lowercasename
+map lu lowercaseName
+map lU lowercaseNameRecursive
 
 #y: copy  file
 #d: cut   file
@@ -77,6 +81,7 @@ map at tar
 map ag targz
 map ab tarbz
 map au unarchive
+map aU unarchivefiles
 
 # File view
 #t: Toggle file tag
@@ -107,38 +112,69 @@ cmd newfile ${{
 
 # Creates new folder with selected files
 cmd newfold ${{
+    SAVEIFS=$IFS
+    IFS=$(echo -en "\n\b")
+
     set -f
-    read newd
     printf "Directory name: "
+    read newd
     mkdir -- "$newd"
-    mv -- $fx "$newd"
+
+    for file in "$fx"
+    do
+        mv $file $newd
+    done
+
+    IFS=$SAVEIFS
 }}
 
 # Changes file permissions for every selected file
 cmd chmod ${{
-  printf "Mode Bits: "
-  read ans
+    printf "Mode Bits: "
+    read ans
 
-  for file in "$fx"
-  do
-    chmod $ans $file
-  done
+    for file in "$fx"
+    do
+        chmod $ans $file
+    done
 
-  lf -remote 'send reload'
+    lf -remote 'send reload'
 }}
 
 # Archive bindings
-## Unzips currently selected file
+## Unarchives current file
 cmd unarchive ${{
-  case "$f" in
-      *.zip)     unzip "$f" ;;
-      *.tar.gz)  tar -xzvf "$f" ;;
-      *.tar.bz2) tar -xjvf "$f" ;;
-      *.tar)     tar -xvf "$f" ;;
-      *.7z)      7z x "$f"
-      *.rar)     unrar x "$f"
-      *)         echo "Unsupported format" ;;
-  esac
+    case "$f" in
+        *.zip)     unzip "$f"     ;;
+        *.tar.gz)  tar -xzvf "$f" ;;
+        *.tar.bz2) tar -xjvf "$f" ;;
+        *.tar)     tar -xvf "$f"  ;;
+        *.7z)      7z x "$f"  ;;
+        *.rar)     unrar x "$f"   ;;
+        *) lf -remote "send $id echo Unsupported format"
+    esac
+}}
+
+## Unarchives current file to given directory
+cmd unarchivefiles ${{
+    set -f
+    printf "Directory name: "
+    read newd
+    mkdir -p "$newd"
+
+    for file in $fx
+    do
+        # echo Extracting: "$file" >> test.txt
+        case "$file" in
+            *.zip)     unzip -d "$newd" "$file"     ;;
+            *.tar.gz)  tar -C "$newd" -xzvf "$file" ;;
+            *.tar.bz2) tar -C "$newd" -xjvf "$file" ;;
+            *.tar)     tar -C "$newd" -xvf  "$file" ;;
+            *.7z)      7z x -o"$newd" "$file"       ;;
+            *.rar)     unrar x "$file" "$newd"      ;;
+            *) lf -remote "send $id echo Unsupported format"
+        esac
+    done
 }}
 
 ## Compresses file in different ways
@@ -149,10 +185,64 @@ cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
 
 # Outputs the lowercase name of a file.
 # For working with wine
-cmd lowercasename ${{
-    if [ -z "$fs" ]; then
-        mv "$f" $(echo "$f" | tr '[:upper:]' '[:lower:]')
-    fi
+cmd lowercaseName ${{
+    SAVEIFS=$IFS
+    IFS=$(echo -en "\n\b")
+
+    for file in $fx
+    do
+        mv "$file" $(echo "$file" | tr '[:upper:]' '[:lower:]')
+    done
+
+    IFS=$SAVEIFS
+}}
+
+# Outputs the lowercase name of a file.
+# For working with wine
+cmd lowercaseNameRecursive ${{
+    SAVEIFS=$IFS
+    IFS=$(echo -en "\n\b")
+
+    for file in $(find $fx | tac)
+    do
+        DIRECTORY=$(dirname $file)
+        FILENAME=$(basename $file | tr '[:upper:]' '[:lower:]')
+
+        [ ! "$file" -ef "$DIRECTORY/$FILENAME" ] && mv "$file" "$DIRECTORY/$FILENAME"
+    done
+
+    IFS=$SAVEIFS
+}}
+
+# Removes anything that is not a /, alphanumeric, or -, _, or .
+# from file name.
+cmd sanitizeName ${{
+    SAVEIFS=$IFS
+    IFS=$(echo -en "\n\b")
+
+    for file in $fx
+    do
+        mv "$file" $(echo "$file" | sed -e 's/[^A-Za-z0-9\/._-]/_/g')
+    done
+
+    IFS=$SAVEIFS
+}}
+
+# Removes anything that is not a /, alphanumeric, or -, _, or .
+# from file name.
+cmd sanitizeNameRecursive ${{
+    SAVEIFS=$IFS
+    IFS=$(echo -en "\n\b")
+
+    for file in $(find $fx | tac)
+    do
+        DIRECTORY=$(dirname $file)
+        FILENAME=$(basename $file | sed -e 's/[^A-Za-z0-9\/._-]/_/g')
+
+        [ ! "$file" -ef "$DIRECTORY/$FILENAME" ] && mv "$file" "$DIRECTORY/$FILENAME"
+    done
+
+    IFS=$SAVEIFS
 }}
 
 # Opens all filenames in vim and to edit the names
@@ -178,25 +268,6 @@ cmd batch_rename !{{
   rm "$contentsfile"
   trap - INT TERM EXIT
 }}
-
-# Changes paste to use rsync to show copy progress
-# cmd paste &{{
-#     set -- $(cat ~/.local/share/lf/files)
-#     mode="$1"
-#     shift
-#     case "$mode" in
-#         copy)
-#             rsync -av --ignore-existing --progress -- "$@" . |
-#             stdbuf -i0 -o0 -e0 tr '\r' '\n' |
-#             while IFS= read -r line; do
-#                 lf -remote "send $id echo $line"
-#             done
-#             ;;
-#         move) mv -n -- "$@" .;;
-#     esac
-#     rm ~/.local/share/lf/files
-#     lf -remote "send clear"
-# }}
 
 # Like mv, but it merges already existing directories.
 # Does not work if destination and source are on different filesystems.
