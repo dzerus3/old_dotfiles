@@ -234,6 +234,10 @@ map("", "K", "O")
 -- Custom mappings
 ---------------------------------------------------------------
 
+-- ze and zi move cursor to top/bottom of visible screen
+map("", "ze", "L")
+map("", "zi", "H")
+
 -- W and B move to beginning/end of word inclusive
 map("", "W", "e")
 map("", "B", "gE")
@@ -258,6 +262,10 @@ map("v", "c", "\"_c")
 -- Leader-D to delete without copying
 map("",  "<leader>d", "\"_d")
 map("v", "<leader>d", "\"_d")
+
+-- Hack to work around conflict with `d`elete `i`n
+map("", "di", "dk")
+map("", "dd", "dd")
 
 -- Enter clears toggles highlighting
 map("", "<CR>", ":set hlsearch!<CR>")
