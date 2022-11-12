@@ -264,8 +264,8 @@ map("",  "<leader>d", "\"_d")
 map("v", "<leader>d", "\"_d")
 
 -- Hack to work around conflict with `d`elete `i`n
-map("", "di", "dk")
-map("", "dd", "dd")
+map("n",  "di", "dk")
+map("n",  "dd", "dd")
 
 -- Enter clears toggles highlighting
 map("", "<CR>", ":set hlsearch!<CR>")
