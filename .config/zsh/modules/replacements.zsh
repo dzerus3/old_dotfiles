@@ -6,13 +6,13 @@ if command -v exa &> /dev/null; then
 	abbrev ls='exa'
 fi
 
-if command -v rg &> /dev/null; then
-	abbrev rg='grep'
-fi
+# if command -v rg &> /dev/null; then
+# 	abbrev grep='rg'
+# fi
 
-if command -v bat &> /dev/null; then
-	abbrev cat='bat'
-fi
+#if command -v bat &> /dev/null; then
+#	abbrev cat='bat'
+#fi
 
 if command -v xh &> /dev/null; then
 	abbrev curl='xh'
