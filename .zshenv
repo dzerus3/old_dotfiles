@@ -17,13 +17,3 @@ export XDG_PUBLICSHARE_DIR="$HOME/pub"
 
 # Moves zsh config to config folder
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
-
-# Sets nvim as pager
-if command -v nvim &> /dev/null; then
-    # Sets nvim as default editor
-    export EDITOR='nvim'
-	export MANPAGER='nvim +Man!'
-else
-    export EDITOR='vim'
-	export MANPAGER='less +Gg'
-fi

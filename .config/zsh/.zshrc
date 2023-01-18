@@ -6,6 +6,16 @@
 #   $ZDOTDIR/plugins/zsh-autosuggestions/README.md
 ################################################################
 
+# Sets nvim as pager
+if command -v nvim &> /dev/null; then
+    # Sets nvim as default editor
+    export EDITOR='nvim'
+	export MANPAGER='nvim +Man!'
+else
+    export EDITOR='vim'
+	export MANPAGER='less +Gg'
+fi
+
 # Enable colors
 autoload -U colors && colors
 
