@@ -25,6 +25,7 @@ export BAT_STYLE='plain'
 
 # pass configuration
 export PASSWORD_STORE_DIR=$XDG_DATA_HOME/pass
+export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 
 # Allows executing commands from ~/.local/bin
 export PATH=$HOME/.local/bin:$PATH
@@ -32,22 +33,12 @@ export PATH=$HOME/.local/bin:$PATH
 # Cargo automatically installs to ~/.local/bin
 export CARGO_INSTALL_ROOT=$HOME/.local
 
-# nnn configuration
-# https://www.ditig.com/256-colors-cheat-sheet
-BLK="E4" CHR="E4" DIR="04" EXE="02" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="F5" SOCK="F5" OTHER="01"
-export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-export NNN_COLORS='#07a0221b'
-export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$"
-export NNN_FIFO=/tmp/nnn.fifo
-
-# Excludes some characters from being counted as parts of words
-# so that Ctrl + w works better
-local WORDCHARS=$'*?-.[]~;!#$%^(){}<>'
+# Includes some characters as parts of words for Ctrl + w
+local WORDCHARS=-@$'*?.[]~;!#$%^(){}<>'
 
 # Initializes zoxide
 eval "$(zoxide init zsh)"
-
-# Excludes .cache and ~ from zoxide completion
+# Excludes files from zoxide completion
 export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*:$ZDOTDIR/plugins/*
 
 ################################################################
@@ -120,7 +111,6 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 zstyle ':completion:*:*:cp:*' file-sort modification
 zstyle ':completion:*:*:chown:*' file-list all
 zstyle ':completion:*:*:chmod:*' file-list all
-
 # Taken from oh-my-zsh taskwarrior plugin
 zstyle ':completion:*:*:task:*' verbose yes
 zstyle ':completion:*:*:task:*:descriptions' format '%U%B%d%b%u'
@@ -208,7 +198,7 @@ export LESSKEYIN="$XDG_CONFIG_HOME/lesskey"
 export LESSHISTFILE=-
 
 # Enable less color support
-export LESS=' --RAW-CONTROL-CHARS --squeeze-blank-lines '
+#export LESS=' --RAW-CONTROL-CHARS --squeeze-blank-lines '
 
 ################################################################
 # Prompt
@@ -223,8 +213,7 @@ source $ZDOTDIR/modules/prompt.zsh
 # Fortune
 ################################################################
 
-# My signature fortune | lolcat setup. Tries to run without
-# breaking anything if neither is installed.
+# My signature fortune | lolcat setup.
 if command -v fortune &> /dev/null; then
 	if command -v lolcat &> /dev/null; then
 		fortune | lolcat
