@@ -158,9 +158,8 @@ bindkey '^x' edit-command-line
 # Plugins
 ################################################################
 
-# If you want plugins to be installed mkdir $ZDOTDIR/plugins
+# If you don't want plugins, don't create $ZDOTDIR/plugins
 if [ -d $ZDOTDIR/plugins ]; then
-	# TODO: Find better way to organize this
 	# Rebinds up/down to use substring search
 	bindkey '^[[A' history-substring-search-up
 	bindkey '^[[B' history-substring-search-down
