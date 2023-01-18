@@ -1,9 +1,11 @@
+-- Note: Sometimes breaks when used with pass edit; workaround
+-- is to run nano first. Can't reliably reproduce.
+
 ---------------------------------------------------------------
 -- Helper functions
 ---------------------------------------------------------------
 
 -- https://github.com/nanotee/nvim-lua-guide
-
 function map(mode, shortcut, command)
 	vim.api.nvim_set_keymap(
 		mode,
@@ -42,20 +44,6 @@ vim.opt.foldmethod = "indent"
 
 -- Disables folding by default
 vim.opt.foldenable = false
-
--- Set a color scheme
--- I use https://github.com/w0ng/vim-hybrid with a few tweaks
--- from https://github.com/AlessandroYorba/Alduin
--- FIXME: Don't make error when theme not installed
-vim.opt.background = "dark"
-vim.g.hybrid_custom_term_colors = 1
-vim.cmd([[
-	colorscheme hybrid
-	highlight Search       guifg=#dfdfaf guibg=#878787 gui=NONE ctermfg=187 ctermbg=102  cterm=NONE
-	highlight MatchParen   guifg=#dfdfaf guibg=#875f5f gui=NONE ctermfg=187 ctermbg=95   cterm=NONE
-	highlight Function     guifg=#af6767 guibg=NONE    gui=NONE ctermfg=95  ctermbg=NONE cterm=NONE
-	highlight CursorLineNR guifg=#808890 guibg=NONE    gui=NONE ctermfg=101 ctermbg=NONE cterm=NONE
-]])
 
 -- Enables persistent undo
 vim.opt.undofile = true
@@ -322,8 +310,55 @@ vim.cmd([[
 	iabbrev lenny ( ͡° ͜ʖ ͡°)
 ]])
 
+
+---------------------------------------------------------------
+-- Color Scheme
+--
+-- I use https://github.com/w0ng/vim-hybrid with a few tweaks
+-- from https://github.com/AlessandroYorba/Alduin
+--
+-- Note: This breaks status line colors if declared after it,
+-- likely because color theme overwrites them.
+--
+-- FIXME: Don't make error when theme not installed
+---------------------------------------------------------------
+vim.opt.background = "dark"
+vim.g.hybrid_custom_term_colors = 1
+vim.cmd([[
+	colorscheme hybrid
+	highlight Search
+        \ guifg=#dfdfaf
+        \ guibg=#878787 
+        \ gui=NONE
+        \ ctermfg=187
+        \ ctermbg=102
+        \ cterm=NONE
+	highlight MatchParen
+        \ guifg=#dfdfaf
+        \ guibg=#875f5f
+        \ gui=NONE
+        \ ctermfg=187
+        \ ctermbg=95
+        \ cterm=NONE
+    highlight Function
+        \ guifg=#af6767
+        \ guibg=NONE
+        \ gui=NONE
+        \ ctermfg=95
+        \ ctermbg=NONE
+        \ cterm=NONE
+	highlight CursorLineNR
+        \ guifg=#808890
+        \ guibg=NONE
+        \ gui=NONE
+        \ ctermfg=101
+        \ ctermbg=NONE
+        \ cterm=NONE
+]])
+
 ---------------------------------------------------------------
 -- Status line
+--
 -- Inspired by elements of:
 -- https://stackoverflow.com/a/5380230
 -- https://stackoverflow.com/a/10416234
@@ -381,27 +416,20 @@ vim.g.tagbar_map_showproto =  "['k']"
 vim.g.tagbar_map_togglecaseinsensitive = "['l']"
 
 ---------------------------------------------------------------
--- NNN
----------------------------------------------------------------
-
--- map("t", "-", "<cmd>NnnExplorer<CR>")
--- map("n", "-", "<cmd>NnnExplorer %:p:h<CR>")
-
----------------------------------------------------------------
 -- Telescope
 ---------------------------------------------------------------
 
-map("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>")
-map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
-map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+--map("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>")
+--map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+--map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 
 ---------------------------------------------------------------
 -- Markdown
 ---------------------------------------------------------------
 
-vim.g.vim_markdown_no_default_key_mappings = 1
-vim.g.vim_markdown_folding_level = 1
-vim.opt.conceallevel = 2
+--vim.g.vim_markdown_no_default_key_mappings = 1
+--vim.g.vim_markdown_folding_level = 1
+--vim.opt.conceallevel = 2
 
 ---------------------------------------------------------------
 -- Treesitter
@@ -531,23 +559,9 @@ require("packer").startup({
             "numToStr/Comment.nvim"
         },
 
-        -- Allows moving through code tags
-        {
-            "preservim/tagbar",
-            cmd = "TagbarToggle"
-        },
-
         -- Enables tab completion
         {
             "ervandew/supertab",
-        },
-
-        -- Automatically creates character pairs
-        {
-            "windwp/nvim-autopairs",
-            config = function()
-                require("nvim-autopairs").setup{}
-            end
         },
 
         -- Allows incrementing dates
@@ -578,56 +592,6 @@ require("packer").startup({
             end
         },
 
-        -- Fuzzy file finder
-        {
-            "nvim-telescope/telescope.nvim",
-            tag = "0.1.0",
-            requires = {"nvim-lua/plenary.nvim"},
-            opt = true,
-            cmd = "Telescope",
-            disable = true
-            --config = function()
-            --    require("telescope").setup()
-            --end
-        },
-
-        -- Better behavior in .md files
-        {
-            "preservim/vim-markdown",
-            requires = {"godlygeek/tabular"},
-            disable = true
-        },
-
-        -- Better searching and replacement
-        {
-            "tpope/vim-abolish",
-            disable = true
-        },
-
-        -- Integration with nnn file manager
-        {
-            "luukvbaal/nnn.nvim",
-            opt = true,
-            cmd = "NnnExplorer",
-            disable = true,
-            config = function()
-                require("nnn").setup()
-            end
-        },
-
-        -- Fuzzy file finder
-        {
-            "nvim-telescope/telescope.nvim",
-            tag = "0.1.0",
-            requires = {"nvim-lua/plenary.nvim"},
-            opt = true,
-            cmd = "Telescope",
-            disable = true
-            --config = function()
-            --    require("telescope").setup()
-            --end
-        },
-
         -- Better behavior in .md files
         {
             "preservim/vim-markdown",
@@ -640,6 +604,22 @@ require("packer").startup({
             "mbbill/undotree",
             cmd = { "UndotreeToggle", "UndotreeShow" },
             disable = true
+        },
+
+        -- Allows moving through code tags
+        {
+            "preservim/tagbar",
+            cmd = "TagbarToggle",
+            disable = true
+        },
+
+        -- Automatically creates character pairs
+        {
+            "windwp/nvim-autopairs",
+            disable = true,
+            config = function()
+                require("nvim-autopairs").setup{}
+            end
         },
     },
     --[[config = {
