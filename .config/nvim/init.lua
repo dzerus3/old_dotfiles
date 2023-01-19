@@ -19,6 +19,15 @@ function map(mode, shortcut, command)
 end
 
 ---------------------------------------------------------------
+-- Neovide
+---------------------------------------------------------------
+
+--vim.g.neovide_cursor_animation_length=0.02
+--vim.g.neovide_cursor_vfx_mode = "wireframe"
+--vim.opt.mouse = "a"
+--vim.g.hybrid_custom_term_colors = 1
+
+---------------------------------------------------------------
 -- Leader key
 ---------------------------------------------------------------
 
@@ -628,13 +637,3 @@ require("packer").startup({
         }
     }]]
 })
-
----------------------------------------------------------------
--- Neovide
----------------------------------------------------------------
-
--- vim.g.neovide_cursor_animation_length=0.02
--- vim.g.neovide_cursor_vfx_mode = "wireframe"
--- vim.opt.mouse = "a"
--- vim.g.hybrid_custom_term_colors = 1
-
