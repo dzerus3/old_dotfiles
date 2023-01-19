@@ -305,9 +305,9 @@ vim.cmd([[
 	iabbrev EUR €
 	iabbrev GBP £
 	iabbrev RUB ₽
-	iabbrev ccc ©
-	iabbrev tmk ®
-	iabbrev lenny ( ͡° ͜ʖ ͡°)
+	iabbrev copyright_ ©
+	iabbrev trademark_ ®
+	iabbrev lenny_ ( ͡° ͜ʖ ͡°)
 ]])
 
 
