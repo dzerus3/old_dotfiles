@@ -1,6 +1,3 @@
--- Note: Sometimes breaks when used with pass edit; workaround
--- is to run nano first. Can't reliably reproduce.
-
 ---------------------------------------------------------------
 -- Helper functions
 ---------------------------------------------------------------
@@ -18,14 +15,24 @@ function map(mode, shortcut, command)
 	)
 end
 
----------------------------------------------------------------
--- Neovide
----------------------------------------------------------------
+-- This function tracks the word count, used for statusline
+-- Taken from: https://vim.fandom.com/wiki/Word_count
+vim.cmd([[
+    let g:word_count=wordcount().words
+    function WordCount()
+        if has_key(wordcount(),'visual_words')
+            let g:word_count=wordcount().visual_words."/".wordcount().words " count selected words
+        else
+            let g:word_count=wordcount().cursor_words."/".wordcount().words " or shows words 'so far'
+        endif
+        return g:word_count
+    endfunction
+]])
 
---vim.g.neovide_cursor_animation_length=0.02
---vim.g.neovide_cursor_vfx_mode = "wireframe"
---vim.opt.mouse = "a"
---vim.g.hybrid_custom_term_colors = 1
+-- https://vi.stackexchange.com/questions/36876/see-live-word-count-in-lualine
+local function getWords()
+    return tostring(vim.fn.wordcount().words)
+end
 
 ---------------------------------------------------------------
 -- Leader key
@@ -33,7 +40,6 @@ end
 
 -- With a map leader it's possible to do extra key combinations
 vim.g.mapleader = " "
---vim.g.maplocalleader = ","
 
 ----------------------------------------------------------------
 -- Vim settings
