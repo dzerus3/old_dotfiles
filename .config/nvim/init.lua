@@ -123,18 +123,20 @@ vim.cmd([[
 		autocmd!
 
         " Applies to markdown, plaintext, and LATEX
-        " TODO: Add word count to status bar
 		autocmd FileType markdown,text,plaintex
-		\   setlocal norelativenumber  " Disables relative numbers
-		\ | setlocal wrap              " Enables line wrapping
-		\ | setlocal linebreak         " Makes lines break at spaces
-		\ | setlocal display+=lastline " TODO: What does this do?
+		\ setlocal norelativenumber  " Disables relative numbers
+		autocmd FileType markdown,text,plaintex
+		\ setlocal wrap              " Enables line wrapping
+		autocmd FileType markdown,text,plaintex
+		\ setlocal linebreak         " Makes lines break at spaces
+		autocmd FileType markdown,text,plaintex
+		\ setlocal display+=lastline " TODO: What does this do?
 
         " Applies to man and help pages
 		autocmd FileType man,help
-		\   setlocal scrolloff=99999    " Always centers screen
-		\ | nnoremap <buffer> q :q!<CR> " Rebinds q to quit
-
+		\ setlocal scrolloff=99999    " Always centers screen
+		autocmd FileType man,help
+		\ nnoremap <buffer> q :q!<CR> " Rebinds q to quit
 	augroup end
 ]])
 
@@ -413,6 +415,15 @@ vim.opt.statusline = table.concat({
 	-- Percentage of location
 	"%7*%6p%%  "
 })
+
+-- If inside a plaintext file, add word count to status line
+vim.cmd([[
+	augroup statusline
+		autocmd!
+		autocmd FileType markdown,text,plaintex
+        \ set statusline+=\ w:%{WordCount()}\ \ 
+    augroup end
+]])
 
 ---------------------------------------------------------------
 -- Tagbar
