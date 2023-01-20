@@ -73,6 +73,9 @@ vim.opt.sidescrolloff = 7
 -- Disables showing mode on the bottom. Should be obvious from cursor
 vim.opt.showmode = false
 
+-- Disables wrapping
+vim.opt.wrap = false
+
 -- Visible whitespace
 -- See :help lua line 1139
 vim.opt.list = true
@@ -109,25 +112,28 @@ vim.opt.incsearch = true
 -- Make it so vim handles numbers with leading zeroes correctly
 vim.opt.nrformats:remove {"octal"}
 
--- Disables wrapping
-vim.opt.wrap = false
-
 -- Enables relative numbers
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
+-- Tweaks for working with manpages, help, and plaintext
 vim.cmd([[
 	augroup plaintext
 		autocmd!
+
+        " Applies to markdown, plaintext, and LATEX
+        " TODO: Add word count to status bar
 		autocmd FileType markdown,text,plaintex
-		\   setlocal norelativenumber
-		\ | setlocal wrap
-		\ | setlocal linebreak
-		\ | setlocal display+=lastline
+		\   setlocal norelativenumber  " Disables relative numbers
+		\ | setlocal wrap              " Enables line wrapping
+		\ | setlocal linebreak         " Makes lines break at spaces
+		\ | setlocal display+=lastline " TODO: What does this do?
+
+        " Applies to man and help pages
 		autocmd FileType man,help
-		\   setlocal scrolloff=99999
-		\ | nnoremap <buffer> q :q!<CR>
+		\   setlocal scrolloff=99999    " Always centers screen
+		\ | nnoremap <buffer> q :q!<CR> " Rebinds q to quit
 
 	augroup end
 ]])
@@ -163,7 +169,7 @@ vim.opt.backspace = {
 
 vim.opt.wrap = false
 
--- Don't redraw while executing macros
+-- Don't redraw while executing macros; improves performance
 vim.opt.lazyredraw = true
 
 -- Ignore useless files with :e
@@ -202,11 +208,11 @@ vim.g.loaded_netrwPlugin = 1
 -- Colemak remappings
 ---------------------------------------------------------------
 
--- Movement keys at neio
-map("", "n", "h")
-map("", "e", "j")
-map("", "i", "k")
-map("", "o", "l")
+-- Movement keys rebound to neio
+map("", "n",  "h")
+map("", "e",  "j")
+map("", "i",  "k")
+map("", "o",  "l")
 map("", "ge", "gj")
 map("", "gi", "gk")
 
@@ -216,12 +222,15 @@ map("", "L", "I")
 map("", "gl", "gi")
 
 -- Search result navigation with h
-map("", "h", "n")
-map("", "H", "N")
+map("", "h",  "n")
+map("", "H",  "N")
+-- Search forward/backward and select
 map("", "gh", "gn")
 map("", "gH", "gN")
 map("", "gn", "")
 map("", "gN", "")
+map("", "go", "")
+map("", "gO", "")
 
 -- Insert mode with newline is now on k
 map("", "k", "o")
@@ -239,10 +248,6 @@ map("", "zi", "H")
 map("", "W", "e")
 map("", "B", "gE")
 
--- Sets N and O for easier horizontal navigation
---map("", "N", ",")
---map("", "O", ";")
-
 -- E and I function like PageUp/Down
 map("", "E", "<C-f>")
 map("", "I", "<C-b>")
@@ -250,7 +255,7 @@ map("", "I", "<C-b>")
 -- Lower case j joins lines
 map("", "j", "J")
 
--- c and s no longer copy
+-- c and s no longer yank
 map("",  "s", "\"_s")
 map("v", "s", "\"_s")
 map("",  "c", "\"_c")
@@ -278,7 +283,7 @@ map("", "<C-k>",   "o<Esc>o")
 map("", "<C-S-K>", "O<Esc>O")
 
 -- Movement between previous motions
-map("", "<C-H>", "<C-O>")
+map("", "<C-H>",   "<C-O>")
 map("", "<C-S-H>", "<C-I>")
 
 -- Keymaps for working with vimrc
@@ -292,18 +297,18 @@ map("n", "<leader>l", ":set relativenumber!<CR>")
 map("n", "<leader>hl", ":set cursorline!<CR>")
 map("n", "<leader>hc", ":set cursorcolumn!<CR>")
 
--- Disables the use of the arrow keys
-map("", "<Left>", "")
-map("", "<Down>", "")
-map("", "<Up>",   "")
+-- Disables the arrow keys
+map("", "<Left>",  "")
+map("", "<Down>",  "")
+map("", "<Up>",    "")
 map("", "<Right>", "")
 
-map("i", "<Left>", "")
-map("i", "<Down>", "")
-map("i", "<Up>",   "")
+map("i", "<Left>",  "")
+map("i", "<Down>",  "")
+map("i", "<Up>",    "")
 map("i", "<Right>", "")
 
--- Disables use of Ctrl + w in insert mode
+-- Disables Ctrl + w in insert mode
 map("i", "<C-w>", "")
 
 ---------------------------------------------------------------
@@ -376,6 +381,7 @@ vim.cmd([[
 
 -- Always show the status line
 vim.opt.laststatus=2
+-- Enables 24-bit colors
 vim.opt.termguicolors=true
 
 -- Colors for status line
@@ -389,7 +395,7 @@ vim.cmd([[
 	highlight User7 guifg=#FFFFFF guibg=#333333
 ]])
 
-vim.opt.statusline= table.concat({
+vim.opt.statusline = table.concat({
 	-- Buffer number
 	"%1* %02n %*",
 	-- File name (up to 40 characters)
@@ -450,8 +456,7 @@ require "nvim-treesitter.configs".setup {
 		"c",
 		"lua",
 		"rust",
-		"bash",
-		"zig"
+		"bash"
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -570,7 +575,7 @@ require("packer").startup({
 
         -- Enables tab completion
         {
-            "ervandew/supertab",
+            "ervandew/supertab"
         },
 
         -- Allows incrementing dates

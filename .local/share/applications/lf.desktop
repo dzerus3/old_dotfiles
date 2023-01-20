@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=nnn
+Name=lf
 GenericName=File manager
 Comment=File manager
-Exec=/usr/local/bin/nnn
+Exec=/usr/bin/lf
 Terminal=true

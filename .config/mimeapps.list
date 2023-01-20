@@ -1,12 +1,11 @@
-[Default Applications]
-
 # xdg-mime seems to be the correct app for managing this file
 # See tldr xdg-mime
 
-application/pdf=org.pwmt.zathura.desktop
-application/epub=org.pwmt.zathura.desktop
-application/fb2=org.pwmt.zathura.desktop
-application/djvu=org.pwmt.zathura.desktop
+[Default Applications]
+application/pdf=zathura.desktop;
+application/epub=zathura.desktop;
+application/fb2=zathura.desktop;
+application/djvu=zathura.desktop;
 
 image/gif=imv.desktop
 image/jpeg=imv.desktop;
@@ -46,5 +45,4 @@ application/x-ms-dos-executable=wine.desktop
 application/x-partial-download=mpv.desktop;
 audio/x-aac=mpv.desktop;
 
-inode/directory=nnn.desktop
-x-scheme-handler/nxm=modorganizer2-nxm-handler.desktop
+inode/directory=lf.desktop;
