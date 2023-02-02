@@ -1,0 +1,110 @@
+{
+    // So that it doesn't go over the logout prompt
+    "layer": "bottom",
+     // Waybar position (top|bottom|left|right)
+    "position": "top",
+
+    "modules-left": [
+        "sway/workspaces"
+    ],
+
+    "modules-center": [
+        "clock#1",
+        "clock#2",
+        "clock#3"
+    ],
+
+    "modules-right": [
+        "cpu",
+        "memory",
+        "disk",
+        "network",
+        "sway/language",
+        "battery",
+        "wireplumber"
+    ],
+
+    "sway/workspaces": {
+		"disable-scroll": false,
+		"format": "{name}"
+	},
+
+    // Day of week
+    "clock#1": {
+		"format": "{:%a}",
+		"tooltip": false
+	},
+
+    // Time
+	"clock#2": {
+		"format": "{:%H.%M.%S}",
+		"tooltip": false,
+        "interval": 1
+	},
+
+    // Month/date
+	"clock#3": {
+		"format": "{:%m/%d}",
+		"tooltip": false
+	},
+
+    "sway/language": {
+        "format": "{shortDescription}",
+        "on-click": "swaymsg input '10730:258:Kinesis_Freestyle_Edge_Keyboard' xkb_switch_layout next",
+        "on-click-right": "swaymsg input '10730:258:Kinesis_Freestyle_Edge_Keyboard' xkb_switch_layout prev"
+    },
+
+    "cpu": {
+        "interval": 5,
+        "format": "{usage}%",
+        "max-length": 10
+    },
+
+    "memory": {
+        "interval": 10,
+        "format": "{used:0.1f}G"
+    },
+
+    "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "interval": 3,
+
+        "format-wifi": "{essid} ",
+        "tooltip-format-wifi": "{ifname}: ({signalStrength}%)",
+
+        "format-ethernet": "",
+        "tooltip-format-ethernet": "{ifname}",
+
+        "format-disconnected": "Disconnected ⚠",
+    },
+
+    "battery": {
+		"states": {
+			"good": 85,
+			"warning": 30,
+			"critical": 10
+		},
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-muted": "",
+        "on-click": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-click-right": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+        "format-icons": ["", "", ""]
+    },
+
+    "disk": {
+        "interval": 30,
+        "format": "{percentage_used}% on {path}",
+        "path": "/"
+    }
+}

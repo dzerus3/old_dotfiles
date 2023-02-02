@@ -1,12 +1,13 @@
 # Dependencies
 # To make full use of this config file, you need the following:
+## A cursor theme called "current"
 ## kitty (Terminal Emulator)
 ## j4-dmenu-desktop (Gets .desktop files)
 ## bemenu (Application launcher)
 ## mako (Notification center)
 ## gentoo-pipewire-launcher (Audio)
 ## fcitx (Chinese language input)
-## i3status (For status bar)
+## Waybar version > 0.9.17 (For status bar)
 
 # Variables
 ## Windows key
@@ -40,13 +41,12 @@ set $menu j4-dmenu-desktop --dmenu='bemenu --tf "#5D8CAE" --nb "#272727" --nf "#
 
 # Configuration
 ## Disable window titlebars
-#for_window [class=".*"] border pixel 0
 default_border pixel
 default_floating_border pixel
 
 ## Add gaps between windows
-gaps inner 10
-gaps outer 10
+gaps inner 8
+gaps outer 2
 
 ## Cursor theme
 seat seat0 xcursor_theme current 16
@@ -58,18 +58,14 @@ output * bg $HOME/pics/wallpaper/wallpaper.jpg fill
 
 ## Idle configuration
 exec swayidle -w \
-         timeout 600 'swaylock -f -c 000000' \
-         timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -e -f -c 000000'
+         timeout 1800 'swaylock -f -c 000000' \
+         timeout 2700 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+         # This options doesn't work without elogind or systemd
+         #before-sleep 'swaylock -e -f -c 000000'
 
 ## Keyboard configuration
-#TODO: Get Chinese input to work
-#TODO: Get phonetic Russian input to work
-#TODO: Get a Spanish keyboard
-exec --no-startup-id fcitx -d
 input * {
-    xkb_layout  "us,cn,ru"
-    xkb_variant "phonetic_YAZHERTY"
+    xkb_layout  "us,es,ru(phonetic_YAZHERTY)"
     xkb_options "grp:win_space_toggle"
 }
 
@@ -206,16 +202,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Status Bar
-bar {
-    position top
-    status_command i3status
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+# See .config/waybar/config for configuration
+bar swaybar_command waybar
 
 include /etc/sway/config.d/*
