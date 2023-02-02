@@ -40,6 +40,7 @@ local WORDCHARS=-@$'*?.[]~;!#$%^(){}<>'
 eval "$(zoxide init zsh)"
 # Excludes files from zoxide completion
 export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*:$ZDOTDIR/plugins/*
+export _ZO_DATA_DIR=$XDG_STATE_HOME
 
 ################################################################
 # History options
