@@ -67,7 +67,7 @@ exec swayidle -w \
 input type:keyboard {
     xkb_layout  "us,es,ru"
     #xkb_file    "~/.config/xkb/custom"
-    xkb_variant "colemak_dh,,phonetic_YAZHERTY"
+    xkb_variant "colemak_dh,colemak_dh,rulemak_dh"
     xkb_options "caps:escape,grp:win_space_toggle"
 }
 
