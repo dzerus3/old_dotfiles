@@ -15,11 +15,11 @@
     ],
 
     "modules-right": [
+        "sway/language",
         "cpu",
         "memory",
         "disk",
         "network",
-        "sway/language",
         "battery",
         "wireplumber"
     ],
@@ -49,7 +49,7 @@
 	},
 
     "sway/language": {
-        "format": "{shortDescription}",
+        //"format": "{shortDescription}({variant})",
         "on-click": "swaymsg input '10730:258:Kinesis_Freestyle_Edge_Keyboard' xkb_switch_layout next",
         "on-click-right": "swaymsg input '10730:258:Kinesis_Freestyle_Edge_Keyboard' xkb_switch_layout prev"
     },

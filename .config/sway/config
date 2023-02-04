@@ -64,9 +64,11 @@ exec swayidle -w \
          #before-sleep 'swaylock -e -f -c 000000'
 
 ## Keyboard configuration
-input * {
-    xkb_layout  "us,es,ru(phonetic_YAZHERTY)"
-    xkb_options "grp:win_space_toggle"
+input type:keyboard {
+    xkb_layout  "us,es,ru"
+    #xkb_file    "~/.config/xkb/custom"
+    xkb_variant "colemak_dh,,phonetic_YAZHERTY"
+    xkb_options "caps:escape,grp:win_space_toggle"
 }
 
 # Key bindings
