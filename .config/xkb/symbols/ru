@@ -2,18 +2,20 @@
 // contact: Geert Hendrickx <geert@hendrickx.be>
 // http://forum.colemak.com/viewtopic.php?id=519
 //
+// Modified by Dellon Zerus to match Colemak-DH
+//
 // ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┲━━━━━━━━━┓
 // │ Ё ``│ ! ˝ │ @   │ №   │ $   │ %   │ ^ ¯ │ &   │ * ₴ │ (   │ )   │ _ — │ Ъ + ┃ ⌫       ┃
 // │ ё ` │ 1 ´ │ 2 ¨ │ 3 # │ 4 ¢ │ 5 € │ 6 ˘ │ 7   │ 8 ₽ │ 9 [ │ 0 ] │ - – │ ъ = ┃Backspace┃
 // ┢━━━━━┷━┱───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┺━┳━━━━━━━┫
-// ┃       ┃ Я Ѣ │ Ж Ѵ │ Ф Ѳ │ П   │ Г Ґ │ й Ј │ Л Љ │ У Ў │ Ы Ї │ Ю : │ Ш { │ Щ } ┃ Enter ┃
-// ┃ Tab ↹ ┃ я ѣ │ ж ѵ │ ф ѳ │ п   │ г ґ │ й ј │ л љ │ у ў │ ы ї │ ю ; │ ш « │ щ » ┃   ⏎   ┃
+// ┃       ┃ Я Ѣ │ Ж Ѵ │ Ф Ѳ │ П   │ б Ґ │ й Ј │ Л Љ │ У Ў │ Ы Ї │ Ю : │ Ш { │ Щ } ┃ Enter ┃
+// ┃ Tab ↹ ┃ я ѣ │ ж ѵ │ ф ѳ │ п   │ Б ґ │ й ј │ л љ │ у ў │ ы ї │ ю ; │ ш « │ щ » ┃   ⏎   ┃
 // ┣━━━━━━━┻┱────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┺┓      ┃
-// ┃ ⌫ Back ┃ А   │ Р   │ С   │ Т Ћ │ Д Ђ │ Ч Џ │ Н Њ │ Е Є │ И І │ О   │ Ь " │ Э | ┃      ┃
-// ┃  space ┃ а   │ р   │ с   │ т ћ │ д ђ │ ч џ │ н њ │ е є │ и і │ о   │ ь ' │ э \ ┃      ┃
+// ┃ ⌫ Back ┃ А   │ Р   │ С   │ Т Ћ │ г Ђ │ М Џ │ Н Њ │ Е Є │ И І │ О   │ Ь " │ Э | ┃      ┃
+// ┃  space ┃ а   │ р   │ с   │ т ћ │ Г ђ │ М џ │ н њ │ е є │ и і │ о   │ ь ' │ э \ ┃      ┃
 // ┣━━━━━━━━┻━┱───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┲━━━┷━━━━━┻━━━━━━┫
-// ┃          ┃ З Ѕ │ Х   │ Ц   │ В   │ Б Ѓ │ К Ќ │ М   │ ;   │ :   │ ? Ӏ ┃                ┃
-// ┃  Shift ⇧ ┃ з ѕ │ х   │ ц   │ в   │ б ѓ │ к ќ │ м   │ , < │ . > │ / ӏ ┃     Shift ⇧    ┃
+// ┃          ┃ З Ѕ │ Х   │ Ц   │ Д   │ В Ѓ │ К Ќ │ Ч   │ ;   │ :   │ ? Ӏ ┃                ┃
+// ┃  Shift ⇧ ┃ з ѕ │ х   │ ц   │ д   │ в ѓ │ к ќ │ ч   │ , < │ . > │ / ӏ ┃     Shift ⇧    ┃
 // ┣━━━━━━━┳━━┻━━━━┳┷━━━━━┷┱────┴─────┴─────┴─────┴─────┴─────┴┲━━━━┷━━┳━━┻━━━━┳━━━━━━━┳━━━┛
 // ┃       ┃       ┃       ┃                                   ┃       ┃       ┃       ┃
 // ┃ Ctrl  ┃ Meta  ┃  Alt  ┃                Space              ┃AltGr ⇮┃ Menu  ┃ Ctrl  ┃
@@ -56,7 +58,7 @@ xkb_symbols "rulemak_dh" {
     key <AC02> { [     Cyrillic_er,     Cyrillic_ER                                   ] };
     key <AC03> { [     Cyrillic_es,     Cyrillic_ES                                   ] };
     key <AC04> { [     Cyrillic_te,     Cyrillic_TE,    Serbian_tshe,    Serbian_TSHE ] };
-    key <AC05> { [     Cyrillic_ge,     Cyrillic_GE,     Serbian_dje,     Serbian_DJE ] };
+    key <AC05> { [     Cyrillic_ghe,    Cyrillic_GHE,     Serbian_dje,     Serbian_DJE ] };
     key <AC06> { [     Cyrillic_em,     Cyrillic_EM,   Cyrillic_dzhe,   Cyrillic_DZHE ] };
     key <AC07> { [     Cyrillic_en,     Cyrillic_EN,    Cyrillic_nje,    Cyrillic_NJE ] };
     key <AC08> { [     Cyrillic_ie,     Cyrillic_IE,    Ukrainian_ie,    Ukrainian_IE ] };
