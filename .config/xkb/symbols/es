@@ -8,9 +8,10 @@ xkb_symbols "colemak_dh" {
 
     name[Group1]="Spanish";
 
-    key <AE11>	{ [dead_acute, dead_diaeresis, braceleft,  dead_caron ]	};
-    key <AD11>	{ [    ntilde, Ntilde,   dead_tilde, dead_doubleacute ]	};
-    key <AD12>	{ [exclamdown, questiondown, dead_cedilla, dead_ogonek ]	};
+    key <BKSL>  { [dead_acute, dead_diaeresis, braceleft,    dead_caron ]	};
+    key <AD11>  { [ntilde,     Ntilde,         dead_tilde,   dead_doubleacute ]	};
+    key <AD12>  { [exclamdown, questiondown,   dead_cedilla, dead_ogonek ]	};
+    key <AE11>  { [minus,      underscore,     endash,       emdash ] };
 
     include "level3(ralt_switch)"
 };
