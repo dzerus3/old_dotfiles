@@ -95,7 +95,8 @@ bindsym Control+Shift+Print exec grim -g "$(slurp)" $psf
 bindsym $mod+Shift+c reload
 
 ## Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+q exec echo 'yes\nno' | bemenu --tf "#5D8CAE" --nb "#272727" --nf "#c0c0c0" --hb "#1a6b3c" --hf "#FFFFFF" -p "Are you sure you want to exit?" | grep yes && swaymsg exit
+# bindsym $mod+Shift+q exec echo 'yes\nno' | bemenu --tf "#5D8CAE" --nb "#272727" --nf "#c0c0c0" --hb "#1a6b3c" --hf "#FFFFFF" -p "Are you sure you want to exit?" | grep yes && swaymsg exit
+bindsym $mod+Shift+q exec $HOME/.local/bin/sway/sway-logout.sh
 
 ## Moving around:
 ### Move your focus around
