@@ -37,7 +37,7 @@ exec /usr/bin/mako
 exec /usr/bin/gentoo-pipewire-launcher
 
 ## The application launcher menu
-set $menu j4-dmenu-desktop --dmenu='bemenu --tf "#5D8CAE" --nb "#272727" --nf "#c0c0c0" --hb "#1a6b3c" --hf "#FFFFFF" -i --fn "Deja Vu Sans Mono 10"' --term='kitty'
+set $menu $HOME/.local/bin/sway/sway-appselector.sh
 
 # Configuration
 ## Disable window titlebars
