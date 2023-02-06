@@ -6,7 +6,6 @@
 ## bemenu (Application launcher)
 ## mako (Notification center)
 ## gentoo-pipewire-launcher (Audio)
-## fcitx (Chinese language input)
 ## Waybar version > 0.9.17 (For status bar)
 
 # Variables
@@ -19,16 +18,13 @@ set $down e
 set $up i
 set $right o
 
-## Screenshot folder
+## Screenshot format
 set $psf $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
 
 ## Preferred terminal emulator
 set $term kitty
 
 # Applications
-
-## Polkit, so GUIs can ask for elevated privileges
-#exec /usr/bin/lxpolkit
 
 ## Notification center, so notifications are displayed graphically
 exec /usr/bin/mako
@@ -66,7 +62,6 @@ exec swayidle -w \
 ## Keyboard configuration
 input type:keyboard {
     xkb_layout  "us,es,ru"
-    #xkb_file    "~/.config/xkb/custom"
     xkb_variant "colemak_dh,colemak_dh,rulemak_dh"
     xkb_options "caps:escape,grp:win_space_toggle"
 }
@@ -95,7 +90,6 @@ bindsym Control+Shift+Print exec grim -g "$(slurp)" $psf
 bindsym $mod+Shift+c reload
 
 ## Exit sway (logs you out of your Wayland session)
-# bindsym $mod+Shift+q exec echo 'yes\nno' | bemenu --tf "#5D8CAE" --nb "#272727" --nf "#c0c0c0" --hb "#1a6b3c" --hf "#FFFFFF" -p "Are you sure you want to exit?" | grep yes && swaymsg exit
 bindsym $mod+Shift+q exec $HOME/.local/bin/sway/sway-logout.sh
 
 ## Moving around:

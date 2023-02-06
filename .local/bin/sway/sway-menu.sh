@@ -16,6 +16,9 @@ arguments="-i"
 # Adds argument for message
 message="-p $1"
 
+# Loops through all but the first option passed (that's the
+# message) and pipes that in newline-separated format (that's
+# what the echo is for) to bemenu.
 for buffer in "${@:2}"
 do
     echo $buffer
