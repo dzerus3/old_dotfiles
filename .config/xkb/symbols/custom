@@ -24,7 +24,7 @@ default partial alphanumeric_keys
 xkb_symbols "sp_colemak_dh" {
     include "custom(colemak_dh)"
 
-    name[Group1]="Spanish (Colemak-DH)";
+    name[Group1]="Spanish";
 
     key <BKSL>  { [dead_acute, dead_diaeresis, braceleft,    dead_caron ]	};
     key <AD11>  { [ntilde,     Ntilde,         dead_tilde,   dead_doubleacute ]	};
@@ -39,7 +39,7 @@ partial alphanumeric_keys
 xkb_symbols "rulemak_dh" {
     include "ru(rulemak)"
 
-    name[Group1]= "Russian (Rulemak-DH, phonetic Colemak)";
+    name[Group1]= "Russian (Rulemak, phonetic Colemak)";
 
     key <AD05> { [     Cyrillic_be,    Cyrillic_BE,  Ukrainian_ghe_with_upturn, Ukrainian_GHE_WITH_UPTURN ] };
     key <AC05> { [     Cyrillic_ghe,    Cyrillic_GHE,     Serbian_dje,     Serbian_DJE ] };
@@ -48,6 +48,3 @@ xkb_symbols "rulemak_dh" {
     key <AB05> { [     Cyrillic_ve,     Cyrillic_VE,   Macedonia_gje,   Macedonia_GJE ] };
     key <AB07> { [     Cyrillic_che,    Cyrillic_CHE                                  ] };
 };
-
-
-
