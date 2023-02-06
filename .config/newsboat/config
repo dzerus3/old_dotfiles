@@ -31,28 +31,35 @@ bind-key o open
 bind-key E next
 bind-key I prev
 
+# l opens article in browser
 unbind-key l
 bind-key l open-in-browser-and-mark-read
 
+# u toggles read status
 unbind-key u
 unbind-key N
 bind-key u toggle-article-read
 
+# Ctrl + u shows all urls
 unbind-key ^U
 bind-key ^U show-urls
 
+# y for downloading podcasts
 unbind-key y
 bind-key y enqueue
 
+# z/Z for sorting
 unbind-key g
 unbind-key G
 unbind-key z
 bind-key z sort
 bind-key Z rev-sort
 
+# g/G move to top/bottom of feed
 bind-key g home
 bind-key G end
 
+# q quits the program
 unbind-key q
 unbind-key Q
 bind-key q hard-quit
