@@ -103,6 +103,7 @@ zstyle ':completion:*' use-compctl false
 
 # Enables completion caching for faster startup
 zstyle ':completion:*' use-cache true
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 
 # Sets colors for autocompletion options
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
