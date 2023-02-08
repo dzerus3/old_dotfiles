@@ -10,10 +10,10 @@
 if command -v nvim &> /dev/null; then
     # Sets nvim as default editor
     export EDITOR='nvim'
-	export MANPAGER='nvim +Man!'
+    export MANPAGER='nvim +Man!'
 else
     export EDITOR='vim'
-	export MANPAGER='less +Gg'
+    export MANPAGER='less +Gg'
 fi
 
 # Enable colors
@@ -161,15 +161,15 @@ bindkey '^x' edit-command-line
 
 # If you don't want plugins, don't create $ZDOTDIR/plugins
 if [ -d $ZDOTDIR/plugins ]; then
-	# Rebinds up/down to use substring search
-	bindkey '^[[A' history-substring-search-up
-	bindkey '^[[B' history-substring-search-down
+    # Rebinds up/down to use substring search
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
 
-	source $ZDOTDIR/modules/plugins.zsh
+    source $ZDOTDIR/modules/plugins.zsh
 
-	plugin-load woefe/git-prompt.zsh
-	plugin-load zsh-users/zsh-history-substring-search
-	plugin-load zdharma-continuum/fast-syntax-highlighting
+    plugin-load woefe/git-prompt.zsh
+    plugin-load zsh-users/zsh-history-substring-search
+    plugin-load zdharma-continuum/fast-syntax-highlighting
 fi
 
 ################################################################
@@ -218,9 +218,9 @@ source $ZDOTDIR/modules/prompt.zsh
 
 # My signature fortune | lolcat setup.
 if command -v fortune &> /dev/null; then
-	if command -v lolcat &> /dev/null; then
-		fortune | lolcat
-	else
-		fortune
-	fi
+    if command -v lolcat &> /dev/null; then
+        fortune | lolcat
+    else
+        fortune
+    fi
 fi
