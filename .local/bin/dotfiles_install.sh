@@ -1,5 +1,8 @@
 #!/usr/bin/zsh
 
+# Necessary for clean installation
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
 mkdir -p $HOME/.config
 mkdir -p $HOME/.local/state
 mkdir -p $HOME/.local/share
@@ -16,7 +19,21 @@ if [ "$1" == "noplugins" ]; then
 else
 	echo "Enabling plugins..."
 
+    # Creates zsh plugins folder (zsh will auto install them from there)
 	mkdir -p $HOME/.config/zsh/plugins
+
+    # Installs Packer (neovim package manager)
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 		$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+    # Disables neovim plugins temporarily
+    sed -i '1i\
+        vim.g.disableplugins = 1
+    ' $XDG_CONFIG_HOME/nvim/init.lua
+
+    # Runs PackerSync to get all other plugins installed
+    nvim -c "PackerSync" $(mktemp)
+
+    # Re-enable neovim plugins
+    sed '1d' $XDG_CONFIG_HOME/nvim/init.lua > $XDG_CONFIG_HOME/nvim/init.lua
 fi
