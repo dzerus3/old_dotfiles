@@ -1,4 +1,7 @@
 {
+    "bar_id": "bar-0",
+    "ipc": true,
+
     // So that it doesn't go over the logout prompt
     "layer": "bottom",
      // Waybar position (top|bottom|left|right)
@@ -37,14 +40,14 @@
 
     // Time
 	"clock#2": {
-		"format": "{:%H.%M.%S}",
+		"format": "{:%H.%M}",
 		"tooltip": false,
         "interval": 1
 	},
 
     // Month/date
 	"clock#3": {
-		"format": "{:%m/%d}",
+		"format": "{:%d}",
 		"tooltip": false
 	},
 

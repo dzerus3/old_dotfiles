@@ -134,6 +134,10 @@ bindsym $mod+Shift+0 move container to workspace number 10
 bindsym $mod+control+$right move container to workspace next, workspace next
 bindsym $mod+control+$left move container to workspace prev, workspace prev
 
+### If you select the workspace you just switched to, you'll
+### switch back to the one you switched from
+workspace_auto_back_and_forth yes
+
 ## Layout
 ### Move the focused window
 bindsym $mod+Shift+$left move left
