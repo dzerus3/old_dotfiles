@@ -2,7 +2,12 @@
 -- Helper functions
 ---------------------------------------------------------------
 
-dofile(vim.env.XDG_CONFIG_HOME .. '/nvim/functions.lua')
+if(vim.env.XDG_CONFIG_HOME == nil)
+	then
+	dofile('~/.config/nvim/functions.lua')
+else
+    dofile(vim.env.XDG_CONFIG_HOME .. '/nvim/functions.lua')
+end
 
 ---------------------------------------------------------------
 -- Leader key
@@ -306,14 +311,19 @@ vim.cmd([[
 ---------------------------------------------------------------
 -- Plugin configuration
 --
--- The if statement is for the installation script. I suppose
--- if you really don't like my plugin configs, you can use use
--- it for that too.
+-- The disableplugins check is for the installation script. I
+-- suppose if you really don't like my plugin configs, you can
+-- use it for that too.
 ---------------------------------------------------------------
 
 if (vim.g.disableplugins == nil)
 then
-    dofile(vim.env.XDG_CONFIG_HOME .. '/nvim/plugincfg.lua')
+    if(vim.env.XDG_CONFIG_HOME == nil)
+    then
+        dofile('~/.config/nvim/plugincfg.lua')
+    else
+        dofile(vim.env.XDG_CONFIG_HOME .. '/nvim/plugincfg.lua')
+    end
 end
 
 ---------------------------------------------------------------
