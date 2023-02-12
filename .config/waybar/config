@@ -1,7 +1,4 @@
 {
-    "bar_id": "bar-0",
-    "ipc": true,
-
     // So that it doesn't go over the logout prompt
     "layer": "bottom",
      // Waybar position (top|bottom|left|right)
@@ -105,7 +102,7 @@
 
     "disk": {
         "interval": 30,
-        "format": "{percentage_used}% on {path}",
+        "format": "{percentage_used}%",
         "path": "/"
     }
 }

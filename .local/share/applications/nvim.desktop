@@ -2,5 +2,5 @@
 Type=Application
 Name=Neovim
 Comment=Text editor
-Exec=/usr/bin/nvim
-Terminal=true
+Exec=kitty -e /usr/bin/nvim
+# Terminal=true

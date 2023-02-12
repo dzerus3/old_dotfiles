@@ -3,5 +3,5 @@ Type=Application
 Name=lf
 GenericName=File manager
 Comment=File manager
-Exec=/usr/bin/lf
-Terminal=true
+Exec=kitty -e /usr/bin/lf
+# Terminal=true

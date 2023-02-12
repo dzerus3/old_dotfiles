@@ -27,13 +27,13 @@ set $term kitty
 # Applications
 
 ## Notification center, so notifications are displayed graphically
-exec /usr/bin/mako
+exec mako
 
 ## Gentoo launcher for pipewire
-exec /usr/bin/gentoo-pipewire-launcher
+exec gentoo-pipewire-launcher
 
 ## The application launcher menu
-set $menu $HOME/.local/bin/sway/sway-appselector.sh
+set $menu wofi --show=drun --term kitty
 
 # Configuration
 ## Disable window titlebars
@@ -205,9 +205,6 @@ bindsym $mod+r mode "resize"
 # See .config/waybar/config for configuration
 bar {
     swaybar_command waybar
-    position top
-    #mode hide
-    #modifier $mod+a
 }
 
 include /etc/sway/config.d/*
