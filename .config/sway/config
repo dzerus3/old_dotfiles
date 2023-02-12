@@ -151,11 +151,6 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-### Splits window vertically/horizontally
-### In other words, the next windows you open will be that orientation
-bindsym $mod+z splith
-bindsym $mod+x splitv
-
 ### Make the current window fullscreen
 bindsym $mod+f fullscreen
 
@@ -164,13 +159,17 @@ bindsym $mod+t focus mode_toggle
 ### Toggle the current window between tiling and floating mode
 bindsym $mod+Shift+t floating toggle
 
-### Switch the current container between different layout styles
-bindsym $mod+l layout stacking
-bindsym $mod+u layout tabbed
-bindsym $mod+y layout toggle split
+### Splits window vertically/horizontally
+### In other words, the next windows you open will be that orientation
+bindsym $mod+z splitv
+bindsym $mod+x splith
+
 # Move focus to the parent container
-# No idea what this actually does
-#bindsym $mod+j focus parent
+bindsym $mod+u focus parent
+### Switch the current container between different layout styles
+bindsym $mod+l layout toggle split
+#bindsym $mod+u layout stacking
+bindsym $mod+y layout tabbed
 
 # Scratchpad:
 ## Move the currently focused window to the scratchpad
@@ -204,6 +203,11 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # See .config/waybar/config for configuration
-bar swaybar_command waybar
+bar {
+    swaybar_command waybar
+    position top
+    #mode hide
+    #modifier $mod+a
+}
 
 include /etc/sway/config.d/*
