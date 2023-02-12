@@ -23,6 +23,9 @@ git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME\
 # Pull in the dotfiles
 git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME\
     pull origin master
+# Set Github as upstream
+git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME\
+    branch --set-upstream-to=origin/master master
 
 echo "Enabling plugins..."
 
