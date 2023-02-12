@@ -63,7 +63,7 @@ exec swayidle -w \
 input type:keyboard {
     xkb_layout  "custom,custom,custom"
     xkb_variant "colemak_dh,sp_colemak_dh,rulemak_dh"
-    xkb_options "caps:escape,grp:win_space_toggle"
+    xkb_options "caps:swapescape,grp:alt_shift_toggle"
 }
 
 # Key bindings
