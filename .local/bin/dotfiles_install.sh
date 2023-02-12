@@ -1,16 +1,26 @@
 #!/bin/zsh
 
+# Quit if any command fails
+set -e
+
+# Change shell to zsh
+chsh -s /bin/zsh
+
 # Necessary for clean installation
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
+# Create necessary directories if they don't already exist
 mkdir -p $HOME/.config
 mkdir -p $HOME/.local/state
 mkdir -p $HOME/.local/share
 mkdir -p $HOME/.local/bin
 
+# Create dotfile git directory
 git init --bare $HOME/.local/share/dotfiles
+# Set dotfile origin to Github
 git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME\
     remote add origin https://github.com/dzerus3/dotfiles
+# Pull in the dotfiles
 git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME\
     pull origin master
 
