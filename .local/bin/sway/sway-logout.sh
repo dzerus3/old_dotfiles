@@ -1,11 +1,11 @@
 #!/bin/bash
 
 options=(
-    "Logout"
-    "Shutdown"
-    "Reboot"
-    "Suspend"
-    "Cancel"
+    "(L)ogout"
+    "(S)hutdown"
+    "(R)eboot"
+    "(Su)spend"
+    "(C)ancel"
 )
 
 selection=$($HOME/.local/bin/sway/sway-menu.sh "Exit?" "${options[@]}")
