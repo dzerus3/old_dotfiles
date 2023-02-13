@@ -13,9 +13,9 @@ selection=$($HOME/.local/bin/sway/sway-menu.sh "Exit?" "${options[@]}")
 
 # Note: User needs permission in /etc/doas.conf
 case "$selection" in
-    Logout)   swaymsg exit         ;;
-    Shutdown) doas shutdown -h now ;;
-    Reboot)   doas shutdown -r now ;;
-    Suspend)  doas s2ram           ;;
+    '⍈ (L)ogout')   swaymsg exit         ;;
+    '⏼ (R)eboot')   doas -n shutdown -h now ;;
+    '⏻ (S)hutdown') doas -n shutdown -r now ;;
+    '⏾ (Su)spend')  doas -n s2ram           ;;
 esac
 
