@@ -4,6 +4,7 @@ options=(
     "Logout"
     "Shutdown"
     "Reboot"
+    "Suspend"
     "Cancel"
 )
 
@@ -14,5 +15,6 @@ case "$selection" in
     Logout)   swaymsg exit         ;;
     Shutdown) doas shutdown -h now ;;
     Reboot)   doas shutdown -r now ;;
+    Suspend)  doas s2ram           ;;
 esac
 

@@ -6,4 +6,4 @@
 for buffer in "${@:2}"
 do
     echo $buffer
-done | wofi -i -d -H 200 -W 100 -p $1
+done | wofi --insensitive --dmenu --cache-file /dev/null --height 225 --width 100 --prompt $1
