@@ -1,15 +1,16 @@
 #!/bin/bash
+# Draws on https://dev.to/mafflerbach/use-pass-and-rofi-to-get-a-fancy-password-manager-2k37
 
-if [[ -v PASSWORD_STORE_DIR ]]
-then
-    location=$PASSWORD_STORE_DIR
-else
-    location=$HOME/.password-store
-fi
-cd $location
+prefix=${PASSWORD_STORE_DIR-~/.password-store}
+password_files=( "$prefix/**/*.gpg" )
+password_files=( "${password_files[@]#"$prefix"/}" )
+password_files=( "${password_files[@]%.gpg}" )
 
-passwords=()
-readarray -d '' passwords < <(find . -type f -not -path '*/\.git*' -not -path '*/\.gpg-id' -print0)
+selection=$(
+    printf '%s\n' "${password_files[@]}" | \
+    wofi -d --height 225 --width 500 --prompt "Pick a password"
+)
+echo $selection
+[[ -n $selection ]] || exit
 
-selection=$($HOME/.local/bin/sway/sway-menu.sh "Pick a password:" ${passwords[@]})
-pass -c $selection
+pass -c "$selection"

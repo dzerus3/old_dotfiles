@@ -63,12 +63,14 @@ exec swayidle -w \
 input type:keyboard {
     xkb_layout  "custom,custom,custom"
     xkb_variant "colemak_dh,sp_colemak_dh,rulemak_dh"
-    xkb_options "caps:swapescape,grp:alt_shift_toggle"
+    xkb_options "caps:swapescape,grp:rctrl_toggle"
 }
 
 # Key bindings
 ## Start a terminal
 bindsym $mod+Return exec $term
+
+bindsym $mod+p exec "$HOME/.local/bin/sway/sway-pass.sh"
 
 ## Kill focused window
 bindsym $mod+w kill
