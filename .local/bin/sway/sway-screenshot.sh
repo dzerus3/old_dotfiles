@@ -19,7 +19,7 @@ OPTIONS=(
 CHOICE=$(
     printf '%s\n' "${OPTIONS[@]}" | \
     wofi --dmenu --cache-file /dev/null \
-         --height 225 --width 300 --prompt "$(uptime -p)"
+         --height 225 --width 300 --prompt "What do you want to screenshot?"
 )
 
 FILENAME="${SHOTPATH}/screenshot-$(date +'%Y-%m-%d-%H%M%S.png')"
@@ -55,7 +55,7 @@ RESULTS=(
 WAHL=$(
     printf '%s\n' "${RESULTS[@]}" | \
     wofi --dmenu --cache-file /dev/null \
-         --height 225 --width 300 --prompt "$(uptime -p)"
+         --height 225 --width 300 --prompt "What do you want to do?"
 )
 
 
