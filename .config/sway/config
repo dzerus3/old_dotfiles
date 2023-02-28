@@ -83,10 +83,7 @@ bindsym $mod+d exec $menu
 floating_modifier $mod normal
 
 ## Screenshots
-bindsym Print               exec grim - | wl-copy
-bindsym Shift+Print         exec grim -g "$(slurp)" - | wl-copy
-bindsym Control+Print       exec grim $psf
-bindsym Control+Shift+Print exec grim -g "$(slurp)" $psf
+bindsym Print exec $HOME/.local/bin/sway/sway-screenshot.sh
 
 ## Reload the configuration file
 bindsym $mod+Shift+c reload
