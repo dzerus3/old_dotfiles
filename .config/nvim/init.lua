@@ -45,6 +45,14 @@ vim.g.mapleader = " "
 -- Vim settings
 ----------------------------------------------------------------
 
+-- Workaround for vim to reset cursor when leaving
+vim.cmd([[
+    augroup resetcursor
+        autocmd!
+        autocmd VimLeave * set guicursor=a:ver1-blinkon0
+    augroup end
+]])
+
 -- Enable syntax highlighting
 vim.g.syntax = true
 
