@@ -1,11 +1,8 @@
 # Dependencies
-# To make full use of this config file, you need the following:
 ## A cursor theme called "current"
-## kitty (Terminal Emulator)
-## j4-dmenu-desktop (Gets .desktop files)
-## bemenu (Application launcher)
+## foot (Terminal Emulator)
+## wofi (Application launcher)
 ## mako (Notification center)
-## gentoo-pipewire-launcher (Audio)
 ## Waybar version > 0.9.17 (For status bar)
 
 # Variables
@@ -22,18 +19,20 @@ set $right o
 set $psf $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
 
 ## Preferred terminal emulator
-set $term kitty
+set $term footclient
+
+## The application launcher menu
+set $menu wofi --show=drun
 
 # Applications
-
 ## Notification center, so notifications are displayed graphically
 exec mako
 
 ## Gentoo launcher for pipewire
 exec gentoo-pipewire-launcher
 
-## The application launcher menu
-set $menu wofi --show=drun --term kitty
+## Starts up foot server
+exec foot --server
 
 # Configuration
 ## Disable window titlebars
