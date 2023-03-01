@@ -564,6 +564,12 @@ then
             H = "Search backwards and select",
         }
     })
+
+    ---------------------------------------------------------------
+    -- UndoTree
+    ---------------------------------------------------------------
+
+    vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 end
 
 ---------------------------------------------------------------
@@ -608,30 +614,14 @@ require("packer").startup({
             end
         },
 
-        -- Better behavior in .md files
-        { "preservim/vim-markdown",
-            requires = {"godlygeek/tabular"},
-            disable = true
-        },
-
         -- Graphically shows undo history
         { "mbbill/undotree",
             cmd = { "UndotreeToggle", "UndotreeShow" },
-            disable = true
         },
 
         -- Allows moving through code tags
         { "preservim/tagbar",
             cmd = "TagbarToggle",
-            disable = true
-        },
-
-        -- Automatically creates character pairs
-        { "windwp/nvim-autopairs",
-            disable = true,
-            config = function()
-                require("nvim-autopairs").setup{}
-            end
         },
     },
 })
