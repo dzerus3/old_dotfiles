@@ -3,7 +3,7 @@
 # Choose directory to save screenshots and viewer
 # Modified version of https://github.com/de-arl/slurpshot
 
-SHOTPATH=$(xdg-user-dir PICTURES)
+SHOTPATH=$(xdg-user-dir PICTURES)/screenshots
 VIEWER=/usr/bin/imv
 
 WINDOWS=`swaymsg -t get_tree | jq '.. | (.nodes? // empty)[] | select(.visible and .pid) | "\(.app_id) \(.rect.x),\(.rect.y) \(.rect.width)x\(.rect.height)"'`
@@ -22,7 +22,7 @@ CHOICE=$(
          --height 225 --width 300 --prompt "What do you want to screenshot?"
 )
 
-FILENAME="${SHOTPATH}/screenshot-$(date +'%Y-%m-%d-%H%M%S.png')"
+FILENAME="${SHOTPATH}/ps_$(date +'%Y-%m-%d-%H%M%S.png')"
 GRID=\"$(echo $CHOICE | awk ' {print $2,$3} ')
 
 # Name printed when viewing screenshot, adjust if you edit FILENAME

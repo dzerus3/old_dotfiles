@@ -11,9 +11,8 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 # Create necessary directories if they don't already exist
 mkdir -p $HOME/.config
-mkdir -p $HOME/.local/state
-mkdir -p $HOME/.local/share
-mkdir -p $HOME/.local/bin
+mkdir -p $HOME/.local/{state,share,bin}
+mkdir -p $HOME/pics/{screenshots,wallpapers}
 
 # Create dotfile git directory
 git init --bare $HOME/.local/share/dotfiles

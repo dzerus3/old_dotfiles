@@ -15,9 +15,6 @@ set $down e
 set $up i
 set $right o
 
-## Screenshot format
-set $psf $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
-
 ## Preferred terminal emulator
 set $term footclient
 
@@ -49,7 +46,7 @@ seat seat0 xcursor_theme current 16
 ## Wallpaper
 #set $wallpapers_path $(xdg-user-dir PICTURES)/wallpaper
 #output * bg $(find $wallpapers_path -type f | shuf -n 1) fill
-output * bg $HOME/pics/wallpaper/wallpaper.jpg fill
+output * bg $HOME/pics/wallpapers/wallpaper.jpg fill
 
 ## Idle configuration
 exec swayidle -w \
