@@ -12,7 +12,7 @@ options=(
 selection=$(
     printf '%s\n' "${options[@]}" | \
     wofi --dmenu --cache-file /dev/null \
-         --height 225 --width 300 --prompt "$(uptime -p)"
+         --height 225 --width 150 --prompt "$(uptime -p | sed -e 's/,.*$//g')"
 )
 
 # Note: User needs permission in /etc/doas.conf
