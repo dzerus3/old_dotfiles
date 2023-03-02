@@ -21,10 +21,10 @@ git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME\
     remote add origin https://github.com/dzerus3/dotfiles
 # Pull in the dotfiles
 git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME\
-    pull origin master
+    pull origin laptop
 # Set Github as upstream
 git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME\
-    branch --set-upstream-to=origin/master master
+    branch --set-upstream-to=origin/laptop laptop
 
 echo "Enabling plugins..."
 
