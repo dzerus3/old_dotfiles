@@ -47,4 +47,5 @@ nvim -c "PackerSync" $(mktemp)
 sed '1d' $XDG_CONFIG_HOME/nvim/init.lua > $XDG_CONFIG_HOME/nvim/tmp.lua
 mv $XDG_CONFIG_HOME/nvim/tmp.lua $XDG_CONFIG_HOME/nvim/init.lua
 
+echo "Neovim may have given you a treesitter-related error. This is normal."
 echo "Installation seems to have finished successfully. Yay."
