@@ -448,6 +448,14 @@ then
     ]])
 
     ---------------------------------------------------------------
+    -- Telescope
+    ---------------------------------------------------------------
+
+    map("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>")
+    map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+    map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+
+    ---------------------------------------------------------------
     -- Tagbar
     ---------------------------------------------------------------
 
@@ -612,6 +620,15 @@ require("packer").startup({
             config = function()
                 require("which-key").setup{}
             end
+        },
+
+        -- Fuzzy file finder
+        {
+            "nvim-telescope/telescope.nvim",
+            tag = "0.1.0",
+            requires = {"nvim-lua/plenary.nvim"},
+            opt = true,
+            cmd = "Telescope",
         },
 
         -- Graphically shows undo history
