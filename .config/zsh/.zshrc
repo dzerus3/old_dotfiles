@@ -2,6 +2,7 @@
 # Generic options
 #
 # DOCUMENTATION:
+#   TODO: replace zshall
 #   man zshall, from line 5812 /WORDCHARS
 #   $ZDOTDIR/plugins/zsh-autosuggestions/README.md
 ################################################################
@@ -47,6 +48,7 @@ export _ZO_DATA_DIR=$XDG_STATE_HOME
 #
 # DOCUMENTATION:
 #   man zshbuiltins, /history /fc
+#   TODO: replace zshall
 #   man zshall, from line 5375 /HISTFILE
 #   man zshall, from line 6312 /APPEND_HISTORY
 ################################################################
@@ -83,6 +85,7 @@ setopt inc_append_history_time
 
 ################################################################
 # Completion
+#
 # See man zshcompsys
 ################################################################
 
@@ -136,7 +139,9 @@ zstyle ':completion:*' list-suffixes true
 
 ################################################################
 # Keybindings
+#
 # DOCUMENTATION:
+#   TODO: replace zshall
 #   man zshall, from line 10536 /STANDARD WIDGETS
 ################################################################
 
@@ -173,6 +178,11 @@ fi
 
 ################################################################
 # Abbreviations
+#
+# Code borrowed from https://dev.to/frost/fish-style-abbreviations-in-zsh-40aa
+#
+# NOTE: Should be sourced *after* keybinding definitions.
+# Specifically, bindkey -e hardbroke it.
 ################################################################
 
 source $ZDOTDIR/modules/abbreviations.zsh
@@ -181,13 +191,69 @@ source $ZDOTDIR/modules/abbreviations.zsh
 # Custom functions
 ################################################################
 
-source $ZDOTDIR/modules/custom.zsh
+# Enables colors for diff if GNU coreutils are installed
+ls   --version | grep GNU > /dev/null && alias ls='ls --color=auto'
+grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
+diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
+
+# A few common abbreviations
+abbrev cls='clear'
+abbrev md='mkdir'
+
+abbrev e='ls'
+abbrev el='ls -l'
+abbrev ea='ls -a'
+abbrev eal='ls -al'
+abbrev ela='ls -la'
+abbrev eld='ls -ld'
+abbrev edl='ls -dl'
+
+alias ip='ip --color=auto'
+
+if command -v nvim &> /dev/null; then
+    abbrev nv='nvim'
+fi
+
+# Dotfile configuration
+alias dotfiles="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
+abbrev dot='dotfiles'
+
+# Easy editing of common files
+abbrev editrc="$EDITOR ~/.config/zsh/.zshrc"
+# TODO: Check if regular vim is installed
+abbrev editvimrc="$EDITOR ~/.config/nvim/init.lua"
+
+if command -v task &> /dev/null; then
+    abbrev t='task'
+    abbrev tmodlast='task modify $(task +LATEST uuids)'
+    abbrev tdep='task add dep:$(task +LATEST uuids)'
+fi
+
+if command -v yt-dlp &> /dev/null; then
+    abbrev yt-music='yt-dlp --extract-audio --audio-format opus --yes-playlist -o "%(track)s__%(artist)s__%(album)s__%(release_year)s.%(ext)s"'
+    abbrev yt-audiobook='yt-dlp --extract-audio --audio-format mp3 --yes-playlist -o "%(title)s.%(ext)s"'
+fi
+
+alias wget="wget --hsts-file $XDG_CACHE_HOME/wget-hsts"
+
+open(){
+    nohup xdg-open $1 > /dev/null &
+}
+
+isitup() {
+    # I'm not sure why the lookaround is included in the results,
+    # but hey, it works.
+    curl -s "https://isitup.org/$1" | grep -P '(?<=<title>).*(?=<\/title>)' | cut -c 8- | rev | cut -c 9- | rev
+}
 
 #################################################################
-# Command replacements
+# grc
+#
+# Enables grc support if it is installed. Taken from grc's zsh
+# plugin at https://github.com/garabik/grc/blob/master/grc.zsh
 #################################################################
 
-source $ZDOTDIR/modules/replacements.zsh
+source $ZDOTDIR/modules/grc.zsh
 
 ################################################################
 # less configuration
@@ -204,12 +270,57 @@ export LESSHISTFILE=-
 
 ################################################################
 # Prompt
+#
 # DOCUMENTATION:
 #   $ZDOTDIR/plugins/git-prompt.zsh/examples/default.zsh
+#   TODO: replace zshall
 #   man zshall, from line 2061 /EXPANSION OF PROMPT
 ################################################################
 
-source $ZDOTDIR/modules/prompt.zsh
+# Makes prompt more font-compatible
+ZSH_THEME_GIT_PROMPT_PREFIX=':'
+ZSH_THEME_GIT_PROMPT_SUFFIX=
+ZSH_THEME_GIT_PROMPT_SEPARATOR=
+ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[cyan]%}:"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
+ZSH_THEME_GIT_PROMPT_UPSTREAM_NO_TRACKING=" %{$fg_bold[red]%}!"
+ZSH_THEME_GIT_PROMPT_UPSTREAM_PREFIX=" %{$fg[red]%}(%{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_UPSTREAM_SUFFIX="%{$fg[red]%})"
+ZSH_THEME_GIT_PROMPT_BEHIND=" ↓"
+ZSH_THEME_GIT_PROMPT_AHEAD=" ↑"
+ZSH_THEME_GIT_PROMPT_UNMERGED=" %{$fg[red]%}x"
+ZSH_THEME_GIT_PROMPT_STAGED=" %{$fg[green]%}o"
+ZSH_THEME_GIT_PROMPT_UNSTAGED=" %{$fg[red]%}+"
+ZSH_THEME_GIT_PROMPT_UNTRACKED=" ."
+ZSH_THEME_GIT_PROMPT_STASHED=" %{$fg[blue]%}s"
+ZSH_THEME_GIT_PROMPT_CLEAN=
+
+# Resets any existing prompt
+PROMPT=""
+
+# If we're connected to ssh, displays hostname
+if ((${#SSH_CLIENT[@]})); then
+    PROMPT=$PROMPT'($(hostname)) '
+fi
+
+# Sets a red and magenta prompt if root, and blue/green otherwise.
+if [ $UID -eq 0 ]; then
+    PROMPT=$PROMPT"%B%{$fg[red]%}[%{$fg[magenta]%}%B%1~%b%{$reset_color%}"
+else
+    PROMPT=$PROMPT"%B%{$fg[blue]%}[%{$fg[green]%}%B%1~%b%{$reset_color%}"
+fi
+
+# If gitprompt addon is installed, uses it
+if typeset -f gitprompt > /dev/null; then
+    PROMPT=$PROMPT'$(gitprompt)'
+fi
+
+# Sets a red and magenta prompt if root, and blue/green otherwise.
+if [ $UID -eq 0 ]; then
+    PROMPT=$PROMPT"%{$fg[red]%}]%{$reset_color%} "
+else
+    PROMPT=$PROMPT"%{$fg[blue]%}]%{$reset_color%} "
+fi
 
 ################################################################
 # Fortune

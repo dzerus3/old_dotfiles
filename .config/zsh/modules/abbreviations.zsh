@@ -1,14 +1,9 @@
-# Code borrowed from https://dev.to/frost/fish-style-abbreviations-in-zsh-40aa
-#
 # Mechanism is fairly simple. There is a global array of
 # abbreviations. Each abbreviation is also assigned as an alias.
 # Each time Space is pressed or a command is entered, the word
 # before (if it is the first word in the command) is checked
 # against the array of abbreviations. If it is in that array,
 # run _expand_alias (see man zshcompsys) against that word.
-#
-# NOTE: Should be sourced *after* keybinding definitions.
-# Specifically, bindkey -e hardbroke it.
 
 # declare a list of expandable aliases to fill up later
 typeset -a ealiases
