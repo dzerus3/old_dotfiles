@@ -1,5 +1,6 @@
 # Respectfully stolen from
 # https://github.com/mattmc3/zsh_unplugged
+
 function plugin-load {
     local repo plugin_name plugin_dir initfile initfiles
     ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins}

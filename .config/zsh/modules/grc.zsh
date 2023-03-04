@@ -1,3 +1,5 @@
+# Taken from grc's zsh plugin at https://github.com/garabik/grc/blob/master/grc.zsh
+
 if command -v grc &> /dev/null; then
     grc_commands=(
         blkid df dig du env fdisk findmnt free getfacl id

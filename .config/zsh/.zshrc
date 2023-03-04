@@ -179,8 +179,6 @@ fi
 ################################################################
 # Abbreviations
 #
-# Code borrowed from https://dev.to/frost/fish-style-abbreviations-in-zsh-40aa
-#
 # NOTE: Should be sourced *after* keybinding definitions.
 # Specifically, bindkey -e hardbroke it.
 ################################################################
@@ -249,8 +247,7 @@ isitup() {
 #################################################################
 # grc
 #
-# Enables grc support if it is installed. Taken from grc's zsh
-# plugin at https://github.com/garabik/grc/blob/master/grc.zsh
+# Enables grc support if it is installed.
 #################################################################
 
 source $ZDOTDIR/modules/grc.zsh
