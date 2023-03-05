@@ -20,6 +20,7 @@ audio/flac=mpv.desktop;
 audio/wav=mpv.desktop;
 audio/ogg=mpv.desktop;
 audio/mp3=mpv.desktop;
+audio/mpeg=mpv.desktop;
 audio/m4a=mpv.desktop;
 audio/m4b=mpv.desktop;
 audio/mp4=mpv.desktop;
