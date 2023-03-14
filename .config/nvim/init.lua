@@ -598,6 +598,8 @@ require("packer").startup({
         -- Enables tab completion
         { "ervandew/supertab" },
 
+        { "gentoo/gentoo-syntax"},
+
         -- Allows incrementing dates
         { "tpope/vim-speeddating",
             requires = { "tpope/vim-repeat" }
