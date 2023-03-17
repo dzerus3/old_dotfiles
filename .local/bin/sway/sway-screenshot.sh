@@ -49,6 +49,7 @@ fi
 RESULTS=(
     "View"
     "Save"
+    "Copy"
     "Discard"
 )
 
@@ -62,6 +63,9 @@ WAHL=$(
 if [ "$WAHL" = View ]
 then	
 	$VIEWER $FILENAME &
+elif [ "$WAHL" = Copy ]
+then
+    wl-copy < $FILENAME
 elif [ "$WAHL" = Discard ]
 then
 	rm $FILENAME
