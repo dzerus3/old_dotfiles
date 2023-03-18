@@ -223,8 +223,14 @@ abbrev editvimrc="$EDITOR ~/.config/nvim/init.lua"
 
 if command -v task &> /dev/null; then
     abbrev t='task'
+    abbrev ta='task add'
     abbrev tmodlast='task modify $(task +LATEST uuids)'
     abbrev tdep='task add dep:$(task +LATEST uuids)'
+fi
+
+if command -v buku &> /dev/null; then
+    abbrev b='buku'
+    abbrev ba='buku --add'
 fi
 
 if command -v yt-dlp &> /dev/null; then
