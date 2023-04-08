@@ -2,9 +2,7 @@
 # Generic options
 #
 # DOCUMENTATION:
-#   TODO: replace zshall reference
-#   man zshall, from line 5812 /WORDCHARS
-#   $ZDOTDIR/plugins/zsh-autosuggestions/README.md
+#   man zshparam /WORDCHARS
 ################################################################
 
 # Sets nvim as pager
@@ -28,10 +26,10 @@ export BAT_STYLE='plain'
 export PASSWORD_STORE_DIR=$XDG_DATA_HOME/pass
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 
-# Allows executing commands from ~/.local/bin
+# Allows executing commands from .local/bin
 export PATH=$HOME/.local/bin:$PATH
 
-# Cargo automatically installs to ~/.local/bin
+# Cargo automatically installs to .local/bin
 export CARGO_INSTALL_ROOT=$HOME/.local
 
 # Includes some characters as parts of words for Ctrl + w
@@ -47,10 +45,9 @@ export _ZO_DATA_DIR=$XDG_STATE_HOME
 # History options
 #
 # DOCUMENTATION:
-#   man zshbuiltins, /history /fc
-#   TODO: replace zshall reference
-#   man zshall, from line 5375 /HISTFILE
-#   man zshall, from line 6312 /APPEND_HISTORY
+#   man zshbuiltins /history /fc
+#   man zshparam /HISTFILE
+#   man zshoptions /APPEND_HISTORY
 ################################################################
 
 # Sets history to output the last 30 entries
@@ -141,8 +138,7 @@ zstyle ':completion:*' list-suffixes true
 # Keybindings
 #
 # DOCUMENTATION:
-#   TODO: replace zshall reference
-#   man zshall, from line 10536 /STANDARD WIDGETS
+#   man zshzle /STANDARD WIDGETS
 ################################################################
 
 # Enables emacs keybindings
@@ -280,8 +276,7 @@ export LESSHISTFILE=-
 #
 # DOCUMENTATION:
 #   $ZDOTDIR/plugins/git-prompt.zsh/examples/default.zsh
-#   TODO: replace zshall reference
-#   man zshall, from line 2061 /EXPANSION OF PROMPT
+#   man zshmisc /EXPANSION OF PROMPT
 ################################################################
 
 # Makes prompt more font-compatible
