@@ -217,13 +217,14 @@ alias dotfiles="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
 abbrev dot='dotfiles'
 
 # Easy editing of common files
-abbrev editrc="$EDITOR ~/.config/zsh/.zshrc"
+abbrev editrc="$EDITOR $HOME/.config/zsh/.zshrc"
 # TODO: Check if regular vim is installed
-abbrev editvimrc="$EDITOR ~/.config/nvim/init.lua"
+abbrev editvimrc="$EDITOR $HOME/.config/nvim/init.lua"
 
 if command -v task &> /dev/null; then
     abbrev t='task'
     abbrev ta='task add'
+    abbrev td='task done'
     abbrev tmodlast='task modify $(task +LATEST uuids)'
     abbrev tdep='task add dep:$(task +LATEST uuids)'
 fi
