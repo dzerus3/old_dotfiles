@@ -69,10 +69,11 @@ vim.opt.foldmethod = "indent"
 vim.opt.foldenable = false
 
 -- Enables persistent undo
+-- FIXME: The if statement doesn't seem to work correctly
 vim.opt.undofile = true
 if(vim.env.XDG_STATE_HOME == nil)
 	then
-	vim.opt.undodir = "~/.local/state/nvim/undo"
+	vim.opt.undodir = vim.env.HOME .. "/.local/state/nvim/undo"
 else
 	vim.opt.undodir = vim.env.XDG_STATE_HOME .. "/nvim/undo"
 end
