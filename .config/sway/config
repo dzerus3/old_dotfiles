@@ -3,7 +3,7 @@
 ## foot (Terminal Emulator)
 ## wofi (Application launcher)
 ## mako (Notification center)
-## Waybar version > 0.9.17 (For status bar)
+## waybar (For status bar)
 
 # Variables
 ## Windows key
@@ -43,6 +43,7 @@ default_floating_border pixel
 gaps inner 8
 gaps outer 2
 
+## Reduces size of titlebars on custom layouts
 font CodeNewRoman NF 6
 titlebar_border_thickness 0
 titlebar_padding 0
