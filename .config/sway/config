@@ -73,8 +73,10 @@ input type:keyboard {
 # Key bindings
 ## Start a terminal
 bindsym $mod+Return exec $term
-
-bindsym $mod+p exec "$HOME/.local/bin/sway/sway-pass.sh"
+## Start nvim
+bindsym $mod+t exec $term -e nvim
+## Start firefox
+bindsym $mod+g exec firefox-bin
 
 ## Kill focused window
 bindsym $mod+w kill
@@ -181,6 +183,17 @@ bindsym $mod+Shift+minus move scratchpad
 ## Show the next scratchpad window or hide the focused scratchpad window.
 ## If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
+
+# Enables floating for certain windows
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_role="About"] floating enable
+for_window [class="Wine"] floating enable
+for_window [app_id="lutris"] floating enable
 
 # Resizing containers:
 mode "resize" {
