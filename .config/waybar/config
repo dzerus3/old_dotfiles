@@ -15,6 +15,7 @@
     ],
 
     "modules-right": [
+        "mpd",
         "sway/language",
         "cpu",
         "memory",
@@ -43,10 +44,18 @@
 	},
 
     // Month/date
-	"clock#3": {
-		"format": "{:%d}",
-		"tooltip": false
-	},
+    "clock#3": {
+        "format": "{:%d}",
+        "tooltip": false
+    },
+
+    "mpd": {
+        "format": "{stateIcon} {artist} {elapsedTime:%M:%S}/{totalTime:%M:%S}",
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+    },
 
     "sway/language": {
         "format": "{shortDescription}",

@@ -52,6 +52,13 @@ window#waybar {
     padding: 0 9px;
 }
 
+#mpd {
+    border-radius: 4px 4px 4px 4px;
+    padding-right: 9px;
+    padding-left: 9px;
+}
+
+#mpd,
 #cpu,
 #memory,
 #disk,
