@@ -271,14 +271,21 @@ map("", "I", "<C-b>")
 -- Lower case j joins lines
 map("", "j", "J")
 
--- c and s no longer yank
-map("",  "s", "\"_s")
-map("v", "s", "\"_s")
-map("",  "c", "\"_c")
-map("v", "c", "\"_c")
+-- Leader-action to delete without copying
+map("",  "<leader>x", "\"_x")
+map("",  "<leader>X", "\"_X")
+map("v",  "<leader>x", "\"_x")
 
--- Leader-D to delete without copying
+map("",  "<leader>s", "\"_s")
+map("",  "<leader>S", "\"_S")
+map("v", "<leader>s", "\"_s")
+
+map("",  "<leader>c", "\"_c")
+map("",  "<leader>C", "\"_C")
+map("v", "<leader>c", "\"_c")
+
 map("",  "<leader>d", "\"_d")
+map("",  "<leader>D", "\"_D")
 map("v", "<leader>d", "\"_d")
 
 -- Hack to work around conflict with `d`elete `i`n
