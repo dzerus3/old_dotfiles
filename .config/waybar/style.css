@@ -7,38 +7,39 @@ window#waybar {
 }
 
 #workspaces button {
-	padding: 0 2px;
-	color: #fdf6e3;
+    padding: 0 2px;
+    color: #fdf6e3;
 }
 #workspaces button.focused {
-	background-color: #772b2e;
+    background-color: #772b2e;
 }
 #workspaces button:hover {
-	box-shadow: inherit;
-	text-shadow: inherit;
-	background: #1a1a1a;
-	border: #1a1a1a;
-	padding: 0 3px;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: #1a1a1a;
+    border: #1a1a1a;
+    padding: 0 3px;
 }
 
-#memory {
-	color: #2aa198;
-	padding: 0 8px;
+#language {
+    margin: 0 15px;
 }
+
 #cpu {
-	color: #6c71c4;
-	padding: 0 8px;
+    color: #6c71c4;
+    padding: 0 8px;
     border-radius: 2px 0px 0px 2px;
 }
-#battery {
-	padding: 0 8px;
+#memory {
+    color: #2aa198;
+    padding: 0 8px;
 }
 #disk {
-	color: #b58900;
-	padding: 0 8px;
+    color: #b58900;
+    padding: 0 8px;
 }
-#language {
-    margin: 0 20px;
+#battery {
+    padding: 0 8px;
 }
 
 #network {

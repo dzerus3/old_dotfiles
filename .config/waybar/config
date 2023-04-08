@@ -26,22 +26,22 @@
     ],
 
     "sway/workspaces": {
-		"disable-scroll": false,
-		"format": "{name}"
-	},
+        "disable-scroll": false,
+        "format": "{name}"
+    },
 
     // Day of week
     "clock#1": {
-		"format": "{:%a}",
-		"tooltip": false
-	},
+        "format": "{:%a}",
+        "tooltip": false
+    },
 
     // Time
-	"clock#2": {
-		"format": "{:%H.%M}",
-		"tooltip": false,
-        "interval": 1
-	},
+    "clock#2": {
+        "format": "{:%H.%M}",
+        "tooltip": false,
+        "interval": 5
+    },
 
     // Month/date
     "clock#3": {
@@ -86,20 +86,20 @@
     },
 
     "battery": {
-		"states": {
-			"good": 85,
-			"warning": 30,
-			"critical": 10
-		},
-		"format": "{icon} {capacity}%",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		]
-	},
+        "states": {
+            "good": 85,
+            "warning": 30,
+            "critical": 10
+        },
+        "format": "{icon} {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
 
     "wireplumber": {
         "format": "{volume}% {icon}",
