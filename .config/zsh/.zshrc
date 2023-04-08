@@ -2,7 +2,7 @@
 # Generic options
 #
 # DOCUMENTATION:
-#   TODO: replace zshall
+#   TODO: replace zshall reference
 #   man zshall, from line 5812 /WORDCHARS
 #   $ZDOTDIR/plugins/zsh-autosuggestions/README.md
 ################################################################
@@ -48,7 +48,7 @@ export _ZO_DATA_DIR=$XDG_STATE_HOME
 #
 # DOCUMENTATION:
 #   man zshbuiltins, /history /fc
-#   TODO: replace zshall
+#   TODO: replace zshall reference
 #   man zshall, from line 5375 /HISTFILE
 #   man zshall, from line 6312 /APPEND_HISTORY
 ################################################################
@@ -141,7 +141,7 @@ zstyle ':completion:*' list-suffixes true
 # Keybindings
 #
 # DOCUMENTATION:
-#   TODO: replace zshall
+#   TODO: replace zshall reference
 #   man zshall, from line 10536 /STANDARD WIDGETS
 ################################################################
 
@@ -165,22 +165,28 @@ bindkey '^x' edit-command-line
 
 # If you don't want plugins, don't create $ZDOTDIR/plugins
 if [ -d $ZDOTDIR/plugins ]; then
+    source $ZDOTDIR/modules/plugins.zsh
+
+    # A portable alternative to zoxide
+    #plugin-load skywind3000/z.lua
+
+    # Allows displaying git status as part of prompt
+    plugin-load woefe/git-prompt.zsh
+    # Makes history searching more intelligent
+    plugin-load zsh-users/zsh-history-substring-search
+    # Enables syntax highlighting in the shell
+    plugin-load zdharma-continuum/fast-syntax-highlighting
+
     # Rebinds up/down to use substring search
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
-
-    source $ZDOTDIR/modules/plugins.zsh
-
-    plugin-load woefe/git-prompt.zsh
-    plugin-load zsh-users/zsh-history-substring-search
-    plugin-load zdharma-continuum/fast-syntax-highlighting
 fi
 
 ################################################################
 # Abbreviations
 #
 # NOTE: Should be sourced *after* keybinding definitions.
-# Specifically, bindkey -e hardbroke it.
+# Specifically, bindkey -e broke it.
 ################################################################
 
 source $ZDOTDIR/modules/abbreviations.zsh
@@ -276,7 +282,7 @@ export LESSHISTFILE=-
 #
 # DOCUMENTATION:
 #   $ZDOTDIR/plugins/git-prompt.zsh/examples/default.zsh
-#   TODO: replace zshall
+#   TODO: replace zshall reference
 #   man zshall, from line 2061 /EXPANSION OF PROMPT
 ################################################################
 
@@ -303,7 +309,7 @@ PROMPT=""
 
 # If we're connected to ssh, displays hostname
 if ((${#SSH_CLIENT[@]})); then
-    PROMPT=$PROMPT'($(hostname)) '
+    PROMPT=$PROMPT"($(hostname)) "
 fi
 
 # Sets a red and magenta prompt if root, and blue/green otherwise.
