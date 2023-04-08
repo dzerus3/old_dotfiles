@@ -38,7 +38,7 @@ export CARGO_INSTALL_ROOT=$HOME/.local
 local WORDCHARS=-$'*?.[]~;!#$%^(){}<>'
 
 # Initializes zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 # Excludes files from zoxide completion
 export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*:$ZDOTDIR/plugins/*
 export _ZO_DATA_DIR=$XDG_STATE_HOME
@@ -195,24 +195,22 @@ source $ZDOTDIR/modules/abbreviations.zsh
 # Custom functions
 ################################################################
 
-# Enables colors for diff if GNU coreutils are installed
+# Enables colors if GNU coreutils are installed
 ls   --version | grep GNU > /dev/null && alias ls='ls --color=auto'
 grep --version | grep GNU > /dev/null && alias grep='grep --color=auto'
 diff --version | grep GNU > /dev/null && alias diff='diff --color=auto'
+alias ip='ip --color=auto'
 
-# A few common abbreviations
 abbrev cls='clear'
 abbrev md='mkdir'
 
-abbrev e='ls'
-abbrev el='ls -l'
-abbrev ea='ls -a'
-abbrev eal='ls -al'
-abbrev ela='ls -la'
-abbrev eld='ls -ld'
-abbrev edl='ls -dl'
-
-alias ip='ip --color=auto'
+abbrev l='ls'
+abbrev ll='ls -l'
+abbrev la='ls -a'
+abbrev lal='ls -al'
+abbrev lla='ls -la'
+abbrev lld='ls -ld'
+abbrev ldl='ls -dl'
 
 if command -v nvim &> /dev/null; then
     abbrev nv='nvim'
