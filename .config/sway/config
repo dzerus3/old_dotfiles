@@ -28,6 +28,9 @@ exec mako
 ## Gentoo launcher for pipewire
 exec gentoo-pipewire-launcher
 
+## Music player daemon
+exec mpd
+
 ## Starts up foot server
 exec foot --server
 
