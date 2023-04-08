@@ -35,7 +35,7 @@ export PATH=$HOME/.local/bin:$PATH
 export CARGO_INSTALL_ROOT=$HOME/.local
 
 # Includes some characters as parts of words for Ctrl + w
-local WORDCHARS=-@$'*?.[]~;!#$%^(){}<>'
+local WORDCHARS=-$'*?.[]~;!#$%^(){}<>'
 
 # Initializes zoxide
 eval "$(zoxide init zsh)"
