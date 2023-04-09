@@ -22,6 +22,8 @@ autoload -U colors && colors
 export BAT_PAGER=
 export BAT_STYLE='plain'
 
+export DELTA_PAGER='less -R'
+
 # pass configuration
 export PASSWORD_STORE_DIR=$XDG_DATA_HOME/pass
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
