@@ -5,13 +5,19 @@
 #   man zshparam /WORDCHARS
 ################################################################
 
-# Sets nvim as pager
+# Sets default editor
 if command -v nvim &> /dev/null; then
-    # Sets nvim as default editor
     export EDITOR='nvim'
+elif command -v nano &> /dev/null; then
+    export EDITOR='nano'
+fi
+
+# Sets pager for man
+if command -v most &> /dev/null; then
+    export MANPAGER='most'
+elif command -v nvim &> /dev/null; then
     export MANPAGER='nvim +Man!'
 else
-    export EDITOR='vim'
     export MANPAGER='less +Gg'
 fi
 
@@ -22,11 +28,15 @@ autoload -U colors && colors
 export BAT_PAGER=
 export BAT_STYLE='plain'
 
+# delta configuration
 export DELTA_PAGER='less -R'
 
 # pass configuration
 export PASSWORD_STORE_DIR=$XDG_DATA_HOME/pass
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
+
+# most configuration
+export MOST_INITFILE=~/.config/mostkey
 
 # Allows executing commands from .local/bin
 export PATH=$HOME/.local/bin:$PATH
