@@ -77,6 +77,8 @@ bindsym $mod+Return exec $term
 bindsym $mod+t exec $term -e nvim
 ## Start firefox
 bindsym $mod+g exec firefox-bin
+# Start volume adjustment
+bindsym $mod+v exec $term -e alsamixer
 
 ## Kill focused window
 bindsym $mod+w kill
