@@ -10,7 +10,7 @@ browser /usr/bin/lynx
 # Open link with mpv
 macro m set browser "setsid -f mpv --really-quiet --no-terminal" ; open-in-browser ; set browser lynx
 # Open link with firefox
-macro l set browser "firefox %u"; open-in-browser ; set browser "lynx %u"
+macro l set browser "firefox-bin %u"; open-in-browser ; set browser "lynx %u"
 # Save link with buku
 macro b set browser "buku --tag newsboat -a %u"; open-in-browser ; set browser "lynx %u"
 
