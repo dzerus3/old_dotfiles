@@ -310,12 +310,9 @@ map("", "<C-S-K>", "O<Esc>O")
 map("", "<C-H>",   "<C-O>")
 map("", "<C-S-H>", "<C-I>")
 
--- Keymaps for working with vimrc
-map("", "<leader>re", ":vsplit $MYVIMRC<cr>")
-map("", "<leader>rr", ":source $MYVIMRC<cr>")
-
 -- <leader>l toggles line numbers
-map("n", "<leader>l", ":set relativenumber!<CR>")
+map("n", "<leader>l", ":set number!<CR>")
+map("n", "<leader>r", ":set relativenumber!<CR>")
 
 -- Leader + h allows highlighting `l`ine or `c`olumn
 map("n", "<leader>hl", ":set cursorline!<CR>")
@@ -505,13 +502,8 @@ then
             i = "Go to the window above",
             o = "Go to the right window",
 
-            r = {
-                name = "+init.lua editing",
-                e = "Edit init.lua",
-                r = "Reload init.lua"
-            },
-
-            l = "Toggle relative numbers",
+            l = "Toggle line numbers",
+            r = "Toggle relative numbers",
             h = {
                 name = "+Cursor highlighting",
                 l = "Highlight line",
