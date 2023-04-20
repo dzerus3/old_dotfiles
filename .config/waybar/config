@@ -104,8 +104,8 @@
     "wireplumber": {
         "format": "{volume}% {icon}",
         "format-muted": "",
-        "on-click": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
-        "on-click-right": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+        "on-click": "foot -e alsamixer",
+        "on-click-right": "foot -e alsamixer",
         "format-icons": ["", "", ""]
     },
 
