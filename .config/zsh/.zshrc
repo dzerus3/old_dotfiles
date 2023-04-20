@@ -220,7 +220,9 @@ fi
 
 # Dotfile configuration
 alias dotfiles="git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME"
+alias datafiles="git --git-dir=$HOME/.local/share/datafiles --work-tree=$HOME"
 abbrev dot='dotfiles'
+abbrev data='datafiles'
 
 # Easy editing of common files
 abbrev editrc="$EDITOR $HOME/.config/zsh/.zshrc"
@@ -238,6 +240,7 @@ fi
 if command -v buku &> /dev/null; then
     abbrev b='buku'
     abbrev ba='buku --add'
+    abbrev buku-backup='buku -e ~/.local/share/buku/bookmarks.md'
 fi
 
 if command -v yt-dlp &> /dev/null; then
