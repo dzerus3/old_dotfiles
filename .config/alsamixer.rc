@@ -1,0 +1,10 @@
+bind q mixer close
+bind 0 mixer control_set_100
+
+bind e mixer control_down_5
+bind i mixer control_up_5
+
+bind n mixer previous
+bind o mixer next
+
+bind l mixer select_card
