@@ -13,3 +13,6 @@ bind n mixer previous
 bind o mixer next
 
 bind l mixer select_card
+
+color menu white black bold
+color menu_selected white black reverse
