@@ -8,17 +8,11 @@
 # Sets default editor
 if command -v nvim &> /dev/null; then
     export EDITOR='nvim'
+#TODO
+# elif command -v vim &> /dev/null; then
+#     export EDITOR='vim'
 elif command -v nano &> /dev/null; then
     export EDITOR='nano'
-fi
-
-# Sets pager for man
-if command -v most &> /dev/null; then
-    export MANPAGER='most'
-elif command -v nvim &> /dev/null; then
-    export MANPAGER='nvim +Man!'
-else
-    export MANPAGER='less +Gg'
 fi
 
 # Enable colors
@@ -282,7 +276,8 @@ export LESSKEYIN="$XDG_CONFIG_HOME/lesskey"
 export LESSHISTFILE=-
 
 # Enable less color support
-#export LESS=' --RAW-CONTROL-CHARS --squeeze-blank-lines '
+export LESS='-ix8RmPm'
+export MANPAGER='less -ix8RmPm'
 
 ################################################################
 # Prompt
