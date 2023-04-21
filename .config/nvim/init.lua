@@ -86,7 +86,7 @@ vim.opt.scrolloff = 7
 vim.opt.sidescrolloff = 7
 
 -- Disables showing mode on the bottom. Should be obvious from cursor
-vim.opt.showmode = false
+--vim.opt.showmode = false
 
 -- Disables wrapping
 vim.opt.wrap = false
@@ -538,8 +538,6 @@ end
 
 -- Always show the status line
 vim.opt.laststatus=2
--- Enables 24-bit colors
-vim.opt.termguicolors=true
 
 -- Colors for status line
 vim.cmd([[
