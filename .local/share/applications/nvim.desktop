@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Neovim
-Comment=Text editor
-Exec=foot /usr/bin/nvim
-# Terminal=true

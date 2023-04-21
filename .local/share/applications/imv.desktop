@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=imv
-GenericName=Image viewer
-Comment=Fast freeimage-based Image Viewer
-Exec=imv %F
-Terminal=false

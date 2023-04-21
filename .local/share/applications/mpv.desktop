@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=mpv
-GenericName=Media player
-Comment=Media Player
-Exec=mpv --player-operation-mode=pseudo-gui -- %U
-Terminal=false

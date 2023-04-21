@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=lf
-GenericName=File manager
-Comment=File manager
-Exec=foot /usr/bin/lf
-# Terminal=true
