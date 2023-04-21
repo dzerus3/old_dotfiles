@@ -41,11 +41,13 @@ export CARGO_INSTALL_ROOT=$HOME/.local
 # Includes some characters as parts of words for Ctrl + w
 local WORDCHARS=-$'*?.[]~;!#$%^(){}<>'
 
-# Initializes zoxide
-eval "$(zoxide init --cmd cd zsh)"
-# Excludes files from zoxide completion
-export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*:$ZDOTDIR/plugins/*
-export _ZO_DATA_DIR=$XDG_STATE_HOME
+if command -v zoxide &> /dev/null; then
+    # Initializes zoxide
+    eval "$(zoxide init --cmd cd zsh)"
+    # Excludes files from zoxide completion
+    export _ZO_EXCLUDE_DIRS=$HOME:$XDG_CACHE_HOME/*:$ZDOTDIR/plugins/*
+    export _ZO_DATA_DIR=$XDG_STATE_HOME
+fi
 
 ################################################################
 # History options
