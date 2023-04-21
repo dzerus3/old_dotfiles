@@ -1,5 +1,43 @@
 ################################################################
-# Generic options
+# Keybindings
+#
+# DOCUMENTATION:
+#   man zshzle /STANDARD WIDGETS
+################################################################
+
+# Enables emacs keybindings
+bindkey -e
+
+# Gives tab selection vim navigation
+bindkey -M menuselect 'n' vi-backward-char
+bindkey -M menuselect 'e' vi-down-line-or-history
+bindkey -M menuselect 'i' vi-up-line-or-history
+bindkey -M menuselect 'o' vi-forward-char
+
+# Edit command in vim with Ctrl + x
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^x' edit-command-line
+
+#################################################################
+# grc
+#
+# Enables grc support if it is installed.
+#################################################################
+
+source $ZDOTDIR/modules/grc.zsh
+
+################################################################
+# Abbreviations
+#
+# NOTE: Should be sourced *after* keybinding definitions.
+# Specifically, bindkey -e breaks it.
+################################################################
+
+source $ZDOTDIR/modules/abbreviations.zsh
+
+################################################################
+# General options
 #
 # DOCUMENTATION:
 #   man zshparam /WORDCHARS
@@ -8,9 +46,10 @@
 # Sets default editor
 if command -v nvim &> /dev/null; then
     export EDITOR='nvim'
-#TODO
-# elif command -v vim &> /dev/null; then
-#     export EDITOR='vim'
+    abbrev editvimrc="$EDITOR $HOME/.config/nvim/init.lua"
+elif command -v vim &> /dev/null; then
+    export EDITOR='vim'
+    abbrev editvimrc="$EDITOR $HOME/.vimrc"
 elif command -v nano &> /dev/null; then
     export EDITOR='nano'
 fi
@@ -143,27 +182,6 @@ zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion:*' list-suffixes true
 
 ################################################################
-# Keybindings
-#
-# DOCUMENTATION:
-#   man zshzle /STANDARD WIDGETS
-################################################################
-
-# Enables emacs keybindings
-bindkey -e
-
-# Gives tab selection vim navigation
-bindkey -M menuselect 'n' vi-backward-char
-bindkey -M menuselect 'e' vi-down-line-or-history
-bindkey -M menuselect 'i' vi-up-line-or-history
-bindkey -M menuselect 'o' vi-forward-char
-
-# Edit command in vim with Ctrl + x
-autoload edit-command-line
-zle -N edit-command-line
-bindkey '^x' edit-command-line
-
-################################################################
 # Plugins
 ################################################################
 
@@ -185,15 +203,6 @@ if [ -d $ZDOTDIR/plugins ]; then
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
 fi
-
-################################################################
-# Abbreviations
-#
-# NOTE: Should be sourced *after* keybinding definitions.
-# Specifically, bindkey -e breaks it.
-################################################################
-
-source $ZDOTDIR/modules/abbreviations.zsh
 
 ################################################################
 # Custom functions
@@ -228,8 +237,6 @@ abbrev data='datafiles'
 
 # Easy editing of common files
 abbrev editrc="$EDITOR $HOME/.config/zsh/.zshrc"
-# TODO: Check if regular vim is installed
-abbrev editvimrc="$EDITOR $HOME/.config/nvim/init.lua"
 
 if command -v task &> /dev/null; then
     abbrev t='task'
@@ -261,14 +268,6 @@ isitup() {
     # but hey, it works.
     curl -s "https://isitup.org/$1" | grep -P '(?<=<title>).*(?=<\/title>)' | cut -c 8- | rev | cut -c 9- | rev
 }
-
-#################################################################
-# grc
-#
-# Enables grc support if it is installed.
-#################################################################
-
-source $ZDOTDIR/modules/grc.zsh
 
 ################################################################
 # less configuration
