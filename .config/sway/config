@@ -4,6 +4,7 @@
 ## wofi (Application launcher)
 ## mako (Notification center)
 ## waybar (For status bar)
+## grim, slurp, jq (Screenshotting)
 
 # Variables
 ## Windows key

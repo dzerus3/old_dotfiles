@@ -188,7 +188,7 @@ fi
 # Abbreviations
 #
 # NOTE: Should be sourced *after* keybinding definitions.
-# Specifically, bindkey -e broke it.
+# Specifically, bindkey -e breaks it.
 ################################################################
 
 source $ZDOTDIR/modules/abbreviations.zsh
