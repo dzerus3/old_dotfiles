@@ -4,15 +4,15 @@
 
 -- https://github.com/nanotee/nvim-lua-guide
 function map(mode, shortcut, command)
-	vim.api.nvim_set_keymap(
-		mode,
-		shortcut,
-		command,
-		{
-			noremap = true,
-			silent = true
-		}
-	)
+    vim.api.nvim_set_keymap(
+        mode,
+        shortcut,
+        command,
+        {
+            noremap = true,
+            silent = true
+        }
+    )
 end
 
 -- This function tracks the word count, used for statusline
@@ -72,10 +72,10 @@ vim.opt.foldenable = false
 -- FIXME: The if statement doesn't seem to work correctly
 vim.opt.undofile = true
 if(vim.env.XDG_STATE_HOME == nil)
-	then
-	vim.opt.undodir = vim.env.HOME .. "/.local/state/nvim/undo"
+    then
+    vim.opt.undodir = vim.env.HOME .. "/.local/state/nvim/undo"
 else
-	vim.opt.undodir = vim.env.XDG_STATE_HOME .. "/nvim/undo"
+    vim.opt.undodir = vim.env.XDG_STATE_HOME .. "/nvim/undo"
 end
 
 -- Disables swapfiles
@@ -95,19 +95,19 @@ vim.opt.wrap = false
 -- See :help lua line 1139
 vim.opt.list = true
 vim.opt.listchars = {
-	trail      = "-",
-	tab        = "▸ ",
-	extends    = "❱",
-	precedes   = "❰",
-	multispace = "·",
-	lead       = " "
+    trail      = "-",
+    tab        = "▸ ",
+    extends    = "❱",
+    precedes   = "❰",
+    multispace = "·",
+    lead       = " "
 }
 
 -- Don't insert completion option until it is selected
 vim.opt.completeopt = {
-	"noinsert",
-	"menuone",
-	"noselect"
+    "noinsert",
+    "menuone",
+    "noselect"
 }
 
 -- Height of the command bar
@@ -129,30 +129,31 @@ vim.opt.nrformats:remove {"octal"}
 
 -- Enables relative numbers
 vim.opt.relativenumber = true
+-- Enables highlighting of current line number
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
 -- Tweaks for working with manpages, help, and plaintext
 vim.cmd([[
-	augroup plaintext
-		autocmd!
+    augroup plaintext
+        autocmd!
 
         " Applies to markdown, plaintext, and LATEX
-		autocmd FileType markdown,text,plaintex
-		\ setlocal norelativenumber  " Disables relative numbers
-		autocmd FileType markdown,text,plaintex
-		\ setlocal wrap              " Enables line wrapping
-		autocmd FileType markdown,text,plaintex
-		\ setlocal linebreak         " Makes lines break at spaces
-		autocmd FileType markdown,text,plaintex
-		\ setlocal display+=lastline " TODO: What does this do?
+        autocmd FileType markdown,text,plaintex
+        \ setlocal norelativenumber  " Disables relative numbers
+        autocmd FileType markdown,text,plaintex
+        \ setlocal wrap              " Enables line wrapping
+        autocmd FileType markdown,text,plaintex
+        \ setlocal linebreak         " Makes lines break at spaces
+        autocmd FileType markdown,text,plaintex
+        \ setlocal display+=lastline " TODO: What does this do?
 
         " Applies to man and help pages
-		autocmd FileType man,help
-		\ setlocal scrolloff=99999    " Always centers screen
-		autocmd FileType man,help
-		\ nnoremap <buffer> q :q!<CR> " Rebinds q to quit
-	augroup end
+        autocmd FileType man,help
+        \ setlocal scrolloff=99999    " Always centers screen
+        autocmd FileType man,help
+        \ nnoremap <buffer> q :q!<CR> " Rebinds q to quit
+    augroup end
 ]])
 
 -- Remember position after exiting file
@@ -179,9 +180,9 @@ vim.opt.matchtime = 2
 
 -- Allows backspace to delete everything
 vim.opt.backspace = {
-	"eol",
-	"start",
-	"indent"
+    "eol",
+    "start",
+    "indent"
 }
 
 vim.opt.wrap = false
@@ -192,22 +193,22 @@ vim.opt.lazyredraw = true
 -- Ignore useless files with :e
 -- Check :help lua.txt line 1114
 vim.opt.wildignore = {
-	-- Version control
-	"*/.git/*", "*/.hg/*", "*/.svn/*", "*/.DS_Store",
-	-- Compiled files
-	"*.o", "*.elf", "*.pyc", "*.bin", "*.exe", "*.msi",
-	-- Images
-	"*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.ico",
-	-- Binary documents
-	"*.pdf", "*.doc*", "*.xls*", "*.ppt*", "*.odt", "*.djvu", "*.fb2",
-	-- Archives
-	"*.zip", "*.tar", "*.rar", "*.7z", "*.gz", "*.bz2",
-	-- Audio
-	"*.mp3", "*.opus", "*.wav", "*.flac", "*.m4a", "*.m4b",
-	-- Video
-	"*.mp4", "*.mkv", "*.webm", "*.avi",
-	-- Miscellaneous
-	"*.dat", "*.db", "*.iso", "*.img", "*.torrent"
+    -- Version control
+    "*/.git/*", "*/.hg/*", "*/.svn/*", "*/.DS_Store",
+    -- Compiled files
+    "*.o", "*.elf", "*.pyc", "*.bin", "*.exe", "*.msi",
+    -- Images
+    "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.ico",
+    -- Binary documents
+    "*.pdf", "*.doc*", "*.xls*", "*.ppt*", "*.odt", "*.djvu", "*.fb2",
+    -- Archives
+    "*.zip", "*.tar", "*.rar", "*.7z", "*.gz", "*.bz2",
+    -- Audio
+    "*.mp3", "*.opus", "*.wav", "*.flac", "*.m4a", "*.m4b",
+    -- Video
+    "*.mp4", "*.mkv", "*.webm", "*.avi",
+    -- Miscellaneous
+    "*.dat", "*.db", "*.iso", "*.img", "*.torrent"
 }
 
 -- Set tab size to 4 spaces
@@ -337,12 +338,12 @@ map("i", "<C-w>", "")
 ---------------------------------------------------------------
 
 vim.cmd([[
-	iabbrev EUR €
-	iabbrev GBP £
-	iabbrev RUB ₽
-	iabbrev copyright_ ©
-	iabbrev trademark_ ®
-	iabbrev lenny_ ( ͡° ͜ʖ ͡°)
+    iabbrev EUR €
+    iabbrev GBP £
+    iabbrev RUB ₽
+    iabbrev copyright_ ©
+    iabbrev trademark_ ®
+    iabbrev lenny_ ( ͡° ͜ʖ ͡°)
 ]])
 
 
