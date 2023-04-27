@@ -262,7 +262,10 @@ noremap <C-S-H> <C-I>
 
 " <leader>l toggles line numbers
 nnoremap <leader>l :set number!<CR>
+" <leader>r toggles relative line numbers
 nnoremap <leader>r :set relativenumber!<CR>
+" <leader>r toggles both types of line numbers
+nnoremap <leader>a :set relativenumber!<CR>:set number!<CR>
 
 " Leader + h allows highlighting `l`ine or `c`olumn
 nnoremap <leader>hl :set cursorline!<CR>

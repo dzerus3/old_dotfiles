@@ -313,7 +313,10 @@ map("", "<C-S-H>", "<C-I>")
 
 -- <leader>l toggles line numbers
 map("n", "<leader>l", ":set number!<CR>")
+-- <leader>r toggles relative numbers
 map("n", "<leader>r", ":set relativenumber!<CR>")
+-- <leader>a toggles between the two
+map("n", "<leader>a", ":set relativenumber!<CR>:set number!<CR>")
 
 -- Leader + h allows highlighting `l`ine or `c`olumn
 map("n", "<leader>hl", ":set cursorline!<CR>")
