@@ -83,6 +83,8 @@
         "tooltip-format-ethernet": "{ifname}",
 
         "format-disconnected": "Disconnected ⚠",
+
+        "on-click": "wpa_gui",
     },
 
     "battery": {
@@ -104,8 +106,8 @@
     "wireplumber": {
         "format": "{volume}% {icon}",
         "format-muted": "",
-        "on-click": "foot -e alsamixer",
-        "on-click-right": "foot -e alsamixer",
+        "on-click": "kitty -e alsamixer",
+        "on-click-right": "kitty -e alsamixer",
         "format-icons": ["", "", ""]
     },
 
