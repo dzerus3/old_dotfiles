@@ -167,7 +167,7 @@ set shiftwidth=0
 " Auto convert tabs to spaces
 set expandtab
 
-" Disables netrw
+" Disables netrw (file manager; runs when you open a directory)
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 
