@@ -1,6 +1,6 @@
 # Dependencies
 ## A cursor theme called "current"
-## foot (Terminal Emulator)
+## kitty (Terminal Emulator)
 ## wofi (Application launcher)
 ## mako (Notification center)
 ## waybar (For status bar)
@@ -17,7 +17,7 @@ set $up i
 set $right o
 
 ## Preferred terminal emulator
-set $term footclient
+set $term kitty
 
 ## The application launcher menu
 set $menu wofi --show=drun
@@ -31,9 +31,6 @@ exec gentoo-pipewire-launcher
 
 ## Music player daemon
 exec mpd
-
-## Starts up foot server
-exec foot --server
 
 # Configuration
 ## Disable window titlebars
