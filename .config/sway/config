@@ -1,9 +1,9 @@
 # Dependencies
 ## A cursor theme called "current"
-## kitty (Terminal Emulator)
-## wofi (Application launcher)
-## mako (Notification center)
-## waybar (For status bar)
+## kitty  (Terminal Emulator)
+## wofi   (Application launcher)
+## mako   (Notification center)
+## fuzzel (For status bar)
 ## grim, slurp, jq (Screenshotting)
 
 # Variables
@@ -20,7 +20,11 @@ set $right o
 set $term kitty
 
 ## The application launcher menu
-set $menu wofi --show=drun
+set $menu fuzzel --horizontal-pad=12 --vertical-pad=10 \
+           --inner-pad=8 \
+           --text-color=c5c8c6ff --selection-text-color=c5c8c6ff \
+           --background=222426f2 --selection-color=373b41f2 \
+           --font="CodeNewRoman NF:size=9,Anonymous Pro:size=9"
 
 # Applications
 ## Notification center, so notifications are displayed graphically
@@ -65,7 +69,7 @@ exec swayidle -w \
 input type:keyboard {
     xkb_layout  "custom,custom"
     xkb_variant "colemak_dh,rulemak_dh"
-    xkb_options "caps:swapescape,grp:rctrl_toggle"
+    xkb_options "caps:swapescape,grp:shifts_toggle"
 }
 
 # Key bindings

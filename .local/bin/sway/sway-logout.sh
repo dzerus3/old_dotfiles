@@ -11,8 +11,12 @@ options=(
 
 selection=$(
     printf '%s\n' "${options[@]}" | \
-    wofi --dmenu --cache-file /dev/null \
-         --height 225 --width 150 --prompt "$(uptime -p | sed -e 's/,.*$//g')"
+    fuzzel --dmenu --lines=5 --width=13 \
+           --horizontal-pad=12 --vertical-pad=10 \
+           --inner-pad=8 \
+           --text-color=c5c8c6ff --selection-text-color=c5c8c6ff \
+           --background=222426f2 --selection-color=373b41f2 \
+           --font="CodeNewRoman NF:size=9,Anonymous Pro:size=9"
 )
 
 # Note: User needs permission in /etc/doas.conf
